@@ -1,13 +1,22 @@
 /*
-  Minimal design system: one typeface, black on white, and the work does the talking.
+  Minimal design system: one typeface, and a five-colour palette
+  (maroon #73030D, wine #732F3B, light grey #F2F2F2, grey #8C8C8C, near-black #0D0D0D).
 */
 :root {
-  --bg: #ffffff;
-  --well: #f3f3f2;
-  --well-hover: #ececea;
-  --ink: #111111;
-  --muted: #767676;
-  --line: #e7e7e5;
+  --maroon: #73030d;
+  --wine: #732f3b;
+  --light: #f2f2f2;
+  --grey: #8c8c8c;
+  --black: #0d0d0d;
+
+  --bg: var(--light);
+  --well: #e6e6e6;
+  --well-hover: #dcdcdc;
+  --ink: var(--black);
+  /* The palette grey, darkened slightly so small text stays readable on the light background */
+  --muted: #6e6e6e;
+  --line: #d6d6d6;
+  --accent: var(--maroon);
 
   --font: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -64,12 +73,12 @@ p {
 }
 
 ::selection {
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--light);
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -93,6 +102,7 @@ p {
 }
 
 .link:hover {
+  color: var(--accent);
   text-decoration-color: currentColor;
 }
 
@@ -110,13 +120,14 @@ p {
 
 .btn:hover,
 .btn--solid {
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--light);
 }
 
 .btn--solid:hover {
-  background: transparent;
-  color: var(--ink);
+  background: var(--wine);
+  border-color: var(--wine);
 }
 
 @media (prefers-reduced-motion: reduce) {
