@@ -1,4 +1,6 @@
 import type { ImageMetadata } from 'astro';
+import path from 'node:path';
+import sharp from 'sharp';
 
 // Every image inside src/assets/work/<slug>/ is picked up automatically,
 // sorted by filename. Name files 01-..., 02-... to control the order.
@@ -11,6 +13,46 @@ const files = import.meta.glob<{ default: ImageMetadata }>(
 export interface WorkImage {
   img: ImageMetadata;
   caption: string;
+  // Soft background colour sampled from the image itself, used behind it on the site.
+  tint: string;
+}
+
+const NEUTRAL_TINT = 'hsl(40 6% 94%)';
+
+// Averages the image's colourful pixels (ignoring white paper, black and greys)
+// and returns that hue as a light pastel, so each design sits on a background that matches it.
+async function tintOf(globKey: string): Promise<string> {
+  const { data, info } = await sharp(path.join(process.cwd(), globKey))
+    .resize(48, 48, { fit: 'inside' })
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  let r = 0, g = 0, b = 0, weight = 0;
+  for (let i = 0; i < data.length; i += info.channels) {
+    const [R, G, B] = [data[i], data[i + 1], data[i + 2]];
+    const max = Math.max(R, G, B);
+    const sat = max === 0 ? 0 : (max - Math.min(R, G, B)) / max;
+    if (max < 30 || sat < 0.18) continue;
+    r += R * sat; g += G * sat; b += B * sat; weight += sat;
+  }
+  if (weight < 20) return NEUTRAL_TINT;
+
+  const [h, s] = rgbToHsl(r / weight, g / weight, b / weight);
+  // Averaging mutes colours, so lift the saturation back into a clear but soft pastel range.
+  const sat = Math.min(Math.max(s * 1.5, 0.3), 0.62);
+  return `hsl(${Math.round(h)} ${Math.round(sat * 100)}% 90%)`;
+}
+
+function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  const l = (max + min) / 2;
+  if (max === min) return [0, 0, l];
+  const d = max - min;
+  const s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  const h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  return [h * 60, s, l];
 }
 
 // Words that should stay in capitals (or a set spelling) when a filename becomes a caption.
@@ -28,11 +70,13 @@ function captionFrom(path: string): string {
     .join(' ');
 }
 
-export function imagesFor(slug: string): WorkImage[] {
-  return Object.keys(files)
+export async function imagesFor(slug: string): Promise<WorkImage[]> {
+  const keys = Object.keys(files)
     .filter((p) => p.startsWith(`/src/assets/work/${slug}/`))
-    .sort()
-    .map((p) => ({ img: files[p].default, caption: captionFrom(p) }));
+    .sort();
+  return Promise.all(
+    keys.map(async (p) => ({ img: files[p].default, caption: captionFrom(p), tint: await tintOf(p) })),
+  );
 }
 
 // Filter buttons on the home page, in display order.
@@ -303,6 +347,6 @@ const all: Project[] = [
   },
 ];
 
-export const projects = all
-  .map((p) => ({ ...p, images: imagesFor(p.slug) }))
-  .filter((p) => p.images.length > 0);
+export const projects = (
+  await Promise.all(all.map(async (p) => ({ ...p, images: await imagesFor(p.slug) })))
+).filter((p) => p.images.length > 0);

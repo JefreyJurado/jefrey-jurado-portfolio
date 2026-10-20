@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import type { WorkImage } from '../data/projects';
+import type { CardSize } from '../lib/layout';
 
 interface Props {
   slug: string;
@@ -8,22 +9,44 @@ interface Props {
   title: string;
   category: string;
   year: string;
-  cover: ImageMetadata;
+  images: WorkImage[];
+  size: CardSize;
   index: number;
 }
 
-const { slug, group, title, category, year, cover, index } = Astro.props;
+const { slug, group, title, category, year, images, size, index } = Astro.props;
+const [cover, ...more] = images;
+// Full-width cards show up to three pieces side by side.
+const extras = more.slice(0, 2);
 ---
 
-<a href={`/work/${slug}/`} class="card" data-group={group}>
+<a
+  href={`/work/${slug}/`}
+  class="card"
+  data-group={group}
+  data-size={size}
+  style={`--tint: ${cover.tint}; --count: ${1 + extras.length}`}
+>
   <div class="card__well">
     <Image
-      src={cover}
+      src={cover.img}
       alt={`${title} — ${category}`}
       widths={[500, 900, 1400]}
-      sizes="(max-width: 760px) 100vw, 50vw"
-      loading={index < 2 ? 'eager' : 'lazy'}
+      sizes="(max-width: 760px) 100vw, 60vw"
+      loading={index < 3 ? 'eager' : 'lazy'}
     />
+    {
+      extras.map((x) => (
+        <Image
+          src={x.img}
+          alt={`${title} — ${x.caption}`}
+          class="card__extra"
+          widths={[400, 700]}
+          sizes="30vw"
+          loading="lazy"
+        />
+      ))
+    }
   </div>
   <div class="card__caption">
     <h3>{title}</h3>
@@ -34,22 +57,45 @@ const { slug, group, title, category, year, cover, index } = Astro.props;
 <style>
   .card {
     display: block;
+    grid-column: span 12;
+  }
+
+  .card[data-size='big'] {
+    grid-column: span 7;
+  }
+
+  .card[data-size='small'] {
+    grid-column: span 5;
   }
 
   .card__well {
     display: grid;
     grid-template: minmax(0, 1fr) / minmax(0, 1fr);
     place-items: center;
+    gap: 4%;
     aspect-ratio: 4 / 3;
-    padding: clamp(24px, 8%, 64px);
-    background: var(--well);
+    padding: clamp(24px, 7%, 64px);
+    background: var(--tint);
     border-radius: 6px;
     overflow: hidden;
     transition: background 0.3s;
   }
 
+  /* Both cards in a big/small pair share one height so their captions line up */
+  .card[data-size='big'] .card__well,
+  .card[data-size='small'] .card__well {
+    aspect-ratio: auto;
+    height: min(38vw, 560px);
+  }
+
+  .card[data-size='full'] .card__well {
+    grid-template-columns: repeat(var(--count), minmax(0, 1fr));
+    aspect-ratio: 21 / 8;
+    padding: clamp(24px, 4%, 56px) clamp(24px, 6%, 96px);
+  }
+
   .card:hover .card__well {
-    background: var(--well-hover);
+    background: color-mix(in srgb, var(--tint) 93%, #000);
   }
 
   .card__well img {
@@ -57,12 +103,20 @@ const { slug, group, title, category, year, cover, index } = Astro.props;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 32px -16px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 14px 36px -16px rgba(0, 0, 0, 0.35);
     transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   .card:hover .card__well img {
-    transform: scale(1.025);
+    transform: translateY(-6px);
+  }
+
+  .card__extra {
+    display: none;
+  }
+
+  .card[data-size='full'] .card__extra {
+    display: block;
   }
 
   .card__caption {
@@ -79,5 +133,19 @@ const { slug, group, title, category, year, cover, index } = Astro.props;
     font-size: 16px;
     font-weight: 500;
     letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 760px) {
+    .card[data-size] {
+      grid-column: span 12;
+    }
+    .card[data-size] .card__well {
+      grid-template-columns: minmax(0, 1fr);
+      aspect-ratio: 4 / 3;
+      height: auto;
+    }
+    .card[data-size] .card__extra {
+      display: none;
+    }
   }
 </style>

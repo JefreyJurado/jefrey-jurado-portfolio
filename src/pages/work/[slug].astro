@@ -51,7 +51,7 @@ const meta = [
     <div class="gallery">
       {
         project.images.map((item, i) => (
-          <figure class:list={{ half: item.img.width / item.img.height < 1.15 }}>
+          <figure class:list={{ half: item.img.width / item.img.height < 1.15 }} style={`--tint: ${item.tint}`}>
             <button class="zoom" data-full={item.img.src} aria-label={`View full size: ${item.caption}`}>
               <Image
                 src={item.img}
@@ -188,7 +188,7 @@ const meta = [
     padding: clamp(20px, 5vw, 72px);
     border: 0;
     border-radius: 6px;
-    background: var(--well);
+    background: var(--tint, var(--well));
     cursor: zoom-in;
   }
 
