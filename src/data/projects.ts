@@ -8,11 +8,31 @@ const files = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
-export function imagesFor(slug: string): ImageMetadata[] {
+export interface WorkImage {
+  img: ImageMetadata;
+  caption: string;
+}
+
+// Words that should stay in capitals (or a set spelling) when a filename becomes a caption.
+const spellings: Record<string, string> = {
+  tesda: 'TESDA', bir: 'BIR', pcx: 'PCX', cvsu: 'CvSU', smith: 'SMITH', ph: 'PH', mcearly: 'McEarly',
+  balwik: 'BALWIK', nhers: "Nher's", ivys: "Ivy's", sofias: "Sofia's", wencys: "Wency's", st: 'St.',
+};
+
+// "05-cover-story.jpg" -> "Cover Story". Rename a file to change its caption.
+function captionFrom(path: string): string {
+  const name = path.split('/').pop()!.replace(/\.[^.]+$/, '').replace(/^\d+-/, '');
+  return name
+    .split('-')
+    .map((w) => spellings[w] ?? w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
+export function imagesFor(slug: string): WorkImage[] {
   return Object.keys(files)
     .filter((p) => p.startsWith(`/src/assets/work/${slug}/`))
     .sort()
-    .map((p) => files[p].default);
+    .map((p) => ({ img: files[p].default, caption: captionFrom(p) }));
 }
 
 // Filter buttons on the home page, in display order.

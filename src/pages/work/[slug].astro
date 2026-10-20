@@ -6,70 +6,92 @@ import { projects } from '../../data/projects';
 export function getStaticPaths() {
   return projects.map((project, i) => ({
     params: { slug: project.slug },
-    props: { project, next: projects[(i + 1) % projects.length] },
+    props: {
+      project,
+      number: i + 1,
+      prev: projects[(i - 1 + projects.length) % projects.length],
+      next: projects[(i + 1) % projects.length],
+    },
   }));
 }
 
-const { project, next } = Astro.props;
+const { project, number, prev, next } = Astro.props;
 const [hero, ...rest] = project.images;
+const meta = [
+  { label: 'Client', value: project.client },
+  { label: 'Role', value: project.role },
+  { label: 'Year', value: project.year },
+  { label: 'Tools', value: project.tools.join(', ') },
+];
 ---
 
 <Base title={project.title} description={project.summary}>
   <article class="wrap">
-    <header class="intro">
-      <a href="/#work" class="back label link-underline">← All work</a>
-      <p class="label">{project.category}</p>
-      <h1>{project.title}</h1>
-      <p class="summary">{project.summary}</p>
-    </header>
-
-    <div class="details">
-      <dl>
-        <div><dt class="label">Client</dt><dd>{project.client}</dd></div>
-        <div><dt class="label">Role</dt><dd>{project.role}</dd></div>
-        <div><dt class="label">Year</dt><dd>{project.year}</dd></div>
-        <div><dt class="label">Tools</dt><dd>{project.tools.join(', ')}</dd></div>
-      </dl>
-      <div class="description">
-        {project.description.map((para) => <p>{para}</p>)}
-      </div>
+    <div class="crumbs label">
+      <a href="/#work" class="underline">← All work</a>
+      <span>Project {number} of {projects.length}</span>
     </div>
 
-    <figure class="hero-image">
-      <button class="zoom" data-full={hero.src} aria-label="View full size">
-        <Image src={hero} alt={`${project.title}, image 1`} widths={[800, 1400, 2000]} sizes="100vw" loading="eager" />
+    <header class="head">
+      <p class="kicker">{project.category}</p>
+      <h1>{project.title}</h1>
+      <p class="deck">{project.summary}</p>
+    </header>
+
+    <dl class="meta">
+      {
+        meta.map((m) => (
+          <div>
+            <dt class="label">{m.label}</dt>
+            <dd>{m.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <div class="body">
+      {project.description.map((para, i) => <p class:list={{ dropcap: i === 0 }}>{para}</p>)}
+    </div>
+
+    <figure class="fig fig--hero">
+      <button class="zoom" data-full={hero.img.src} aria-label={`View full size: ${hero.caption}`}>
+        <Image src={hero.img} alt={`${project.title} — ${hero.caption}`} widths={[800, 1400, 2000]} sizes="100vw" loading="eager" />
       </button>
+      <figcaption><span>Fig. 1</span> {hero.caption}</figcaption>
     </figure>
 
     {
       rest.length > 0 && (
         <div class="gallery">
-          {rest.map((img, i) => (
-            <figure data-reveal class:list={{ wide: img.width / img.height > 1.8 }}>
-              <button class="zoom" data-full={img.src} aria-label="View full size">
+          {rest.map((item, i) => (
+            <figure class:list={['fig', { wide: item.img.width / item.img.height > 1.8 }]}>
+              <button class="zoom" data-full={item.img.src} aria-label={`View full size: ${item.caption}`}>
                 <Image
-                  src={img}
-                  alt={`${project.title}, image ${i + 2}`}
+                  src={item.img}
+                  alt={`${project.title} — ${item.caption}`}
                   widths={[600, 1000, 1600]}
                   sizes="(max-width: 720px) 100vw, 50vw"
                 />
               </button>
+              <figcaption>
+                <span>Fig. {i + 2}</span> {item.caption}
+              </figcaption>
             </figure>
           ))}
         </div>
       )
     }
 
-    {
-      next.slug !== project.slug && (
-        <a href={`/work/${next.slug}/`} class="next">
-          <span class="label">Next project</span>
-          <span class="next__title">
-            {next.title} <span class="next__arrow">→</span>
-          </span>
-        </a>
-      )
-    }
+    <nav class="pager rule" aria-label="More projects">
+      <a href={`/work/${prev.slug}/`}>
+        <span class="label">← Previous</span>
+        <span class="pager__title">{prev.title}</span>
+      </a>
+      <a href={`/work/${next.slug}/`} class="pager__next">
+        <span class="label">Next →</span>
+        <span class="pager__title">{next.title}</span>
+      </a>
+    </nav>
   </article>
 
   <dialog class="lightbox" aria-label="Image viewer">
@@ -92,64 +114,84 @@ const [hero, ...rest] = project.images;
 </script>
 
 <style>
-  .intro {
-    padding: clamp(40px, 8vw, 96px) 0 clamp(32px, 5vw, 56px);
-  }
-
-  .back {
-    display: inline-block;
-    margin-bottom: clamp(32px, 5vw, 64px);
+  .crumbs {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0 10px;
+    border-bottom: 1px solid var(--ink);
     color: var(--ink);
   }
 
-  .intro h1 {
-    margin: 12px 0 24px;
-    font-size: clamp(44px, 8vw, 120px);
-    letter-spacing: -0.05em;
-    line-height: 0.95;
+  .head {
+    padding: clamp(32px, 6vw, 64px) 0 clamp(24px, 3vw, 36px);
+    text-align: center;
   }
 
-  .summary {
-    max-width: 28em;
-    font-size: clamp(19px, 2vw, 24px);
+  .head h1 {
+    margin: 12px 0 18px;
+    font-size: clamp(52px, 9vw, 128px);
+  }
+
+  .deck {
+    text-wrap: balance;
+    max-width: 30em;
+    margin: 0 auto;
+    font-size: clamp(20px, 2vw, 25px);
+    font-style: italic;
+    line-height: 1.35;
     color: var(--muted);
-    line-height: 1.4;
   }
 
-  .details {
+  .meta {
     display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 40px clamp(32px, 6vw, 96px);
-    padding: 32px 0 clamp(48px, 7vw, 88px);
-    border-top: 1px solid var(--ink);
-  }
-
-  dl {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
     margin: 0;
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
   }
 
-  dd {
-    margin: 6px 0 0;
+  .meta div {
+    padding: 12px 16px 14px 0;
   }
 
-  .description {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    max-width: 38em;
-    font-size: 18px;
+  .meta div + div {
+    padding-left: 16px;
+    border-left: 1px solid var(--hair);
   }
 
-  @media (max-width: 860px) {
-    .details {
-      grid-template-columns: 1fr;
+  .meta dd {
+    margin: 4px 0 0;
+    font-size: 17px;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 760px) {
+    .meta {
+      grid-template-columns: 1fr 1fr;
+    }
+    .meta div:nth-child(3) {
+      padding-left: 0;
+      border-left: 0;
+    }
+    .meta div:nth-child(n + 3) {
+      border-top: 1px solid var(--hair);
     }
   }
 
-  figure {
+  .body {
+    columns: 2 22em;
+    column-gap: 40px;
+    column-rule: 1px solid var(--hair);
+    max-width: 960px;
+    margin: 32px auto clamp(40px, 6vw, 64px);
+  }
+
+  .body p + p {
+    margin-top: 1em;
+  }
+
+  .fig {
     margin: 0;
   }
 
@@ -157,25 +199,45 @@ const [hero, ...rest] = project.images;
     display: grid;
     place-items: center;
     width: 100%;
-    height: 100%;
-    padding: clamp(20px, 5vw, 72px);
+    padding: clamp(16px, 4vw, 56px);
     border: 0;
-    border-radius: var(--radius);
-    background: var(--surface);
+    background: var(--well);
     cursor: zoom-in;
   }
 
   .zoom img {
     max-height: 80vh;
     width: auto;
-    box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.4);
+    outline: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  figcaption {
+    padding: 8px 0 0;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  figcaption span {
+    margin-right: 6px;
+    font-family: var(--head);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
   }
 
   .gallery {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(16px, 2.5vw, 32px);
-    margin-top: clamp(16px, 2.5vw, 32px);
+    gap: 36px clamp(16px, 2.4vw, 32px);
+    margin-top: 36px;
+  }
+
+  .gallery .zoom {
+    height: calc(100% - 32px);
   }
 
   .gallery .wide {
@@ -188,30 +250,35 @@ const [hero, ...rest] = project.images;
     }
   }
 
-  .next {
-    display: block;
-    margin-top: clamp(80px, 10vw, 140px);
-    padding-top: 24px;
-    border-top: 1px solid var(--ink);
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: clamp(64px, 8vw, 96px);
   }
 
-  .next__title {
-    display: block;
-    margin-top: 12px;
-    font-size: clamp(36px, 6vw, 88px);
-    font-weight: 500;
-    letter-spacing: -0.045em;
+  .pager a {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 14px;
+  }
+
+  .pager__next {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .pager__title {
+    font-family: var(--head);
+    font-stretch: 75%;
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 52px);
     line-height: 1;
   }
 
-  .next__arrow {
-    display: inline-block;
-    color: var(--accent);
-    transition: transform 0.5s var(--ease);
-  }
-
-  .next:hover .next__arrow {
-    transform: translateX(0.2em);
+  .pager a:hover .pager__title {
+    color: var(--spot);
   }
 
   .lightbox {
@@ -222,7 +289,7 @@ const [hero, ...rest] = project.images;
     margin: 0;
     padding: clamp(16px, 4vw, 48px);
     border: 0;
-    background: rgba(20, 20, 20, 0.94);
+    background: rgba(20, 20, 20, 0.95);
     cursor: zoom-out;
   }
 
@@ -242,12 +309,14 @@ const [hero, ...rest] = project.images;
     top: 16px;
     right: 16px;
     padding: 10px 16px;
-    border: 1px solid #555;
-    border-radius: 999px;
+    border: 1px solid #666;
     background: transparent;
     color: #fff;
-    font: inherit;
-    font-size: 14px;
+    font-family: var(--head);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     cursor: pointer;
   }
 </style>
