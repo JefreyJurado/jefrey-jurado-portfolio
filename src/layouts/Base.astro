@@ -54,15 +54,27 @@ const path = Astro.url.pathname;
     </main>
 
     <footer class="wrap footer" id="contact">
-      <div class="footer__main">
-        <p class="footer__lead">Open to full-time roles and freelance projects.</p>
-        <a href={`mailto:${site.email}`} class="footer__email link">{site.email}</a>
+      <div class="contact">
+        <div class="contact__text">
+          <p class="contact__tag">Let's talk</p>
+          <p class="contact__lead">Open to full-time roles and freelance projects.</p>
+          <p class="contact__sub">Based in {site.location} · willing to relocate</p>
+        </div>
+        <div class="contact__actions">
+          <a href={`mailto:${site.email}`} class="contact__email">
+            <span class="contact__label">Email me</span>
+            <span class="contact__address">{site.email}</span>
+            <span class="contact__arrow" aria-hidden="true">↗</span>
+          </a>
+          <div class="contact__links">
+            <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a href={site.resume} target="_blank">Résumé (PDF) ↗</a>
+          </div>
+        </div>
       </div>
       <div class="footer__row muted">
         <span>© {new Date().getFullYear()} {site.name}</span>
-        <span>{site.location}</span>
-        <a href={site.linkedin} class="link" target="_blank" rel="noopener">LinkedIn</a>
-        <a href={site.resume} class="link" target="_blank">Résumé (PDF)</a>
+        <span>Graphic Designer &amp; Layout Artist</span>
       </div>
     </footer>
   </body>
@@ -118,35 +130,136 @@ const path = Astro.url.pathname;
   }
 
   .footer {
-    margin-top: clamp(96px, 12vw, 160px);
-    padding-bottom: 32px;
+    margin-top: clamp(56px, 7vw, 88px);
+    padding-bottom: 28px;
   }
 
-  .footer__main {
-    padding-top: 32px;
-    border-top: 1px solid var(--line);
+  /* Contact card in the same maroon gradient as the home page hero */
+  .contact {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: clamp(24px, 4vw, 64px);
+    padding: clamp(32px, 4.5vw, 64px);
+    border-radius: 28px;
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(242, 242, 242, 0.12), transparent 55%),
+      linear-gradient(135deg, var(--maroon) 0%, var(--wine) 100%);
+    color: var(--light);
+    box-shadow: 0 30px 60px -36px rgba(115, 3, 13, 0.6);
   }
 
-  .footer__lead {
-    font-size: clamp(22px, 2.6vw, 32px);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-  }
-
-  .footer__email {
+  .contact__tag {
     display: inline-block;
-    margin-top: 6px;
-    font-size: clamp(22px, 2.6vw, 32px);
-    font-weight: 500;
+    padding: 5px 14px;
+    border: 1px solid rgba(242, 242, 242, 0.35);
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(242, 242, 242, 0.85);
+  }
+
+  .contact__lead {
+    margin-top: 18px;
+    font-size: clamp(28px, 3.2vw, 46px);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .contact__sub {
+    margin-top: 12px;
+    font-size: 16px;
+    color: rgba(242, 242, 242, 0.78);
+  }
+
+  .contact__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact__email {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 22px 64px 22px 24px;
+    background: var(--light);
+    border-radius: 18px;
+    color: var(--ink);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .contact__email:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 36px -22px rgba(13, 13, 13, 0.6);
+  }
+
+  .contact__label {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .contact__address {
+    font-size: clamp(18px, 1.8vw, 24px);
+    font-weight: 600;
     letter-spacing: -0.02em;
+    color: var(--maroon);
     overflow-wrap: anywhere;
+  }
+
+  .contact__arrow {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    margin-top: -18px;
+    border-radius: 50%;
+    background: var(--maroon);
+    color: var(--light);
+    font-size: 16px;
+  }
+
+  .contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .contact__links a {
+    padding: 10px 18px;
+    border: 1px solid rgba(242, 242, 242, 0.45);
+    border-radius: 999px;
+    font-size: 15px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .contact__links a:hover {
+    background: rgba(242, 242, 242, 0.14);
+    border-color: var(--light);
+  }
+
+  @media (max-width: 860px) {
+    .contact {
+      grid-template-columns: 1fr;
+    }
   }
 
   .footer__row {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 8px 28px;
-    margin-top: 56px;
+    margin-top: 24px;
+    padding: 0 4px;
     font-size: 14px;
   }
 </style>

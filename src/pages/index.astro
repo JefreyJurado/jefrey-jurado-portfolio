@@ -11,6 +11,25 @@ const facts = [
   { value: String(projects.length), label: 'portfolio projects to explore' },
 ];
 
+// Highlight tiles in the About section. Icons are simple 24px line drawings.
+const strengths = [
+  {
+    title: 'Publishing',
+    text: 'Weekly newspapers, monthly magazines and multi-page layouts, delivered print-ready.',
+    icon: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h4M7 16h4M14 12h3v4h-3z"/>',
+  },
+  {
+    title: 'Packaging & brands',
+    text: 'Labels, pouches and sacks for food products, plus the logos that go on them.',
+    icon: '<path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+  },
+  {
+    title: 'Digital',
+    text: 'Social media campaigns and posts, with an IT background for working alongside web teams.',
+    icon: '<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  },
+];
+
 // Small previews on the "See my work" card at the bottom of the page.
 const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-food']
   .map((slug) => projects.find((p) => p.slug === slug))
@@ -51,10 +70,13 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
       </div>
     </section>
 
-    <section class="row">
-      <h2>About</h2>
-      <div class="prose">
-        <p>
+    <section class="about" aria-labelledby="about-title">
+      <div class="about__head">
+        <p class="about__tag">About</p>
+        <h2 id="about-title">I make dense content clear, and I get it to the press on time.</h2>
+      </div>
+      <div class="about__body">
+        <p class="about__lead">
           Most of my career has been in publishing. I've designed weekly newspapers, monthly magazines, and the
           legal and editorial pages in between, so I know how to make dense content clear and how to get files to
           the press on time.
@@ -65,6 +87,21 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
           (Software Development), so I'm comfortable working with web and app teams.
         </p>
       </div>
+      <ul class="strengths">
+        {
+          strengths.map((item) => (
+            <li>
+              <span class="strengths__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <Fragment set:html={item.icon} />
+                </svg>
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </li>
+          ))
+        }
+      </ul>
     </section>
 
     <a href="/work/" class="next">
@@ -230,12 +267,109 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
     }
   }
 
-  .prose {
+  /* About section: headline and copy in a white card, with three strength tiles */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(24px, 4vw, 64px);
+    padding: clamp(28px, 4.5vw, 64px);
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px -36px rgba(13, 13, 13, 0.4);
+  }
+
+  .about__tag {
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px solid var(--maroon);
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--maroon);
+  }
+
+  .about h2 {
+    margin-top: 20px;
+    font-size: clamp(30px, 3.4vw, 50px);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+  }
+
+  .about__body {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    max-width: 40em;
+    padding-top: 6px;
     font-size: 17px;
+    color: var(--muted);
+  }
+
+  .about__lead {
+    font-size: clamp(19px, 1.6vw, 22px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .strengths {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: clamp(8px, 1.5vw, 16px) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .strengths li {
+    padding: 22px;
+    background: var(--light);
+    border-radius: 18px;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .strengths li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 30px -22px rgba(115, 3, 13, 0.5);
+  }
+
+  .strengths__icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--maroon), var(--wine));
+    color: var(--light);
+  }
+
+  .strengths__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .strengths h3 {
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .strengths p {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+
+  @media (max-width: 860px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+    .strengths {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* "See my work" card with three small previews */
@@ -301,24 +435,4 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
     transform: rotate(4deg) translateY(-4px);
   }
 
-  /* Label on the left, content on the right */
-  .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px clamp(32px, 6vw, 96px);
-    padding: 28px 0 40px;
-    border-top: 1px solid var(--line);
-  }
-
-  h2 {
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-
-  @media (max-width: 860px) {
-    .row {
-      grid-template-columns: 1fr;
-    }
-  }
 </style>
