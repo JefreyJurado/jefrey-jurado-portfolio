@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 import { projects } from '../data/projects';
@@ -9,13 +10,18 @@ const facts = [
   { value: '0', label: 'missed print deadlines' },
   { value: String(projects.length), label: 'portfolio projects to explore' },
 ];
+
+// Small previews on the "See my work" card at the bottom of the page.
+const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-food']
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter((p) => p !== undefined);
 ---
 
 <Base>
   <div class="wrap">
     <section class="hero">
       <div class="hero__about">
-        <p class="hero__tag"><span aria-hidden="true"></span>About me</p>
+        <p class="hero__tag">About me</p>
         <h1>Jefrey Jurado</h1>
         <p class="hero__role">Graphic Designer &amp; Layout Artist · {site.location}</p>
         <p class="hero__bio">
@@ -30,13 +36,13 @@ const facts = [
         </div>
       </div>
 
-      <div class="hero__facts">
-        <ul>
+      <div class="hero__side">
+        <ul class="facts">
           {
             facts.map((f) => (
               <li>
-                <span class="hero__value">{f.value}</span>
-                <span class="hero__label">{f.label}</span>
+                <span class="facts__value">{f.value}</span>
+                <span class="facts__label">{f.label}</span>
               </li>
             ))
           }
@@ -62,48 +68,55 @@ const facts = [
     </section>
 
     <a href="/work/" class="next">
-      <span class="muted">Next</span>
-      <span class="next__title">See my work →</span>
+      <span class="next__text">
+        <span class="muted">Newspapers, magazines, packaging, logos and more</span>
+        <span class="next__title">See my work →</span>
+      </span>
+      <span class="next__thumbs" aria-hidden="true">
+        {
+          previews.map((p) => (
+            <span class="next__thumb" style={`--tint: ${p.images[0].tint}`}>
+              <Image src={p.images[0].img} alt="" width={220} />
+            </span>
+          ))
+        }
+      </span>
     </a>
   </div>
 </Base>
 
 <style>
-  /* Opening panel: maroon "about" tile and a wine facts tile inside a near-black frame */
+  /* Opening card: one maroon-to-wine gradient on the light page, with white fact cards */
   .hero {
+    position: relative;
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 10px;
-    margin: 8px 0 clamp(48px, 7vw, 88px);
-    padding: 10px;
-    background: var(--black);
-    border-radius: 18px;
+    grid-template-columns: 1.35fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    margin: 12px 0 clamp(56px, 8vw, 104px);
+    padding: clamp(32px, 4.5vw, 64px);
+    border-radius: 28px;
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(242, 242, 242, 0.12), transparent 55%),
+      linear-gradient(135deg, var(--maroon) 0%, var(--wine) 100%);
     color: var(--light);
+    overflow: hidden;
+    box-shadow: 0 30px 60px -36px rgba(115, 3, 13, 0.6);
   }
 
   .hero__about {
     display: flex;
     flex-direction: column;
-    padding: clamp(28px, 4vw, 56px);
-    background: var(--maroon);
-    border-radius: 12px;
   }
 
   .hero__tag {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    align-self: flex-start;
+    padding: 6px 14px;
+    border: 1px solid rgba(242, 242, 242, 0.35);
+    border-radius: 999px;
     font-size: 13px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(242, 242, 242, 0.7);
-  }
-
-  .hero__tag span {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--light);
+    color: rgba(242, 242, 242, 0.85);
   }
 
   h1 {
@@ -116,15 +129,15 @@ const facts = [
 
   .hero__role {
     font-size: clamp(16px, 1.4vw, 19px);
-    color: rgba(242, 242, 242, 0.75);
+    color: rgba(242, 242, 242, 0.78);
   }
 
   .hero__bio {
     max-width: 34em;
     margin-top: clamp(20px, 3vw, 32px);
     font-size: clamp(17px, 1.45vw, 20px);
-    line-height: 1.5;
-    color: rgba(242, 242, 242, 0.92);
+    line-height: 1.55;
+    color: rgba(242, 242, 242, 0.94);
   }
 
   .hero__actions {
@@ -136,15 +149,19 @@ const facts = [
   }
 
   .hero__btn {
-    padding: 11px 18px;
-    border: 1px solid rgba(242, 242, 242, 0.45);
+    padding: 12px 20px;
+    border: 1px solid rgba(242, 242, 242, 0.5);
     border-radius: 999px;
     font-size: 15px;
     font-weight: 500;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
   }
 
-  .hero__btn:hover,
+  .hero__btn:hover {
+    background: rgba(242, 242, 242, 0.14);
+    border-color: var(--light);
+  }
+
   .hero__btn--light {
     background: var(--light);
     border-color: var(--light);
@@ -152,53 +169,59 @@ const facts = [
   }
 
   .hero__btn--light:hover {
-    background: transparent;
-    color: var(--light);
+    background: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-1px);
   }
 
-  .hero__facts {
+  .hero__side {
     display: flex;
     flex-direction: column;
-    padding: clamp(28px, 4vw, 48px);
-    background: var(--wine);
-    border-radius: 12px;
+    justify-content: center;
+    gap: 16px;
   }
 
-  .hero__facts ul {
+  .facts {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
+    gap: 12px;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .hero__facts li {
+  .facts li {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: 20px 16px 20px 0;
-    border-top: 1px solid rgba(242, 242, 242, 0.2);
+    gap: 8px;
+    padding: clamp(18px, 2vw, 26px);
+    background: var(--light);
+    border-radius: 18px;
+    color: var(--ink);
+    box-shadow: 0 18px 36px -24px rgba(13, 13, 13, 0.55);
   }
 
-  .hero__value {
-    font-size: clamp(44px, 5vw, 72px);
+  .facts__value {
+    font-size: clamp(40px, 4.4vw, 64px);
     font-weight: 600;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.045em;
     line-height: 1;
+    color: var(--maroon);
   }
 
-  .hero__label {
+  .facts__label {
     font-size: 14px;
     line-height: 1.35;
-    color: rgba(242, 242, 242, 0.75);
+    color: var(--muted);
   }
 
   .hero__open {
-    margin-top: auto;
-    padding-top: 24px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(242, 242, 242, 0.12);
     font-size: 14px;
-    color: rgba(242, 242, 242, 0.75);
+    text-align: center;
+    color: rgba(242, 242, 242, 0.9);
   }
 
   @media (max-width: 900px) {
@@ -215,24 +238,67 @@ const facts = [
     font-size: 17px;
   }
 
+  /* "See my work" card with three small previews */
   .next {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 28px;
     margin-top: clamp(40px, 6vw, 72px);
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
+    padding: clamp(28px, 4vw, 48px);
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px -36px rgba(13, 13, 13, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .next:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 28px 60px -34px rgba(115, 3, 13, 0.45);
+  }
+
+  .next__text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .next__title {
-    font-size: clamp(28px, 3.4vw, 48px);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    transition: color 0.2s;
+    font-size: clamp(30px, 3.6vw, 52px);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    color: var(--maroon);
   }
 
-  .next:hover .next__title {
-    color: var(--accent);
+  .next__thumbs {
+    display: flex;
+    gap: 12px;
+  }
+
+  .next__thumb {
+    display: grid;
+    place-items: center;
+    width: clamp(84px, 10vw, 130px);
+    aspect-ratio: 3 / 4;
+    padding: 12px;
+    background: var(--tint);
+    border-radius: 14px;
+    transition: transform 0.3s;
+  }
+
+  .next__thumb img {
+    max-height: 100%;
+    width: auto;
+    box-shadow: 0 8px 18px -10px rgba(0, 0, 0, 0.4);
+  }
+
+  .next:hover .next__thumb:nth-child(1) {
+    transform: rotate(-4deg) translateY(-4px);
+  }
+
+  .next:hover .next__thumb:nth-child(3) {
+    transform: rotate(4deg) translateY(-4px);
   }
 
   /* Label on the left, content on the right */
@@ -255,5 +321,4 @@ const facts = [
       grid-template-columns: 1fr;
     }
   }
-
 </style>
