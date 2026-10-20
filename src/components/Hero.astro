@@ -1,0 +1,338 @@
+---
+// Home-page opening screen in a dark "bento" layout: a large rotating showcase of
+// featured work on the left, name and quick links on the right.
+import { Image } from 'astro:assets';
+import { projects } from '../data/projects';
+import { site } from '../data/site';
+
+// Projects shown in the showcase, in order. Their first image is used.
+const showcase = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-food', 'logo-design', 'nenas-herald-coffee']
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter((p) => p !== undefined);
+
+const latest = projects[0];
+const links = [
+  { label: 'Latest work', note: latest.title, href: `/work/${latest.slug}/`, action: 'View' },
+  { label: 'Editorial design', note: 'Newspapers & magazines', href: '/?type=editorial#work', jump: 'editorial', action: 'Explore' },
+  { label: 'Packaging & logos', note: 'Labels, pouches, brand marks', href: '/?type=packaging#work', jump: 'packaging', action: 'Explore' },
+  { label: 'Résumé', note: 'PDF, 2 pages', href: site.resume, action: 'Download', external: true },
+  { label: 'Contact', note: site.email, href: `mailto:${site.email}`, action: 'Email' },
+];
+---
+
+<section class="wrap">
+  <div class="hero">
+    <div class="show" aria-roledescription="carousel" aria-label="Featured work">
+      {
+        showcase.map((p, i) => (
+          <a
+            href={`/work/${p.slug}/`}
+            class:list={['show__slide', { 'is-active': i === 0 }]}
+            style={`--tint: ${p.images[0].tint}`}
+            aria-hidden={i === 0 ? undefined : 'true'}
+            tabindex={i === 0 ? undefined : -1}
+          >
+            <Image
+              src={p.images[0].img}
+              alt={`${p.title} — ${p.category}`}
+              widths={[500, 800, 1200]}
+              sizes="(max-width: 900px) 90vw, 50vw"
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+            <span class="show__caption">
+              <span>{p.title}</span>
+              <span class="show__cat">{p.category}</span>
+            </span>
+          </a>
+        ))
+      }
+      <div class="show__dots">
+        {showcase.map((p, i) => <button type="button" aria-label={`Show ${p.title}`} aria-current={i === 0 ? 'true' : undefined} />)}
+      </div>
+    </div>
+
+    <div class="info">
+      <p class="info__tag"><span class="info__dot" aria-hidden="true"></span>Graphic designer · Est. 2014</p>
+      <h1>Jefrey Jurado</h1>
+      <p class="info__lead">Designing newspapers, magazines, packaging and brands that read clearly and print on time.</p>
+
+      <ul class="links">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} data-jump={l.jump} target={l.external ? '_blank' : undefined}>
+                <span class="links__text">
+                  <span class="links__label">{l.label}</span>
+                  <span class="links__note">{l.note}</span>
+                </span>
+                <span class="links__pill">{l.action} ↗</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="info__foot">Open to full-time &amp; freelance · {site.location}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const show = document.querySelector<HTMLElement>('.show');
+  if (show) {
+    const slides = [...show.querySelectorAll<HTMLAnchorElement>('.show__slide')];
+    const dots = [...show.querySelectorAll<HTMLButtonElement>('.show__dots button')];
+    let current = 0;
+    let timer: number | undefined;
+
+    const go = (n: number) => {
+      current = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => {
+        const active = i === current;
+        s.classList.toggle('is-active', active);
+        s.toggleAttribute('aria-hidden', !active);
+        s.tabIndex = active ? 0 : -1;
+      });
+      dots.forEach((d, i) => d.toggleAttribute('aria-current', i === current));
+    };
+
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const start = () => {
+      if (!reduced) timer = window.setInterval(() => go(current + 1), 4000);
+    };
+    const stop = () => window.clearInterval(timer);
+
+    dots.forEach((d, i) =>
+      d.addEventListener('click', () => {
+        stop();
+        go(i);
+        start();
+      }),
+    );
+    show.addEventListener('mouseenter', stop);
+    show.addEventListener('mouseleave', start);
+    start();
+  }
+</script>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+    padding: 10px;
+    background: #0d0d0d;
+    border-radius: 18px;
+    color: #f2f2f0;
+  }
+
+  /* Left: rotating showcase */
+  .show {
+    position: relative;
+    min-height: clamp(440px, calc(100vh - 100px), 640px);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .show__slide {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    place-items: center;
+    padding: clamp(28px, 7%, 72px) clamp(28px, 7%, 72px) 84px;
+    background: var(--tint);
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+
+  .show__slide.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .show__slide img {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 24px 50px -20px rgba(0, 0, 0, 0.45);
+    transition: transform 6s ease;
+  }
+
+  .show__slide.is-active img {
+    transform: scale(1.03);
+  }
+
+  .show__caption {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 14px;
+    background: rgba(13, 13, 13, 0.85);
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #f2f2f0;
+  }
+
+  .show__cat {
+    font-size: 12px;
+    color: #a3a3a0;
+  }
+
+  .show__dots {
+    position: absolute;
+    right: 16px;
+    bottom: 26px;
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+  }
+
+  .show__dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(13, 13, 13, 0.3);
+    cursor: pointer;
+    transition: width 0.3s, background 0.3s;
+  }
+
+  .show__dots button[aria-current] {
+    width: 22px;
+    background: #0d0d0d;
+  }
+
+  /* Right: name and quick links */
+  .info {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(24px, 3vw, 40px);
+    background: #171717;
+    border-radius: 12px;
+  }
+
+  .info__tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #a3a3a0;
+  }
+
+  .info__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #f2f2f0;
+  }
+
+  h1 {
+    margin: clamp(16px, 2vw, 28px) 0 10px;
+    font-size: clamp(44px, 5.2vw, 78px);
+    white-space: nowrap;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  .info__lead {
+    max-width: 24em;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.4;
+    color: #c9c9c6;
+  }
+
+  .links {
+    margin: auto 0 0;
+    padding: clamp(24px, 3vw, 36px) 0 0;
+    list-style: none;
+  }
+
+  .links li {
+    border-top: 1px solid #2c2c2b;
+  }
+
+  .links li:last-child {
+    border-bottom: 1px solid #2c2c2b;
+  }
+
+  .links a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+  }
+
+  .links__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .links__label {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .links__note {
+    overflow: hidden;
+    font-size: 13px;
+    color: #8d8d8a;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .links__pill {
+    flex: none;
+    padding: 6px 12px;
+    border: 1px solid #3a3a39;
+    border-radius: 999px;
+    font-size: 13px;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .links a:hover .links__pill {
+    background: #f2f2f0;
+    border-color: #f2f2f0;
+    color: #0d0d0d;
+  }
+
+  .info__foot {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #8d8d8a;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    h1 {
+      white-space: normal;
+    }
+    .show {
+      min-height: 0;
+      aspect-ratio: 4 / 3.4;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .show__slide,
+    .show__slide img {
+      transition: none;
+    }
+    .show__slide.is-active img {
+      transform: none;
+    }
+  }
+</style>
