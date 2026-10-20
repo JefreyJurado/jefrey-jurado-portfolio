@@ -1,133 +1,37 @@
 ---
-import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { projects, groups } from '../data/projects';
 import { site } from '../data/site';
 
-const facts = [
-  { value: '12+', label: 'years in print & digital design' },
-  { value: '156', label: 'newspaper issues laid out a year' },
-  { value: '0', label: 'missed print deadlines' },
-  { value: '3', label: 'regional editions every week' },
-];
-
-// One row per filter group for the "Inside this portfolio" index.
-const inside = Object.entries(groups)
-  .map(([key, label]) => {
-    const items = projects.filter((p) => p.group === key);
-    return { key, label, items, cover: items[0]?.images[0].img };
-  })
-  .filter((g) => g.items.length > 0);
-
-const services = [
-  {
-    title: 'Newspaper & editorial layout',
-    text: 'Weekly papers, newsletters and legal pages, built from a master template, with clean headline hierarchy and print-ready CTP files.',
-  },
-  {
-    title: 'Magazine design',
-    text: 'Covers, features and multi-page issues, with a type system that keeps long reads clear in English, Filipino or Chinese.',
-  },
-  {
-    title: 'Packaging & logos',
-    text: 'Labels, pouches, sacks and the marks that go on them, designed to work as a family on the shelf.',
-  },
-  {
-    title: 'Social media & campaigns',
-    text: 'Posters, event announcements and daily post series that stay on-brand week after week.',
-  },
-  {
-    title: 'Photo albums & print',
-    text: 'Event photography, album layout and calendars, from the shoot to the printed book.',
-  },
-];
-
-const clients = [
-  'The Southern Tagalog Herald',
-  'AXA Insurance',
-  'ASEAN Times Magazine',
-  'PAPER.Ph',
-  'BALWIK Magazine',
-  "Noor's Gourmet Food",
-  'KCD Technical Institute',
-  'Institute of the Two Hearts',
-  'Monday Mail',
-];
+const filters = Object.entries(groups)
+  .map(([key, label]) => ({ key, label, count: projects.filter((p) => p.group === key).length }))
+  .filter((f) => f.count > 0);
 ---
 
 <Base>
-  <section class="wrap masthead">
-    <div class="masthead__line label">
-      <span>Portfolio · {new Date().getFullYear()} edition</span>
-      <span class="hide-sm">Print · Packaging · Digital</span>
-      <span>{site.location}</span>
-    </div>
-    <h1 class="masthead__name">Jefrey Jurado</h1>
-    <div class="dateline">
-      <span>Graphic Designer &amp; Layout Artist</span>
-      <span>12+ years in print &amp; digital</span>
-      <span class="dateline__open">Open to full-time &amp; freelance</span>
+  <section class="wrap intro">
+    <h1>
+      Graphic designer and layout artist with 12 years in newspapers, magazines, packaging and social media.
+    </h1>
+    <p class="intro__sub muted">
+      Open to full-time and freelance work · {site.location}
+    </p>
+    <div class="intro__actions">
+      <a href={site.resume} class="btn btn--solid" target="_blank">Download résumé</a>
+      <a href={`mailto:${site.email}`} class="btn">Get in touch</a>
     </div>
   </section>
 
-  <section class="wrap front">
-    <div class="front__intro">
-      <p class="kicker">About the designer</p>
-      <p class="front__lede dropcap">
-        For twelve years I've designed newspapers, magazines, packaging and social media content. Most
-        recently I ran layout for a regional weekly: three editions, 156 issues a year, and not one late
-        file to the press.
-      </p>
-      <p class="front__body">
-        I know how to make dense content clear and how to deliver on a schedule. I'm looking for a full-time
-        design role, and I take on freelance projects.
-      </p>
-      <ul class="facts">
-        {
-          facts.map((f) => (
-            <li>
-              <span class="facts__value">{f.value}</span>
-              <span class="facts__label">{f.label}</span>
-            </li>
-          ))
-        }
-      </ul>
-      <div class="front__actions">
-        <a href={site.resume} class="btn btn--solid" target="_blank">Download résumé</a>
-        <a href={`mailto:${site.email}`} class="btn">Email me</a>
-      </div>
-    </div>
-
-    <aside class="inside" aria-labelledby="inside-title">
-      <p class="flag" id="inside-title"><span>Inside this portfolio</span><span>{projects.length} projects</span></p>
-      <ul>
-        {
-          inside.map((g) => (
-            <li>
-              <a href={`/?type=${g.key}#work`} data-jump={g.key}>
-                {g.cover && <Image src={g.cover} alt="" width={160} class="inside__thumb" />}
-                <span class="inside__text">
-                  <span class="inside__label">{g.label}</span>
-                  <span class="inside__items">{g.items.map((p) => p.title).join(' · ')}</span>
-                </span>
-                <span class="inside__count">{g.items.length}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </aside>
-  </section>
-
-  <section class="wrap section" id="work">
-    <p class="flag"><span>The work</span><span data-count>{projects.length} projects</span></p>
+  <section class="wrap" id="work">
     <div class="filters" role="group" aria-label="Filter projects">
-      <button type="button" class="filter" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="filter" data-filter="all" aria-pressed="true">
+        All <sup>{projects.length}</sup>
+      </button>
       {
-        inside.map((g) => (
-          <button type="button" class="filter" data-filter={g.key} aria-pressed="false">
-            {g.label}
+        filters.map((f) => (
+          <button type="button" class="filter" data-filter={f.key} aria-pressed="false">
+            {f.label} <sup>{f.count}</sup>
           </button>
         ))
       }
@@ -140,7 +44,6 @@ const clients = [
             group={p.group}
             title={p.title}
             category={p.category}
-            client={p.client}
             year={p.year}
             cover={p.images[0].img}
             index={i}
@@ -149,41 +52,17 @@ const clients = [
       }
     </div>
   </section>
-
-  <section class="wrap section">
-    <p class="flag"><span>Services</span><span>Full-time · Freelance</span></p>
-    <ul class="services">
-      {
-        services.map((s) => (
-          <li>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section class="wrap section">
-    <p class="flag"><span>Worked with</span><span>Clients &amp; employers</span></p>
-    <p class="clients">{clients.join('  ·  ')}</p>
-  </section>
 </Base>
 
 <script>
   const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
   const cards = document.querySelectorAll<HTMLElement>('.grid [data-group]');
-  const count = document.querySelector('[data-count]');
 
   function apply(filter: string) {
-    let shown = 0;
     cards.forEach((card) => {
-      const match = filter === 'all' || card.dataset.group === filter;
-      card.hidden = !match;
-      if (match) shown++;
+      card.hidden = filter !== 'all' && card.dataset.group !== filter;
     });
     buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
-    if (count) count.textContent = `${shown} project${shown === 1 ? '' : 's'}`;
     // Keep the choice in the URL so a filtered view can be shared, e.g. /?type=packaging#work
     const url = new URL(location.href);
     if (filter === 'all') url.searchParams.delete('type');
@@ -193,328 +72,82 @@ const clients = [
 
   buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter!)));
 
-  // "Inside this portfolio" rows filter in place instead of reloading the page.
-  document.querySelectorAll<HTMLAnchorElement>('[data-jump]').forEach((a) =>
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      apply(a.dataset.jump!);
-      document.getElementById('work')?.scrollIntoView();
-    }),
-  );
-
   const initial = new URLSearchParams(location.search).get('type');
   if (initial && [...buttons].some((b) => b.dataset.filter === initial)) apply(initial);
 </script>
 
 <style>
-  .masthead {
-    padding-top: 18px;
+  .intro {
+    padding-top: clamp(48px, 7vw, 104px);
+    padding-bottom: clamp(40px, 5vw, 72px);
   }
 
-  .masthead__line {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--ink);
+  h1 {
+    max-width: 22em;
+    font-size: clamp(30px, 3.9vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
   }
 
-  .masthead__name {
-    margin: 0.06em 0 0.02em;
-    font-family: var(--text);
-    font-stretch: 100%;
-    font-variation-settings: 'opsz' 72;
-    font-weight: 700;
-    font-size: clamp(56px, 13.4vw, 184px);
-    letter-spacing: -0.035em;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
+  .intro__sub {
+    margin-top: 20px;
+    font-size: clamp(16px, 1.3vw, 18px);
   }
 
-  .dateline {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 6px 24px;
-    padding: 9px 0 8px;
-    border-top: 3px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-    font-family: var(--head);
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .dateline__open {
-    color: var(--spot);
-  }
-
-  @media (max-width: 640px) {
-    .hide-sm {
-      display: none;
-    }
-    .dateline {
-      justify-content: center;
-      text-align: center;
-    }
-  }
-
-  .front {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 40px clamp(32px, 5vw, 72px);
-    padding-top: clamp(28px, 4vw, 44px);
-  }
-
-  .front__intro {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .front__lede {
-    font-size: clamp(22px, 2.2vw, 27px);
-    line-height: 1.35;
-  }
-
-  .front__body {
-    color: var(--muted);
-    max-width: 36em;
-  }
-
-  .facts {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin: 8px 0 4px;
-    padding: 0;
-    list-style: none;
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-  }
-
-  .facts li {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 12px 14px 12px 0;
-  }
-
-  .facts li + li {
-    padding-left: 14px;
-    border-left: 1px solid var(--hair);
-  }
-
-  .facts__value {
-    font-family: var(--head);
-    font-stretch: 75%;
-    font-weight: 800;
-    font-size: 44px;
-    line-height: 1;
-  }
-
-  .facts__label {
-    font-size: 14px;
-    line-height: 1.3;
-    color: var(--muted);
-  }
-
-  @media (max-width: 560px) {
-    .facts {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .facts li:nth-child(3) {
-      padding-left: 0;
-      border-left: 0;
-    }
-    .facts li:nth-child(n + 3) {
-      border-top: 1px solid var(--hair);
-    }
-  }
-
-  .front__actions {
+  .intro__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 4px;
-  }
-
-  .inside ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border-bottom: 1px solid var(--ink);
-  }
-
-  .inside li + li {
-    border-top: 1px solid var(--hair);
-  }
-
-  .inside a {
-    display: grid;
-    grid-template-columns: 72px 1fr auto;
-    gap: 16px;
-    align-items: center;
-    padding: 12px 0;
-  }
-
-  .inside__thumb {
-    width: 72px;
-    height: 72px;
-    object-fit: cover;
-    background: var(--well);
-  }
-
-  .inside__text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-  }
-
-  .inside__label {
-    font-family: var(--head);
-    font-stretch: 75%;
-    font-weight: 800;
-    font-size: 26px;
-    line-height: 1;
-  }
-
-  .inside__items {
-    font-size: 15px;
-    font-style: italic;
-    color: var(--muted);
-  }
-
-  .inside__count {
-    font-family: var(--head);
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--muted);
-  }
-
-  .inside a:hover .inside__label {
-    color: var(--spot);
-  }
-
-  @media (max-width: 900px) {
-    .front {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .section {
-    padding-top: clamp(56px, 8vw, 96px);
+    margin-top: 28px;
   }
 
   .filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 22px;
-    margin: 14px 0 32px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--hair);
+    gap: 6px 24px;
+    margin-bottom: 28px;
   }
 
   .filter {
     padding: 4px 0;
     border: 0;
-    border-bottom: 2px solid transparent;
     background: none;
     color: var(--muted);
-    font-family: var(--head);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font: inherit;
+    font-size: 15px;
     cursor: pointer;
+    transition: color 0.2s;
   }
 
-  .filter:hover {
+  .filter sup {
+    font-size: 11px;
+    margin-left: 1px;
+  }
+
+  .filter:hover,
+  .filter[aria-pressed='true'] {
     color: var(--ink);
   }
 
   .filter[aria-pressed='true'] {
-    color: var(--ink);
-    border-bottom-color: var(--spot);
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px clamp(16px, 2.4vw, 32px);
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(40px, 5vw, 72px) clamp(16px, 2vw, 28px);
   }
 
   .grid :global([hidden]) {
     display: none;
   }
 
-  @media (max-width: 1000px) {
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 640px) {
+  @media (max-width: 760px) {
     .grid {
       grid-template-columns: 1fr;
     }
-  }
-
-  .services {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    margin: 20px 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .services li {
-    padding: 0 18px;
-  }
-
-  .services li:first-child {
-    padding-left: 0;
-  }
-
-  .services li + li {
-    border-left: 1px solid var(--hair);
-  }
-
-  .services h3 {
-    margin-bottom: 10px;
-    font-size: 24px;
-  }
-
-  .services p {
-    font-size: 16px;
-    color: var(--muted);
-  }
-
-  @media (max-width: 1000px) {
-    .services {
-      grid-template-columns: 1fr 1fr;
-      row-gap: 28px;
-    }
-    .services li,
-    .services li:first-child {
-      padding: 0 18px 0 0;
-      border-left: 0;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .services {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .clients {
-    margin-top: 20px;
-    font-size: clamp(22px, 2.6vw, 32px);
-    font-style: italic;
-    line-height: 1.4;
-    white-space: pre-wrap;
   }
 </style>

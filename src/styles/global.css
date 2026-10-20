@@ -1,21 +1,18 @@
 /*
-  Editorial design system — the site is set like a newspaper front page:
-  Archivo (condensed) for headlines and labels, Newsreader for reading text,
-  newsprint paper, black ink and a single spot red.
+  Minimal design system: one typeface, black on white, and the work does the talking.
 */
 :root {
-  --paper: #f0efea;
-  --well: #e3e1da;
-  --ink: #141414;
-  --muted: #5d5b56;
-  --hair: #c4c1b8;
-  --spot: #c8102e;
+  --bg: #ffffff;
+  --well: #f3f3f2;
+  --well-hover: #ececea;
+  --ink: #111111;
+  --muted: #767676;
+  --line: #e7e7e5;
 
-  --head: 'Archivo', 'Arial Narrow', sans-serif;
-  --text: 'Newsreader', Georgia, serif;
+  --font: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --gutter: clamp(16px, 3.5vw, 40px);
-  --max: 1320px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --max: 1440px;
 }
 
 *,
@@ -26,17 +23,16 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-padding-top: 72px;
+  scroll-padding-top: 80px;
 }
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--text);
-  font-size: 18px;
-  line-height: 1.5;
-  font-optical-sizing: auto;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -56,29 +52,24 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-family: var(--head);
-  font-stretch: 75%;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   text-wrap: balance;
 }
 
 p {
+  margin: 0;
   text-wrap: pretty;
 }
 
-p {
-  margin: 0;
-}
-
 ::selection {
-  background: var(--spot);
-  color: #fff;
+  background: var(--ink);
+  color: var(--bg);
 }
 
 :focus-visible {
-  outline: 2px solid var(--spot);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
@@ -89,64 +80,20 @@ p {
   padding: 0 var(--gutter);
 }
 
-/* Small uppercase label, the way a newspaper sets section names and bylines */
-.label {
-  font-family: var(--head);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.muted {
   color: var(--muted);
 }
 
-/* Red kicker above a headline */
-.kicker {
-  font-family: var(--head);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--spot);
+.link {
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s;
 }
 
-/* Thick-and-thin rule across the top of a section */
-.rule {
-  padding-top: 10px;
-  background:
-    linear-gradient(var(--ink), var(--ink)) 0 0 / 100% 3px no-repeat,
-    linear-gradient(var(--ink), var(--ink)) 0 6px / 100% 1px no-repeat;
-}
-
-/* Section flag: black bar with the section name, like a newspaper section front */
-.flag {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  padding: 8px 12px;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--head);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.flag span:last-child {
-  font-weight: 500;
-  color: #b9b6ae;
-}
-
-.dropcap::first-letter {
-  float: left;
-  margin: 0.06em 0.08em 0 0;
-  font-family: var(--head);
-  font-stretch: 75%;
-  font-weight: 800;
-  font-size: 4.1em;
-  line-height: 0.8;
-  color: var(--ink);
+.link:hover {
+  text-decoration-color: currentColor;
 }
 
 .btn {
@@ -154,38 +101,22 @@ p {
   align-items: center;
   gap: 8px;
   padding: 11px 18px;
-  border: 1.5px solid var(--ink);
-  font-family: var(--head);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
   transition: background 0.2s, color 0.2s;
 }
 
-.btn:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-
+.btn:hover,
 .btn--solid {
   background: var(--ink);
-  color: var(--paper);
+  color: var(--bg);
 }
 
 .btn--solid:hover {
-  background: var(--spot);
-  border-color: var(--spot);
-}
-
-.underline {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-
-.underline:hover {
-  color: var(--spot);
+  background: transparent;
+  color: var(--ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

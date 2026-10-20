@@ -8,15 +8,13 @@ export function getStaticPaths() {
     params: { slug: project.slug },
     props: {
       project,
-      number: i + 1,
       prev: projects[(i - 1 + projects.length) % projects.length],
       next: projects[(i + 1) % projects.length],
     },
   }));
 }
 
-const { project, number, prev, next } = Astro.props;
-const [hero, ...rest] = project.images;
+const { project, prev, next } = Astro.props;
 const meta = [
   { label: 'Client', value: project.client },
   { label: 'Role', value: project.role },
@@ -27,68 +25,55 @@ const meta = [
 
 <Base title={project.title} description={project.summary}>
   <article class="wrap">
-    <div class="crumbs label">
-      <a href="/#work" class="underline">← All work</a>
-      <span>Project {number} of {projects.length}</span>
-    </div>
-
     <header class="head">
-      <p class="kicker">{project.category}</p>
+      <a href="/#work" class="back muted">← All work</a>
+      <p class="muted">{project.category}</p>
       <h1>{project.title}</h1>
-      <p class="deck">{project.summary}</p>
+      <p class="summary">{project.summary}</p>
     </header>
 
-    <dl class="meta">
-      {
-        meta.map((m) => (
-          <div>
-            <dt class="label">{m.label}</dt>
-            <dd>{m.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
-
-    <div class="body">
-      {project.description.map((para, i) => <p class:list={{ dropcap: i === 0 }}>{para}</p>)}
+    <div class="info">
+      <dl class="meta">
+        {
+          meta.map((m) => (
+            <div>
+              <dt class="muted">{m.label}</dt>
+              <dd>{m.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <div class="description">
+        {project.description.map((para) => <p>{para}</p>)}
+      </div>
     </div>
 
-    <figure class="fig fig--hero">
-      <button class="zoom" data-full={hero.img.src} aria-label={`View full size: ${hero.caption}`}>
-        <Image src={hero.img} alt={`${project.title} — ${hero.caption}`} widths={[800, 1400, 2000]} sizes="100vw" loading="eager" />
-      </button>
-      <figcaption><span>Fig. 1</span> {hero.caption}</figcaption>
-    </figure>
+    <div class="gallery">
+      {
+        project.images.map((item, i) => (
+          <figure class:list={{ half: item.img.width / item.img.height < 1.15 }}>
+            <button class="zoom" data-full={item.img.src} aria-label={`View full size: ${item.caption}`}>
+              <Image
+                src={item.img}
+                alt={`${project.title} — ${item.caption}`}
+                widths={[700, 1200, 2000]}
+                sizes="(max-width: 760px) 100vw, 90vw"
+                loading={i < 2 ? 'eager' : 'lazy'}
+              />
+            </button>
+            <figcaption class="muted">{item.caption}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
 
-    {
-      rest.length > 0 && (
-        <div class="gallery">
-          {rest.map((item, i) => (
-            <figure class:list={['fig', { wide: item.img.width / item.img.height > 1.8 }]}>
-              <button class="zoom" data-full={item.img.src} aria-label={`View full size: ${item.caption}`}>
-                <Image
-                  src={item.img}
-                  alt={`${project.title} — ${item.caption}`}
-                  widths={[600, 1000, 1600]}
-                  sizes="(max-width: 720px) 100vw, 50vw"
-                />
-              </button>
-              <figcaption>
-                <span>Fig. {i + 2}</span> {item.caption}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      )
-    }
-
-    <nav class="pager rule" aria-label="More projects">
+    <nav class="pager" aria-label="More projects">
       <a href={`/work/${prev.slug}/`}>
-        <span class="label">← Previous</span>
+        <span class="muted">Previous</span>
         <span class="pager__title">{prev.title}</span>
       </a>
       <a href={`/work/${next.slug}/`} class="pager__next">
-        <span class="label">Next →</span>
+        <span class="muted">Next</span>
         <span class="pager__title">{next.title}</span>
       </a>
     </nav>
@@ -96,7 +81,7 @@ const meta = [
 
   <dialog class="lightbox" aria-label="Image viewer">
     <img alt="" />
-    <button class="lightbox__close" aria-label="Close">Close ✕</button>
+    <button class="lightbox__close" aria-label="Close">Close</button>
   </dialog>
 </Base>
 
@@ -114,137 +99,111 @@ const meta = [
 </script>
 
 <style>
-  .crumbs {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 16px 0 10px;
-    border-bottom: 1px solid var(--ink);
+  .head {
+    padding: clamp(40px, 7vw, 96px) 0 clamp(32px, 4vw, 56px);
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: clamp(32px, 5vw, 56px);
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+
+  .back:hover {
     color: var(--ink);
   }
 
-  .head {
-    padding: clamp(32px, 6vw, 64px) 0 clamp(24px, 3vw, 36px);
-    text-align: center;
+  h1 {
+    margin: 8px 0 16px;
+    font-size: clamp(36px, 5.5vw, 76px);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
   }
 
-  .head h1 {
-    margin: 12px 0 18px;
-    font-size: clamp(52px, 9vw, 128px);
-  }
-
-  .deck {
-    text-wrap: balance;
-    max-width: 30em;
-    margin: 0 auto;
-    font-size: clamp(20px, 2vw, 25px);
-    font-style: italic;
-    line-height: 1.35;
+  .summary {
+    max-width: 32em;
+    font-size: clamp(18px, 1.6vw, 22px);
     color: var(--muted);
+  }
+
+  .info {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 32px clamp(32px, 6vw, 96px);
+    padding: 32px 0 clamp(48px, 6vw, 80px);
+    border-top: 1px solid var(--line);
   }
 
   .meta {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
     margin: 0;
-    border-top: 3px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
+    align-content: start;
   }
 
-  .meta div {
-    padding: 12px 16px 14px 0;
-  }
-
-  .meta div + div {
-    padding-left: 16px;
-    border-left: 1px solid var(--hair);
+  .meta dt {
+    font-size: 14px;
   }
 
   .meta dd {
-    margin: 4px 0 0;
+    margin: 2px 0 0;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 40em;
     font-size: 17px;
-    line-height: 1.35;
   }
 
-  @media (max-width: 760px) {
-    .meta {
-      grid-template-columns: 1fr 1fr;
-    }
-    .meta div:nth-child(3) {
-      padding-left: 0;
-      border-left: 0;
-    }
-    .meta div:nth-child(n + 3) {
-      border-top: 1px solid var(--hair);
+  @media (max-width: 860px) {
+    .info {
+      grid-template-columns: 1fr;
     }
   }
 
-  .body {
-    columns: 2 22em;
-    column-gap: 40px;
-    column-rule: 1px solid var(--hair);
-    max-width: 960px;
-    margin: 32px auto clamp(40px, 6vw, 64px);
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(28px, 4vw, 48px) clamp(16px, 2vw, 28px);
   }
 
-  .body p + p {
-    margin-top: 1em;
-  }
-
-  .fig {
+  figure {
+    grid-column: 1 / -1;
     margin: 0;
+  }
+
+  figure.half {
+    grid-column: auto;
   }
 
   .zoom {
     display: grid;
     place-items: center;
     width: 100%;
-    padding: clamp(16px, 4vw, 56px);
+    height: calc(100% - 34px);
+    padding: clamp(20px, 5vw, 72px);
     border: 0;
+    border-radius: 6px;
     background: var(--well);
     cursor: zoom-in;
   }
 
   .zoom img {
-    max-height: 80vh;
+    max-height: 82vh;
     width: auto;
-    outline: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 16px 40px -20px rgba(0, 0, 0, 0.3);
   }
 
   figcaption {
-    padding: 8px 0 0;
-    font-size: 15px;
-    font-style: italic;
-    color: var(--muted);
+    padding-top: 10px;
+    font-size: 14px;
   }
 
-  figcaption span {
-    margin-right: 6px;
-    font-family: var(--head);
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink);
-  }
-
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 36px clamp(16px, 2.4vw, 32px);
-    margin-top: 36px;
-  }
-
-  .gallery .zoom {
-    height: calc(100% - 32px);
-  }
-
-  .gallery .wide {
-    grid-column: 1 / -1;
-  }
-
-  @media (max-width: 720px) {
+  @media (max-width: 760px) {
     .gallery {
       grid-template-columns: 1fr;
     }
@@ -254,31 +213,33 @@ const meta = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-    margin-top: clamp(64px, 8vw, 96px);
+    margin-top: clamp(72px, 9vw, 120px);
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
   }
 
   .pager a {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding-top: 14px;
+    gap: 4px;
+    font-size: 15px;
   }
 
   .pager__next {
-    text-align: right;
     align-items: flex-end;
+    text-align: right;
   }
 
   .pager__title {
-    font-family: var(--head);
-    font-stretch: 75%;
-    font-weight: 800;
-    font-size: clamp(28px, 4vw, 52px);
-    line-height: 1;
+    font-size: clamp(20px, 2.4vw, 32px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
   }
 
   .pager a:hover .pager__title {
-    color: var(--spot);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 1px;
   }
 
   .lightbox {
@@ -289,7 +250,7 @@ const meta = [
     margin: 0;
     padding: clamp(16px, 4vw, 48px);
     border: 0;
-    background: rgba(20, 20, 20, 0.95);
+    background: rgba(255, 255, 255, 0.97);
     cursor: zoom-out;
   }
 
@@ -308,15 +269,13 @@ const meta = [
     position: fixed;
     top: 16px;
     right: 16px;
-    padding: 10px 16px;
-    border: 1px solid #666;
-    background: transparent;
-    color: #fff;
-    font-family: var(--head);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    padding: 9px 16px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
     cursor: pointer;
   }
 </style>

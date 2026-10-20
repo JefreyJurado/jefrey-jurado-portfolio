@@ -7,13 +7,12 @@ interface Props {
   group: string;
   title: string;
   category: string;
-  client: string;
   year: string;
   cover: ImageMetadata;
   index: number;
 }
 
-const { slug, group, title, category, client, year, cover, index } = Astro.props;
+const { slug, group, title, category, year, cover, index } = Astro.props;
 ---
 
 <a href={`/work/${slug}/`} class="card" data-group={group}>
@@ -21,14 +20,15 @@ const { slug, group, title, category, client, year, cover, index } = Astro.props
     <Image
       src={cover}
       alt={`${title} — ${category}`}
-      widths={[400, 700, 1000]}
-      sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw"
-      loading={index < 3 ? 'eager' : 'lazy'}
+      widths={[500, 900, 1400]}
+      sizes="(max-width: 760px) 100vw, 50vw"
+      loading={index < 2 ? 'eager' : 'lazy'}
     />
   </div>
-  <p class="kicker">{category}</p>
-  <h3>{title}</h3>
-  <p class="card__meta">{client} · {year}</p>
+  <div class="card__caption">
+    <h3>{title}</h3>
+    <span class="muted">{category}, {year}</span>
+  </div>
 </a>
 
 <style>
@@ -40,11 +40,16 @@ const { slug, group, title, category, client, year, cover, index } = Astro.props
     display: grid;
     grid-template: minmax(0, 1fr) / minmax(0, 1fr);
     place-items: center;
-    aspect-ratio: 5 / 4;
-    padding: clamp(16px, 7%, 36px);
-    margin-bottom: 14px;
+    aspect-ratio: 4 / 3;
+    padding: clamp(24px, 8%, 64px);
     background: var(--well);
+    border-radius: 6px;
     overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .card:hover .card__well {
+    background: var(--well-hover);
   }
 
   .card__well img {
@@ -52,28 +57,27 @@ const { slug, group, title, category, client, year, cover, index } = Astro.props
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
-    outline: 1px solid rgba(0, 0, 0, 0.08);
-    transition: transform 0.4s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 32px -16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   .card:hover .card__well img {
-    transform: translateY(-4px);
+    transform: scale(1.025);
+  }
+
+  .card__caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 2px 16px;
+    padding-top: 14px;
+    font-size: 15px;
   }
 
   h3 {
-    margin: 6px 0 6px;
-    font-size: clamp(26px, 2.4vw, 32px);
-  }
-
-  .card:hover h3 {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-  }
-
-  .card__meta {
-    font-style: italic;
     font-size: 16px;
-    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
 </style>

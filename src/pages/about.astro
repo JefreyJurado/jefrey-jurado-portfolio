@@ -6,24 +6,24 @@ const experience = [
   {
     role: 'Graphic Designer & Editor-in-Chief',
     org: 'The Southern Tagalog Herald Newspaper',
-    years: '2019 â€“ 2026',
+    years: '2019 – 2026',
     text: 'Ran weekly layout and production for three regional editions: 156 issues a year, with zero missed deadlines.',
   },
   {
     role: 'Packaging Designer & Brand Developer',
-    org: "Noor's Gourmet Food Â· Freelance",
-    years: '2021 â€“ 2024',
+    org: "Noor's Gourmet Food · Freelance",
+    years: '2021 – 2024',
     text: 'Packaging, product logos, calling cards and marketing collateral for multiple food lines.',
   },
   {
     role: 'Marketing Graphic Designer',
-    org: 'AXA Insurance Â· Freelance',
-    years: '2019 â€“ 2021',
+    org: 'AXA Insurance · Freelance',
+    years: '2019 – 2021',
     text: 'Weekly social media posters and certificates over a two-year remote partnership.',
   },
   {
     role: 'Magazine Layout Designer',
-    org: 'ASEAN Times Magazine Â· Contract',
+    org: 'ASEAN Times Magazine · Contract',
     years: '2020',
     text: 'Monthly 36-page full-colour magazine layouts and Chinese-language newspaper pages.',
   },
@@ -36,15 +36,37 @@ const experience = [
   {
     role: 'Graphic Designer',
     org: 'Secular Male Institute of the Two Hearts',
-    years: '2014 â€“ 2023',
+    years: '2014 – 2023',
     text: 'Social media content, commemorative photo albums, newsletters, tarpaulins and event videos.',
   },
   {
     role: 'Graphic Designer',
     org: 'Monday Mail, The Barangay & Talahib Newspapers',
-    years: '2014 â€“ 2016',
+    years: '2014 – 2016',
     text: 'Weekly layouts for three newspapers running at the same time.',
   },
+];
+
+const services = [
+  'Newspaper & editorial layout',
+  'Magazine design',
+  'Packaging & labels',
+  'Logo design',
+  'Social media graphics',
+  'Photo albums & event coverage',
+  'Print production & CTP prep',
+];
+
+const clients = [
+  'The Southern Tagalog Herald',
+  'AXA Insurance',
+  'ASEAN Times Magazine',
+  'PAPER.Ph',
+  'BALWIK Magazine',
+  "Noor's Gourmet Food",
+  'KCD Technical Institute',
+  'Institute of the Two Hearts',
+  'Monday Mail',
 ];
 
 const tools = [
@@ -53,237 +75,176 @@ const tools = [
   'Illustrator',
   'Premiere Pro',
   'Canva',
-  'CTP & print prep',
-  'Colour management',
   'HTML / CSS',
   'React & Next.js',
 ];
 ---
 
 <Base title="About" description="About Jefrey Jurado, graphic designer and layout artist from Laguna, Philippines.">
-  <article class="wrap">
-    <div class="crumbs label">
-      <span>Profile</span>
-      <span>{site.location}</span>
-    </div>
+  <div class="wrap">
+    <section class="intro">
+      <h1>
+        I'm Jefrey, a graphic designer and layout artist from Laguna, Philippines.
+      </h1>
+      <div class="intro__body">
+        <p>
+          Most of my career has been in publishing. I've designed weekly newspapers, monthly magazines, and the
+          legal and editorial pages in between, so I know how to make dense content clear and how to get files to
+          the press on time. For the last seven years I ran layout for three regional editions of a weekly paper:
+          156 issues a year, with no missed deadlines.
+        </p>
+        <p>
+          Outside print, I've designed packaging for food brands, social media campaigns for insurance and
+          education clients, logos for small businesses, and commemorative photo albums. I also studied IT
+          (Software Development), so I'm comfortable working with web and app teams.
+        </p>
+        <p>I'm open to full-time roles and freelance projects, and willing to relocate.</p>
+        <div class="actions">
+          <a href={site.resume} class="btn btn--solid" target="_blank">Download résumé</a>
+          <a href={`mailto:${site.email}`} class="btn">Get in touch</a>
+        </div>
+      </div>
+    </section>
 
-    <header class="head">
-      <p class="kicker">About the designer</p>
-      <h1>Twelve years of deadlines, layouts and good type</h1>
-      <p class="deck">
-        A graphic designer and layout artist who learned the craft on weekly newspapers, and brings the same
-        discipline to magazines, packaging and social media.
-      </p>
-    </header>
-
-    <div class="body">
-      <p class="dropcap">
-        I'm Jefrey Jurado, a graphic designer and layout artist from Laguna, Philippines. Most of my career has
-        been in publishing. I've designed weekly newspapers, monthly magazines, and the legal and editorial pages
-        in between, so I know how to make dense content clear and how to get files to the press on time.
-      </p>
-      <p>
-        Outside print, I've designed packaging for food brands, social media campaigns for insurance and
-        education clients, logos for small businesses, and commemorative photo albums for religious
-        institutions. I also studied IT (Software Development), so I'm comfortable working with web and app
-        teams.
-      </p>
-      <p>
-        I'm open to <strong>full-time roles</strong> and <strong>freelance projects</strong>, and willing to
-        relocate.
-      </p>
-    </div>
-
-    <div class="actions">
-      <a href={site.resume} class="btn btn--solid" target="_blank">Download rÃ©sumÃ© (PDF)</a>
-      <a href={`mailto:${site.email}`} class="btn">Email me</a>
-    </div>
-
-    <section class="section">
-      <p class="flag"><span>Experience</span><span>2014 â€” present</span></p>
-      <ol class="timeline">
+    <section class="row">
+      <h2>Experience</h2>
+      <ol class="jobs">
         {
           experience.map((e) => (
             <li>
-              <span class="years">{e.years}</span>
-              <div>
+              <div class="jobs__head">
                 <h3>{e.role}</h3>
-                <p class="org">{e.org}</p>
+                <span class="muted">{e.years}</span>
               </div>
-              <p class="text">{e.text}</p>
+              <p class="muted">{e.org}</p>
+              <p class="jobs__text">{e.text}</p>
             </li>
           ))
         }
       </ol>
     </section>
 
-    <section class="section split">
-      <div>
-        <p class="flag"><span>Tools</span></p>
-        <ul class="tools">{tools.map((t) => <li>{t}</li>)}</ul>
-      </div>
-      <div>
-        <p class="flag"><span>Education</span></p>
-        <ul class="edu">
-          <li>
-            <h3>BS Information Technology, Software Development</h3>
-            <p>MapÃºa Malayan Digital College Â· 2023 â€“ 2026 (undergraduate)</p>
-          </li>
-          <li>
-            <h3>BA in Communication</h3>
-            <p>Mater Redemptoris College Â· 2010 â€“ 2013</p>
-          </li>
-        </ul>
-      </div>
+    <section class="row">
+      <h2>Services</h2>
+      <ul class="list">{services.map((s) => <li>{s}</li>)}</ul>
     </section>
-  </article>
+
+    <section class="row">
+      <h2>Clients</h2>
+      <ul class="list">{clients.map((c) => <li>{c}</li>)}</ul>
+    </section>
+
+    <section class="row">
+      <h2>Tools</h2>
+      <ul class="list">{tools.map((t) => <li>{t}</li>)}</ul>
+    </section>
+
+    <section class="row">
+      <h2>Education</h2>
+      <ul class="edu">
+        <li>
+          <h3>BS Information Technology, Software Development</h3>
+          <p class="muted">Mapúa Malayan Digital College · 2023 – 2026 (undergraduate)</p>
+        </li>
+        <li>
+          <h3>BA in Communication</h3>
+          <p class="muted">Mater Redemptoris College · 2010 – 2013</p>
+        </li>
+      </ul>
+    </section>
+  </div>
 </Base>
 
 <style>
-  .crumbs {
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px clamp(32px, 6vw, 96px);
+    padding: clamp(56px, 10vw, 140px) 0 clamp(56px, 8vw, 112px);
+  }
+
+  h1 {
+    font-size: clamp(30px, 3.4vw, 48px);
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  .intro__body {
     display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 16px 0 10px;
-    border-bottom: 1px solid var(--ink);
-    color: var(--ink);
-  }
-
-  .head {
-    padding: clamp(32px, 6vw, 64px) 0 clamp(24px, 3vw, 36px);
-    text-align: center;
-    border-bottom: 3px solid var(--ink);
-  }
-
-  .head h1 {
-    max-width: 12em;
-    margin: 12px auto 18px;
-    font-size: clamp(48px, 8vw, 112px);
-  }
-
-  .deck {
-    text-wrap: balance;
-    max-width: 30em;
-    margin: 0 auto;
-    font-size: clamp(20px, 2vw, 25px);
-    font-style: italic;
-    line-height: 1.35;
-    color: var(--muted);
-  }
-
-  .body {
-    columns: 2 22em;
-    column-gap: 40px;
-    column-rule: 1px solid var(--hair);
-    max-width: 960px;
-    margin: 32px auto 0;
-  }
-
-  .body p + p {
-    margin-top: 1em;
-  }
-
-  .body strong {
-    font-weight: 700;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 17px;
   }
 
   .actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 10px;
-    margin-top: 32px;
+    margin-top: 12px;
   }
 
-  .section {
-    padding-top: clamp(56px, 8vw, 88px);
+  @media (max-width: 860px) {
+    .intro {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .timeline {
+  /* Label on the left, content on the right */
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px clamp(32px, 6vw, 96px);
+    padding: 28px 0 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 860px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .jobs,
+  .list,
+  .edu {
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .timeline li {
-    display: grid;
-    grid-template-columns: 140px 1fr 1fr;
-    gap: 6px 32px;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--hair);
+  .jobs li + li {
+    margin-top: 28px;
   }
 
-  .years {
-    font-family: var(--head);
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.06em;
-    color: var(--spot);
-  }
-
-  .timeline h3 {
-    font-size: 26px;
-    line-height: 1.05;
-  }
-
-  .org {
-    margin-top: 4px;
-    font-style: italic;
-    color: var(--muted);
-  }
-
-  .text {
-    color: var(--muted);
-  }
-
-  @media (max-width: 860px) {
-    .timeline li {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(40px, 6vw, 80px);
-  }
-
-  @media (max-width: 860px) {
-    .split {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .tools {
-    columns: 2;
-    margin: 16px 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .tools li {
-    padding: 8px 0;
-    border-bottom: 1px solid var(--hair);
-    break-inside: avoid;
-  }
-
-  .edu {
+  .jobs__head {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin: 16px 0 0;
-    padding: 0;
-    list-style: none;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 16px;
   }
 
-  .edu h3 {
-    font-size: 26px;
-    line-height: 1.05;
+  h3 {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
 
-  .edu p {
+  .jobs__text {
     margin-top: 6px;
-    font-style: italic;
-    color: var(--muted);
+  }
+
+  .list li {
+    padding: 2px 0;
+  }
+
+  .edu li + li {
+    margin-top: 20px;
   }
 </style>
