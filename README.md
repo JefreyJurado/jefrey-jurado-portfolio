@@ -31,6 +31,6 @@ To add a brand-new project, create a new folder and add a matching entry in `src
 
 - Contact email, LinkedIn, location: `src/data/site.ts`
 - Résumé PDF: replace `public/jefrey-jurado-resume.pdf`
-- Home page text, services, clients: `src/pages/index.astro`
-- About page and experience: `src/pages/about.astro`
+- Home page (About: intro, facts, bio): `src/pages/index.astro`
+- Work page (project grid and filters): `src/pages/work/index.astro`
 - Colours and fonts: `src/styles/global.css` (top of the file)

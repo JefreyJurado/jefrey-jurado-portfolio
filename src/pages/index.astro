@@ -1,139 +1,259 @@
 ---
 import Base from '../layouts/Base.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import Hero from '../components/Hero.astro';
-import { projects, groups } from '../data/projects';
-import { sizesFor } from '../lib/layout';
+import { site } from '../data/site';
+import { projects } from '../data/projects';
 
-const sizes = sizesFor(projects.length);
-const filters = Object.entries(groups)
-  .map(([key, label]) => ({ key, label, count: projects.filter((p) => p.group === key).length }))
-  .filter((f) => f.count > 0);
+const facts = [
+  { value: '12+', label: 'years in print & digital design' },
+  { value: '156', label: 'newspaper issues laid out a year' },
+  { value: '0', label: 'missed print deadlines' },
+  { value: String(projects.length), label: 'portfolio projects to explore' },
+];
 ---
 
 <Base>
-  <Hero />
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero__about">
+        <p class="hero__tag"><span aria-hidden="true"></span>About me</p>
+        <h1>Jefrey Jurado</h1>
+        <p class="hero__role">Graphic Designer &amp; Layout Artist · {site.location}</p>
+        <p class="hero__bio">
+          I've spent 12 years designing newspapers, magazines, packaging and social media content. Most recently I
+          ran layout for three regional editions of a weekly newspaper: 156 issues a year, with no missed
+          deadlines. I'm looking for a full-time design role, and I take on freelance projects.
+        </p>
+        <div class="hero__actions">
+          <a href="/work/" class="hero__btn hero__btn--light">View my work →</a>
+          <a href={site.resume} class="hero__btn" target="_blank">Download résumé</a>
+          <a href={`mailto:${site.email}`} class="hero__btn">Email me</a>
+        </div>
+      </div>
 
-  <section class="wrap work" id="work">
-    <h2 class="work__title">Selected work</h2>
-    <div class="filters" role="group" aria-label="Filter projects">
-      <button type="button" class="filter" data-filter="all" aria-pressed="true">
-        All <sup>{projects.length}</sup>
-      </button>
-      {
-        filters.map((f) => (
-          <button type="button" class="filter" data-filter={f.key} aria-pressed="false">
-            {f.label} <sup>{f.count}</sup>
-          </button>
-        ))
-      }
-    </div>
-    <div class="grid">
-      {
-        projects.map((p, i) => (
-          <ProjectCard
-            slug={p.slug}
-            group={p.group}
-            title={p.title}
-            category={p.category}
-            year={p.year}
-            images={p.images}
-            size={sizes[i]}
-            index={i}
-          />
-        ))
-      }
-    </div>
-  </section>
+      <div class="hero__facts">
+        <ul>
+          {
+            facts.map((f) => (
+              <li>
+                <span class="hero__value">{f.value}</span>
+                <span class="hero__label">{f.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="hero__open">Open to full-time &amp; freelance work · willing to relocate</p>
+      </div>
+    </section>
+
+    <section class="row">
+      <h2>About</h2>
+      <div class="prose">
+        <p>
+          Most of my career has been in publishing. I've designed weekly newspapers, monthly magazines, and the
+          legal and editorial pages in between, so I know how to make dense content clear and how to get files to
+          the press on time.
+        </p>
+        <p>
+          Outside print, I've designed packaging for food brands, social media campaigns for insurance and
+          education clients, logos for small businesses, and commemorative photo albums. I also studied IT
+          (Software Development), so I'm comfortable working with web and app teams.
+        </p>
+      </div>
+    </section>
+
+    <a href="/work/" class="next">
+      <span class="muted">Next</span>
+      <span class="next__title">See my work →</span>
+    </a>
+  </div>
 </Base>
 
-<script>
-  import { sizesFor } from '../lib/layout';
-
-  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
-  const cards = [...document.querySelectorAll<HTMLElement>('.grid [data-group]')];
-
-  function apply(filter: string) {
-    const visible = cards.filter((card) => filter === 'all' || card.dataset.group === filter);
-    cards.forEach((card) => (card.hidden = !visible.includes(card)));
-    // Re-flow the large/small rhythm for whichever cards are left.
-    sizesFor(visible.length).forEach((size, i) => (visible[i].dataset.size = size));
-    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
-    // Keep the choice in the URL so a filtered view can be shared, e.g. /?type=packaging#work
-    const url = new URL(location.href);
-    if (filter === 'all') url.searchParams.delete('type');
-    else url.searchParams.set('type', filter);
-    history.replaceState(null, '', url);
-  }
-
-  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter!)));
-
-  // Quick links in the hero filter the grid in place instead of reloading the page.
-  document.querySelectorAll<HTMLAnchorElement>('[data-jump]').forEach((a) =>
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      apply(a.dataset.jump!);
-      document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
-    }),
-  );
-
-  const initial = new URLSearchParams(location.search).get('type');
-  if (initial && [...buttons].some((b) => b.dataset.filter === initial)) apply(initial);
-</script>
-
 <style>
-  .work {
-    padding-top: clamp(56px, 7vw, 96px);
+  /* Opening panel: maroon "about" tile and a wine facts tile inside a near-black frame */
+  .hero {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 10px;
+    margin: 8px 0 clamp(48px, 7vw, 88px);
+    padding: 10px;
+    background: var(--black);
+    border-radius: 18px;
+    color: var(--light);
   }
 
-  .work__title {
-    margin-bottom: 18px;
-    font-size: clamp(28px, 3vw, 40px);
-    letter-spacing: -0.03em;
+  .hero__about {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(28px, 4vw, 56px);
+    background: var(--maroon);
+    border-radius: 12px;
   }
 
-  .filters {
+  .hero__tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(242, 242, 242, 0.7);
+  }
+
+  .hero__tag span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--light);
+  }
+
+  h1 {
+    margin: clamp(20px, 3vw, 36px) 0 10px;
+    font-size: clamp(48px, 6vw, 92px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  .hero__role {
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: rgba(242, 242, 242, 0.75);
+  }
+
+  .hero__bio {
+    max-width: 34em;
+    margin-top: clamp(20px, 3vw, 32px);
+    font-size: clamp(17px, 1.45vw, 20px);
+    line-height: 1.5;
+    color: rgba(242, 242, 242, 0.92);
+  }
+
+  .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 24px;
-    margin-bottom: 28px;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: clamp(28px, 4vw, 44px);
   }
 
-  .filter {
-    padding: 4px 0;
-    border: 0;
-    background: none;
-    color: var(--muted);
-    font: inherit;
+  .hero__btn {
+    padding: 11px 18px;
+    border: 1px solid rgba(242, 242, 242, 0.45);
+    border-radius: 999px;
     font-size: 15px;
-    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .hero__btn:hover,
+  .hero__btn--light {
+    background: var(--light);
+    border-color: var(--light);
+    color: var(--maroon);
+  }
+
+  .hero__btn--light:hover {
+    background: transparent;
+    color: var(--light);
+  }
+
+  .hero__facts {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(28px, 4vw, 48px);
+    background: var(--wine);
+    border-radius: 12px;
+  }
+
+  .hero__facts ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero__facts li {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px 16px 20px 0;
+    border-top: 1px solid rgba(242, 242, 242, 0.2);
+  }
+
+  .hero__value {
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .hero__label {
+    font-size: 14px;
+    line-height: 1.35;
+    color: rgba(242, 242, 242, 0.75);
+  }
+
+  .hero__open {
+    margin-top: auto;
+    padding-top: 24px;
+    font-size: 14px;
+    color: rgba(242, 242, 242, 0.75);
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 40em;
+    font-size: 17px;
+  }
+
+  .next {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: clamp(40px, 6vw, 72px);
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next__title {
+    font-size: clamp(28px, 3.4vw, 48px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
     transition: color 0.2s;
   }
 
-  .filter sup {
-    font-size: 11px;
-    margin-left: 1px;
+  .next:hover .next__title {
+    color: var(--accent);
   }
 
-  .filter:hover,
-  .filter[aria-pressed='true'] {
-    color: var(--ink);
-  }
-
-  .filter[aria-pressed='true'] {
-    text-decoration: underline;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--accent);
-  }
-
-  .grid {
+  /* Label on the left, content on the right */
+  .row {
     display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: clamp(40px, 5vw, 72px) clamp(16px, 2vw, 28px);
+    grid-template-columns: 1fr 1fr;
+    gap: 16px clamp(32px, 6vw, 96px);
+    padding: 28px 0 40px;
+    border-top: 1px solid var(--line);
   }
 
-  .grid :global([hidden]) {
-    display: none;
+  h2 {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
   }
+
+  @media (max-width: 860px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+  }
+
 </style>

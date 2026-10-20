@@ -1,0 +1,134 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects, groups } from '../../data/projects';
+import { sizesFor } from '../../lib/layout';
+
+const sizes = sizesFor(projects.length);
+const filters = Object.entries(groups)
+  .map(([key, label]) => ({ key, label, count: projects.filter((p) => p.group === key).length }))
+  .filter((f) => f.count > 0);
+---
+
+<Base title="Work" description="Selected work by Jefrey Jurado: newspapers, magazines, packaging, logos and social media.">
+  <section class="wrap work">
+    <h1>Work</h1>
+    <p class="work__sub muted">
+      {projects.length} projects across newspapers, magazines, packaging, logos, social media and print.
+    </p>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button type="button" class="filter" data-filter="all" aria-pressed="true">
+        All <sup>{projects.length}</sup>
+      </button>
+      {
+        filters.map((f) => (
+          <button type="button" class="filter" data-filter={f.key} aria-pressed="false">
+            {f.label} <sup>{f.count}</sup>
+          </button>
+        ))
+      }
+    </div>
+    <div class="grid">
+      {
+        projects.map((p, i) => (
+          <ProjectCard
+            slug={p.slug}
+            group={p.group}
+            title={p.title}
+            category={p.category}
+            year={p.year}
+            images={p.images}
+            size={sizes[i]}
+            index={i}
+          />
+        ))
+      }
+    </div>
+  </section>
+</Base>
+
+<script>
+  import { sizesFor } from '../../lib/layout';
+
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const cards = [...document.querySelectorAll<HTMLElement>('.grid [data-group]')];
+
+  function apply(filter: string) {
+    const visible = cards.filter((card) => filter === 'all' || card.dataset.group === filter);
+    cards.forEach((card) => (card.hidden = !visible.includes(card)));
+    // Re-flow the large/small rhythm for whichever cards are left.
+    sizesFor(visible.length).forEach((size, i) => (visible[i].dataset.size = size));
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+    // Keep the choice in the URL so a filtered view can be shared, e.g. /work/?type=packaging
+    const url = new URL(location.href);
+    if (filter === 'all') url.searchParams.delete('type');
+    else url.searchParams.set('type', filter);
+    history.replaceState(null, '', url);
+  }
+
+  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter!)));
+
+  const initial = new URLSearchParams(location.search).get('type');
+  if (initial && [...buttons].some((b) => b.dataset.filter === initial)) apply(initial);
+</script>
+
+<style>
+  .work {
+    padding-top: clamp(40px, 6vw, 88px);
+  }
+
+  h1 {
+    font-size: clamp(40px, 5.5vw, 76px);
+    letter-spacing: -0.04em;
+  }
+
+  .work__sub {
+    margin: 12px 0 28px;
+    font-size: clamp(16px, 1.3vw, 18px);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    margin-bottom: 28px;
+  }
+
+  .filter {
+    padding: 4px 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .filter sup {
+    font-size: 11px;
+    margin-left: 1px;
+  }
+
+  .filter:hover,
+  .filter[aria-pressed='true'] {
+    color: var(--ink);
+  }
+
+  .filter[aria-pressed='true'] {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--accent);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(40px, 5vw, 72px) clamp(16px, 2vw, 28px);
+  }
+
+  .grid :global([hidden]) {
+    display: none;
+  }
+</style>
