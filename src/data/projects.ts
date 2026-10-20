@@ -59,6 +59,7 @@ function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
 const spellings: Record<string, string> = {
   tesda: 'TESDA', bir: 'BIR', pcx: 'PCX', cvsu: 'CvSU', smith: 'SMITH', ph: 'PH', mcearly: 'McEarly',
   balwik: 'BALWIK', nhers: "Nher's", ivys: "Ivy's", sofias: "Sofia's", wencys: "Wency's", st: 'St.',
+  pvi: 'PVI', axa: 'AXA', de: 'de', la: 'la', lifepeaks: 'LifePeaks', shinsures: 'SHInsures', dont: "Don't",
 };
 
 // "05-cover-story.jpg" -> "Cover Story". Rename a file to change its caption.
@@ -248,7 +249,7 @@ const all: Project[] = [
     title: 'Philippine Birds Calendar',
     client: 'Private client',
     category: 'Calendar Design',
-    year: '2022',
+    year: '2021',
     role: 'Graphic Designer',
     tools: ['Photoshop', 'InDesign'],
     summary: 'A 2022 wall calendar featuring a different native Philippine bird each month.',
@@ -273,21 +274,6 @@ const all: Project[] = [
     ],
   },
   {
-    slug: 'wedding-album',
-    group: 'print',
-    title: 'Corpuz–Aguda Nuptials',
-    client: 'Private client',
-    category: 'Photo Album Design',
-    year: '2019',
-    role: 'Album Designer',
-    tools: ['Photoshop'],
-    summary: 'An 8×10 wedding album with a soft, editorial layout built around angled photo panels.',
-    description: [
-      'A 40-page printed wedding album that follows the day in order: preparation, the bride and groom, the procession, the ceremony and the reception.',
-      'A restrained palette of whites and dusty blues, angled photo panels and serif chapter titles keep a large set of photos calm and readable.',
-    ],
-  },
-  {
     slug: 'asean-times-magazine',
     group: 'editorial',
     title: 'ASEAN Times Magazine',
@@ -305,15 +291,16 @@ const all: Project[] = [
   {
     slug: 'social-media-posters',
     group: 'social',
-    title: 'AXA Insurance Posters',
-    client: 'AXA Insurance',
-    category: 'Social Media Design',
+    title: 'AXA Advisor Team Marketing',
+    client: 'LifePeaks Heaven · AXA Philippines advisor team',
+    category: 'Social Media & Branding',
     year: '2019 – 2021',
     role: 'Marketing Graphic Designer',
     tools: ['Photoshop', 'Illustrator', 'Canva'],
-    summary: 'Weekly social media posters and certificates over a two-year remote partnership.',
+    summary: 'Weekly social media posters, recruitment ads, award templates and team logos for an AXA advisor team.',
     description: [
-      'Produced weekly social media posters and certificates for AXA Insurance services and client events over a two-year remote partnership.',
+      'Over a two-year remote partnership, produced the weekly social media content for an AXA Philippines advisor team: financial-literacy and insurance posters in English and Filipino, recruitment ads, and award certificates for top advisors.',
+      'Also designed the team identities, LifePeaks Heaven, LifePeaks Capital and SHInsures, and built reusable award templates so new certificates could be made quickly each month. Award certificates naming individual advisors are left out here for their privacy.',
     ],
   },
   {
