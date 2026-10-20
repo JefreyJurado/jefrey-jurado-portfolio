@@ -50,7 +50,7 @@ const extras = more.slice(0, 2);
   </div>
   <div class="card__caption">
     <h3>{title}</h3>
-    <span class="muted">{category}, {year}</span>
+    <span class="muted">{category} · {year}</span>
   </div>
 </a>
 
@@ -75,10 +75,34 @@ const extras = more.slice(0, 2);
     gap: 4%;
     aspect-ratio: 4 / 3;
     padding: clamp(24px, 7%, 64px);
+    position: relative;
     background: var(--tint);
-    border-radius: 6px;
+    border-radius: 20px;
     overflow: hidden;
     transition: background 0.3s;
+  }
+
+  /* "View project" pill that slides in on hover */
+  .card__well::after {
+    content: 'View project →';
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: var(--maroon);
+    color: var(--light);
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.25s, transform 0.25s;
+  }
+
+  .card:hover .card__well::after,
+  .card:focus-visible .card__well::after {
+    opacity: 1;
+    transform: none;
   }
 
   /* Both cards in a big/small pair share one height so their captions line up */
@@ -125,14 +149,19 @@ const extras = more.slice(0, 2);
     align-items: baseline;
     flex-wrap: wrap;
     gap: 2px 16px;
-    padding-top: 14px;
+    padding: 16px 4px 0;
     font-size: 15px;
   }
 
   h3 {
-    font-size: 16px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    transition: color 0.2s;
+  }
+
+  .card:hover h3 {
+    color: var(--maroon);
   }
 
   @media (max-width: 760px) {

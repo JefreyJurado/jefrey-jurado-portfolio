@@ -12,22 +12,35 @@ const filters = Object.entries(groups)
 
 <Base title="Work" description="Selected work by Jefrey Jurado: newspapers, magazines, packaging, logos and social media.">
   <section class="wrap work">
-    <h1>Work</h1>
-    <p class="work__sub muted">
-      {projects.length} projects across newspapers, magazines, packaging, logos, social media and print.
-    </p>
-    <div class="filters" role="group" aria-label="Filter projects">
-      <button type="button" class="filter" data-filter="all" aria-pressed="true">
-        All <sup>{projects.length}</sup>
-      </button>
-      {
-        filters.map((f) => (
-          <button type="button" class="filter" data-filter={f.key} aria-pressed="false">
-            {f.label} <sup>{f.count}</sup>
-          </button>
-        ))
-      }
+    <header class="head">
+      <div>
+        <p class="head__tag">Work</p>
+        <h1>Selected work</h1>
+        <p class="head__sub">
+          Newspapers, magazines, packaging, logos, social media and print, from 12 years of client and in-house work.
+        </p>
+      </div>
+      <dl class="head__stats">
+        <div><dt>Projects</dt><dd>{projects.length}</dd></div>
+        <div><dt>Categories</dt><dd>{filters.length}</dd></div>
+      </dl>
+    </header>
+
+    <div class="bar">
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button type="button" class="filter" data-filter="all" aria-pressed="true">
+          All <span>{projects.length}</span>
+        </button>
+        {
+          filters.map((f) => (
+            <button type="button" class="filter" data-filter={f.key} aria-pressed="false">
+              {f.label} <span>{f.count}</span>
+            </button>
+          ))
+        }
+      </div>
     </div>
+
     <div class="grid">
       {
         projects.map((p, i) => (
@@ -74,52 +87,141 @@ const filters = Object.entries(groups)
 
 <style>
   .work {
-    padding-top: clamp(40px, 6vw, 88px);
+    padding-top: 12px;
+  }
+
+  /* Header card in the same maroon gradient as the home page */
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 28px;
+    padding: clamp(32px, 4.5vw, 64px);
+    border-radius: 28px;
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(242, 242, 242, 0.12), transparent 55%),
+      linear-gradient(135deg, var(--maroon) 0%, var(--wine) 100%);
+    color: var(--light);
+    box-shadow: 0 30px 60px -36px rgba(115, 3, 13, 0.6);
+  }
+
+  .head__tag {
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px solid rgba(242, 242, 242, 0.35);
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(242, 242, 242, 0.85);
   }
 
   h1 {
-    font-size: clamp(40px, 5.5vw, 76px);
-    letter-spacing: -0.04em;
+    margin: 18px 0 12px;
+    font-size: clamp(44px, 6vw, 88px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
   }
 
-  .work__sub {
-    margin: 12px 0 28px;
-    font-size: clamp(16px, 1.3vw, 18px);
+  .head__sub {
+    max-width: 34em;
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: rgba(242, 242, 242, 0.85);
+  }
+
+  .head__stats {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .head__stats div {
+    min-width: 120px;
+    padding: 16px 20px;
+    background: var(--light);
+    border-radius: 16px;
+    color: var(--ink);
+  }
+
+  .head__stats dt {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .head__stats dd {
+    margin: 2px 0 0;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--maroon);
+  }
+
+  /* Filter pills, kept in view under the menu while scrolling */
+  .bar {
+    position: sticky;
+    top: 64px;
+    z-index: 5;
+    margin: 20px 0 28px;
+    padding: 10px 0;
+    background: rgba(242, 242, 242, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
   .filters {
     display: flex;
-    flex-wrap: wrap;
-    gap: 6px 24px;
-    margin-bottom: 28px;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none;
   }
 
   .filter {
-    padding: 4px 0;
-    border: 0;
-    background: none;
-    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+    padding: 9px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--ink);
     font: inherit;
     font-size: 15px;
+    white-space: nowrap;
     cursor: pointer;
-    transition: color 0.2s;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
   }
 
-  .filter sup {
-    font-size: 11px;
-    margin-left: 1px;
+  .filter span {
+    min-width: 22px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: var(--light);
+    font-size: 12px;
+    text-align: center;
+    color: var(--muted);
   }
 
-  .filter:hover,
+  .filter:hover {
+    border-color: var(--maroon);
+  }
+
   .filter[aria-pressed='true'] {
-    color: var(--ink);
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: var(--light);
   }
 
-  .filter[aria-pressed='true'] {
-    text-decoration: underline;
-    text-underline-offset: 6px;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--accent);
+  .filter[aria-pressed='true'] span {
+    background: rgba(242, 242, 242, 0.2);
+    color: var(--light);
   }
 
   .grid {
