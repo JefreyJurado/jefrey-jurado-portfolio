@@ -77,6 +77,51 @@ const path = Astro.url.pathname;
         <span>Graphic Designer &amp; Layout Artist</span>
       </div>
     </footer>
+
+    <!-- Shown when an email link is clicked: many visitors have no desktop mail app, so mailto alone can do nothing. -->
+    <div class="mailtoast" role="status" aria-live="polite" hidden>
+      <p class="mailtoast__text">
+        <span class="mailtoast__check" aria-hidden="true">✓</span>
+        <span>Email copied: <strong>{site.email}</strong></span>
+      </p>
+      <div class="mailtoast__actions">
+        <a
+          href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(site.email)}`}
+          target="_blank"
+          rel="noopener"
+          class="mailtoast__primary">Open Gmail ↗</a
+        >
+        <a href={`mailto:${site.email}`} data-mail-app>Use email app</a>
+        <button type="button" class="mailtoast__close" aria-label="Close">✕</button>
+      </div>
+    </div>
+
+    <script>
+      const toast = document.querySelector<HTMLElement>('.mailtoast');
+      let hideTimer: number | undefined;
+
+      const hide = () => {
+        if (toast) toast.hidden = true;
+      };
+
+      document.addEventListener('click', async (e) => {
+        const link = (e.target as Element).closest<HTMLAnchorElement>('a[href^="mailto:"]');
+        if (!link || !toast || link.hasAttribute('data-mail-app')) return;
+        e.preventDefault();
+        const address = link.href.replace(/^mailto:/, '').split('?')[0];
+        try {
+          await navigator.clipboard.writeText(address);
+        } catch {
+          // Clipboard can be blocked; the toast still shows the address and the Gmail / mail-app options.
+        }
+        toast.hidden = false;
+        window.clearTimeout(hideTimer);
+        hideTimer = window.setTimeout(hide, 8000);
+      });
+
+      toast?.querySelector('.mailtoast__close')?.addEventListener('click', hide);
+      toast?.querySelectorAll('a').forEach((a) => a.addEventListener('click', hide));
+    </script>
   </body>
 </html>
 
@@ -261,5 +306,100 @@ const path = Astro.url.pathname;
     margin-top: 24px;
     padding: 0 4px;
     font-size: 14px;
+  }
+
+  .mailtoast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    padding: 14px 14px 14px 20px;
+    border-radius: 18px;
+    background: var(--black);
+    color: var(--light);
+    box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.5);
+    transform: translateX(-50%);
+    animation: toast-in 0.25s ease-out;
+  }
+
+  .mailtoast[hidden] {
+    display: none;
+  }
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 10px);
+    }
+  }
+
+  .mailtoast__text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+  }
+
+  .mailtoast__check {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--maroon);
+    font-size: 13px;
+  }
+
+  .mailtoast__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mailtoast__actions a {
+    padding: 8px 14px;
+    border: 1px solid rgba(242, 242, 242, 0.3);
+    border-radius: 999px;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .mailtoast__actions a:hover {
+    background: rgba(242, 242, 242, 0.12);
+  }
+
+  .mailtoast__actions .mailtoast__primary {
+    background: var(--light);
+    border-color: var(--light);
+    color: var(--maroon);
+  }
+
+  .mailtoast__actions .mailtoast__primary:hover {
+    background: #ffffff;
+  }
+
+  .mailtoast__close {
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: rgba(242, 242, 242, 0.7);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .mailtoast__close:hover {
+    background: rgba(242, 242, 242, 0.12);
+    color: var(--light);
   }
 </style>
