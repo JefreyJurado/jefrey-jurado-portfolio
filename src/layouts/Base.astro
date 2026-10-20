@@ -1,0 +1,190 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.role}`;
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/#work', label: 'Work' },
+  { href: '/about/', label: 'About' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="wrap header__inner">
+        <a href="/" class="logo" aria-label="Jefrey Jurado — home">
+          Jefrey Jurado<span class="logo__dot">.</span>
+        </a>
+        <nav aria-label="Main">
+          <ul>
+            {
+              nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="link-underline"
+                    aria-current={path === item.href ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="wrap">
+        <p class="label">Open to full-time roles &amp; freelance projects</p>
+        <a href={`mailto:${site.email}`} class="footer__cta">
+          Let's work <em>together</em>
+          <span class="footer__arrow" aria-hidden="true">→</span>
+        </a>
+        <div class="footer__row">
+          <a href={`mailto:${site.email}`} class="link-underline">{site.email}</a>
+          <a href={site.linkedin} class="link-underline" target="_blank" rel="noopener">LinkedIn</a>
+          <a href={site.resume} class="link-underline" target="_blank">Résumé (PDF)</a>
+          <span class="footer__meta">{site.location} · © {new Date().getFullYear()}</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-in');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { rootMargin: '0px 0px -8% 0px' },
+      );
+      document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+
+  .logo {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .logo__dot {
+    color: var(--accent);
+  }
+
+  nav ul {
+    display: flex;
+    gap: clamp(16px, 3vw, 32px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+  }
+
+  .footer {
+    margin-top: clamp(96px, 14vw, 180px);
+    padding: clamp(64px, 10vw, 120px) 0 32px;
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  .footer .label {
+    color: #a29e97;
+  }
+
+  .footer__cta {
+    display: inline-flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25em;
+    margin: 20px 0 clamp(56px, 8vw, 96px);
+    font-size: clamp(44px, 9vw, 128px);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  .footer__arrow {
+    display: inline-block;
+    color: var(--accent);
+    transition: transform 0.5s var(--ease);
+  }
+
+  .footer__cta:hover .footer__arrow {
+    transform: translateX(0.2em);
+  }
+
+  .footer__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    padding-top: 24px;
+    border-top: 1px solid #3a3a3a;
+    font-size: 15px;
+  }
+
+  .footer__meta {
+    margin-left: auto;
+    color: #a29e97;
+  }
+
+  @media (max-width: 640px) {
+    .footer__meta {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>

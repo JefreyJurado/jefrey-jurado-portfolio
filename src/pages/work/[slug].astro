@@ -1,0 +1,253 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project, i) => ({
+    params: { slug: project.slug },
+    props: { project, next: projects[(i + 1) % projects.length] },
+  }));
+}
+
+const { project, next } = Astro.props;
+const [hero, ...rest] = project.images;
+---
+
+<Base title={project.title} description={project.summary}>
+  <article class="wrap">
+    <header class="intro">
+      <a href="/#work" class="back label link-underline">← All work</a>
+      <p class="label">{project.category}</p>
+      <h1>{project.title}</h1>
+      <p class="summary">{project.summary}</p>
+    </header>
+
+    <div class="details">
+      <dl>
+        <div><dt class="label">Client</dt><dd>{project.client}</dd></div>
+        <div><dt class="label">Role</dt><dd>{project.role}</dd></div>
+        <div><dt class="label">Year</dt><dd>{project.year}</dd></div>
+        <div><dt class="label">Tools</dt><dd>{project.tools.join(', ')}</dd></div>
+      </dl>
+      <div class="description">
+        {project.description.map((para) => <p>{para}</p>)}
+      </div>
+    </div>
+
+    <figure class="hero-image">
+      <button class="zoom" data-full={hero.src} aria-label="View full size">
+        <Image src={hero} alt={`${project.title}, image 1`} widths={[800, 1400, 2000]} sizes="100vw" loading="eager" />
+      </button>
+    </figure>
+
+    {
+      rest.length > 0 && (
+        <div class="gallery">
+          {rest.map((img, i) => (
+            <figure data-reveal class:list={{ wide: img.width / img.height > 1.8 }}>
+              <button class="zoom" data-full={img.src} aria-label="View full size">
+                <Image
+                  src={img}
+                  alt={`${project.title}, image ${i + 2}`}
+                  widths={[600, 1000, 1600]}
+                  sizes="(max-width: 720px) 100vw, 50vw"
+                />
+              </button>
+            </figure>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      next.slug !== project.slug && (
+        <a href={`/work/${next.slug}/`} class="next">
+          <span class="label">Next project</span>
+          <span class="next__title">
+            {next.title} <span class="next__arrow">→</span>
+          </span>
+        </a>
+      )
+    }
+  </article>
+
+  <dialog class="lightbox" aria-label="Image viewer">
+    <img alt="" />
+    <button class="lightbox__close" aria-label="Close">Close ✕</button>
+  </dialog>
+</Base>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.lightbox')!;
+  const img = dialog.querySelector('img')!;
+  document.querySelectorAll<HTMLButtonElement>('.zoom').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      img.src = btn.dataset.full!;
+      img.alt = btn.querySelector('img')?.alt ?? '';
+      dialog.showModal();
+    });
+  });
+  dialog.addEventListener('click', () => dialog.close());
+</script>
+
+<style>
+  .intro {
+    padding: clamp(40px, 8vw, 96px) 0 clamp(32px, 5vw, 56px);
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: clamp(32px, 5vw, 64px);
+    color: var(--ink);
+  }
+
+  .intro h1 {
+    margin: 12px 0 24px;
+    font-size: clamp(44px, 8vw, 120px);
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+  }
+
+  .summary {
+    max-width: 28em;
+    font-size: clamp(19px, 2vw, 24px);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 40px clamp(32px, 6vw, 96px);
+    padding: 32px 0 clamp(48px, 7vw, 88px);
+    border-top: 1px solid var(--ink);
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin: 0;
+  }
+
+  dd {
+    margin: 6px 0 0;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    max-width: 38em;
+    font-size: 18px;
+  }
+
+  @media (max-width: 860px) {
+    .details {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .zoom {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    padding: clamp(20px, 5vw, 72px);
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: zoom-in;
+  }
+
+  .zoom img {
+    max-height: 80vh;
+    width: auto;
+    box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.4);
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 2.5vw, 32px);
+    margin-top: clamp(16px, 2.5vw, 32px);
+  }
+
+  .gallery .wide {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 720px) {
+    .gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .next {
+    display: block;
+    margin-top: clamp(80px, 10vw, 140px);
+    padding-top: 24px;
+    border-top: 1px solid var(--ink);
+  }
+
+  .next__title {
+    display: block;
+    margin-top: 12px;
+    font-size: clamp(36px, 6vw, 88px);
+    font-weight: 500;
+    letter-spacing: -0.045em;
+    line-height: 1;
+  }
+
+  .next__arrow {
+    display: inline-block;
+    color: var(--accent);
+    transition: transform 0.5s var(--ease);
+  }
+
+  .next:hover .next__arrow {
+    transform: translateX(0.2em);
+  }
+
+  .lightbox {
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: clamp(16px, 4vw, 48px);
+    border: 0;
+    background: rgba(20, 20, 20, 0.94);
+    cursor: zoom-out;
+  }
+
+  .lightbox[open] {
+    display: grid;
+    place-items: center;
+  }
+
+  .lightbox img {
+    max-width: 100%;
+    max-height: calc(100vh - 96px);
+    width: auto;
+  }
+
+  .lightbox__close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    padding: 10px 16px;
+    border: 1px solid #555;
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>

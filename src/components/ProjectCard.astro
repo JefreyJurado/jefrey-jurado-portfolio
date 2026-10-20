@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  slug: string;
+  group: string;
+  title: string;
+  category: string;
+  year: string;
+  cover: ImageMetadata;
+  index: number;
+}
+
+const { slug, group, title, category, year, cover, index } = Astro.props;
+---
+
+<a href={`/work/${slug}/`} class="card" data-reveal data-group={group}>
+  <div class="card__media">
+    <Image
+      src={cover}
+      alt={`${title} — ${category}`}
+      widths={[480, 800, 1200]}
+      sizes="(max-width: 720px) 100vw, 50vw"
+      loading={index < 2 ? 'eager' : 'lazy'}
+    />
+  </div>
+  <div class="card__meta">
+    <h3>{title}</h3>
+    <span class="label">{category} · {year}</span>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: block;
+  }
+
+  .card__media {
+    display: grid;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    place-items: center;
+    aspect-ratio: 4 / 3;
+    padding: clamp(20px, 5%, 48px);
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .card__media img {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.8s var(--ease);
+  }
+
+  .card:hover .card__media img {
+    transform: scale(1.04);
+  }
+
+  .card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    padding-top: 14px;
+  }
+
+  .card__meta h3 {
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+</style>

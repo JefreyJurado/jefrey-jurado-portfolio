@@ -1,0 +1,32 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+# jetbrains setting folder
+.idea/
+
+# original source files (large) — keep out of the repo / deploy
+/Benjie_Marianne_Nuptials_for_print 8x10/
+/BLUKE_Portfolio_KCD/
+/Rev._Fr._Dennis_Ordination_Photoalbum/
+
+.vercel
+.env*

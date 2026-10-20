@@ -1,0 +1,8 @@
+# Vercel builds the site from src/ — don't upload these
+node_modules
+dist
+.astro
+/Benjie_Marianne_Nuptials_for_print 8x10
+/BLUKE_Portfolio_KCD
+/Rev._Fr._Dennis_Ordination_Photoalbum
+.env*

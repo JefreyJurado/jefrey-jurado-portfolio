@@ -1,0 +1,478 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects, groups } from '../data/projects';
+import { site } from '../data/site';
+
+const disciplines = [
+  'Newspaper Design',
+  'Magazine Layout',
+  'Social Media',
+  'Packaging',
+  'Photo Albums',
+  'Logo Design',
+  'Branding',
+  'Editorial Typography',
+];
+
+const stats = [
+  { value: '12+', label: 'Years designing for print & digital' },
+  { value: '156', label: 'Newspaper issues laid out every year' },
+  { value: '0', label: 'Missed print deadlines' },
+  { value: '3', label: 'Regional editions run in parallel' },
+];
+
+const services = [
+  {
+    title: 'Newspaper & Editorial Layout',
+    text: 'Broadsheets, tabloids and newsletters: page balance, headline hierarchy, photo editing and print-ready CTP files.',
+  },
+  {
+    title: 'Magazine Design',
+    text: 'Multi-page full-colour magazines with typographic systems, illustrated spreads and bilingual English/Chinese layouts.',
+  },
+  {
+    title: 'Social Media Graphics',
+    text: 'Campaign posters, announcements and certificates for Facebook and Instagram, delivered on a steady weekly rhythm.',
+  },
+  {
+    title: 'Packaging & Brand Identity',
+    text: 'Labels, product packaging, logos and calling cards that make a product line recognisable on the shelf.',
+  },
+  {
+    title: 'Photo Albums & Event Coverage',
+    text: 'Photographing and filming events, then designing the commemorative album and editing the highlight video.',
+  },
+];
+
+const clients = [
+  'The Southern Tagalog Herald',
+  'AXA Insurance',
+  'ASEAN Times Magazine',
+  'PAPER.Ph',
+  'BALWIK Magazine',
+  "Noor's Gourmet Food",
+  'KCD Technical Institute',
+  'Monday Mail',
+  'Institute of the Two Hearts',
+];
+---
+
+<Base>
+  <section class="hero wrap">
+    <p class="hero__status">
+      <span class="dot" aria-hidden="true"></span>
+      Available for full-time &amp; freelance work
+    </p>
+    <h1 class="hero__title">
+      Graphic designer <br class="br-wide" />&amp; <em>layout artist</em> <br class="br-wide" />
+      making print <br class="br-wide" />and pixels read&nbsp;well.
+    </h1>
+    <div class="hero__foot">
+      <p class="hero__intro">
+        I'm {site.name}. For 12+ years I've designed newspapers, magazines, packaging and social media
+        content, and every one of those projects shipped on deadline.
+      </p>
+      <div class="hero__actions">
+        <a href="#work" class="btn btn--solid">View work ↓</a>
+        <a href={site.resume} class="btn" target="_blank">Download résumé</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      {
+        [...disciplines, ...disciplines].map((d) => (
+          <span>
+            {d}
+            <i>✦</i>
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <section class="wrap section" id="work">
+    <div class="section-head">
+      <h2>Selected <em>work</em></h2>
+      <span class="label" data-count>{String(projects.length).padStart(2, '0')} projects</span>
+    </div>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button type="button" class="filter" data-filter="all" aria-pressed="true">
+        All <span>{projects.length}</span>
+      </button>
+      {
+        Object.entries(groups).map(([key, label]) => {
+          const count = projects.filter((p) => p.group === key).length;
+          return (
+            count > 0 && (
+              <button type="button" class="filter" data-filter={key} aria-pressed="false">
+                {label} <span>{count}</span>
+              </button>
+            )
+          );
+        })
+      }
+    </div>
+    <div class="grid">
+      {
+        projects.map((p, i) => (
+          <ProjectCard
+            slug={p.slug}
+            group={p.group}
+            title={p.title}
+            category={p.category}
+            year={p.year}
+            cover={p.images[0]}
+            index={i}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <ul class="stats">
+      {
+        stats.map((s) => (
+          <li data-reveal>
+            <span class="stats__value">{s.value}</span>
+            <span class="stats__label">{s.label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>What I <em>do</em></h2>
+      <span class="label">Services</span>
+    </div>
+    <ol class="services">
+      {
+        services.map((s, i) => (
+          <li data-reveal>
+            <span class="services__num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <h2>Trusted <em>by</em></h2>
+      <span class="label">Clients &amp; employers</span>
+    </div>
+    <ul class="clients" data-reveal>
+      {clients.map((c) => <li>{c}</li>)}
+    </ul>
+  </section>
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const cards = document.querySelectorAll<HTMLElement>('.grid [data-group]');
+  const count = document.querySelector('[data-count]');
+
+  function apply(filter: string) {
+    let shown = 0;
+    cards.forEach((card) => {
+      const match = filter === 'all' || card.dataset.group === filter;
+      card.hidden = !match;
+      if (match) {
+        shown++;
+        card.classList.add('is-in');
+      }
+    });
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+    if (count) count.textContent = `${String(shown).padStart(2, '0')} projects`;
+  }
+
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => {
+      const filter = b.dataset.filter!;
+      apply(filter);
+      // Keep the choice in the URL so a filtered view can be shared, e.g. /?type=packaging#work
+      const url = new URL(location.href);
+      if (filter === 'all') url.searchParams.delete('type');
+      else url.searchParams.set('type', filter);
+      history.replaceState(null, '', url);
+    }),
+  );
+
+  const initial = new URLSearchParams(location.search).get('type');
+  if (initial && [...buttons].some((b) => b.dataset.filter === initial)) apply(initial);
+</script>
+
+<style>
+  .hero {
+    padding-top: clamp(48px, 10vw, 128px);
+    padding-bottom: clamp(48px, 8vw, 96px);
+  }
+
+  .hero__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 14px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--available);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--available) 60%, transparent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    70% {
+      box-shadow: 0 0 0 8px transparent;
+    }
+  }
+
+  .hero__title {
+    margin: clamp(28px, 4vw, 48px) 0;
+    font-size: clamp(44px, 8.4vw, 132px);
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+  }
+
+  .hero__title em {
+    color: var(--accent);
+  }
+
+  .hero__foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+  }
+
+  .hero__intro {
+    max-width: 30em;
+    font-size: clamp(17px, 1.6vw, 20px);
+    color: var(--muted);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  @media (max-width: 720px) {
+    .br-wide {
+      display: none;
+    }
+  }
+
+  .marquee {
+    overflow: hidden;
+    padding: 18px 0;
+    border-block: 1px solid var(--line);
+  }
+
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+
+  .marquee span {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    padding-right: 28px;
+    font-size: clamp(20px, 2.4vw, 30px);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .marquee i {
+    font-style: normal;
+    font-size: 0.6em;
+    color: var(--accent);
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .section {
+    padding-top: clamp(80px, 10vw, 140px);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: -16px 0 40px;
+  }
+
+  .filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease);
+  }
+
+  .filter span {
+    color: var(--muted);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .filter:hover {
+    border-color: var(--ink);
+  }
+
+  .filter[aria-pressed='true'] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  .filter[aria-pressed='true'] span {
+    color: #a29e97;
+  }
+
+  .grid :global([hidden]) {
+    display: none;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(40px, 5vw, 64px) clamp(16px, 2.5vw, 32px);
+  }
+
+  @media (max-width: 720px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--ink);
+  }
+
+  .stats li {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px 24px 0 0;
+  }
+
+  .stats li + li {
+    padding-left: 24px;
+    border-left: 1px solid var(--line);
+  }
+
+  .stats__value {
+    font-size: clamp(56px, 7vw, 104px);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+  }
+
+  .stats__label {
+    max-width: 14em;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  @media (max-width: 860px) {
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 40px;
+    }
+    .stats li:nth-child(3) {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  .services {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .services li {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 16px 32px;
+    align-items: baseline;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .services__num {
+    color: var(--accent);
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .services h3 {
+    font-size: clamp(22px, 2.6vw, 34px);
+    letter-spacing: -0.03em;
+  }
+
+  .services p {
+    color: var(--muted);
+    max-width: 32em;
+  }
+
+  @media (max-width: 860px) {
+    .services li {
+      grid-template-columns: 48px 1fr;
+    }
+    .services p {
+      grid-column: 2;
+    }
+  }
+
+  .clients {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: clamp(24px, 3.4vw, 48px);
+    letter-spacing: -0.035em;
+    line-height: 1.15;
+  }
+
+  .clients li:not(:last-child)::after {
+    content: '/';
+    margin: 0 0.4em;
+    color: var(--line);
+  }
+</style>
