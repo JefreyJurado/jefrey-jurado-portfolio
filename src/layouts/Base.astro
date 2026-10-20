@@ -35,8 +35,8 @@ const path = Astro.url.pathname;
       <div class="wrap top__inner">
         <a href="/" class="top__name">Jefrey Jurado</a>
         <nav aria-label="Main">
-          <a href="/#work" aria-current={path === '/' ? 'page' : undefined}>Work</a>
           <a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a>
+          <a href="/#work" aria-current={path === '/' ? 'page' : undefined}>Work</a>
           <a href={site.resume} target="_blank">Résumé</a>
           <a href={`mailto:${site.email}`}>Email</a>
         </nav>

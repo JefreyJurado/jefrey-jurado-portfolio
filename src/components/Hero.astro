@@ -1,6 +1,6 @@
 ---
-// Home-page opening screen in a dark "bento" layout: a large rotating showcase of
-// featured work on the left, name and quick links on the right.
+// Home-page opening screen in a dark "bento" layout: name, pitch and quick links first
+// (left), then a large rotating showcase of featured work (right).
 import { Image } from 'astro:assets';
 import { projects } from '../data/projects';
 import { site } from '../data/site';
@@ -22,6 +22,29 @@ const links = [
 
 <section class="wrap">
   <div class="hero">
+    <div class="info">
+      <p class="info__tag"><span class="info__dot" aria-hidden="true"></span>Graphic designer · Est. 2014</p>
+      <h1>Jefrey Jurado</h1>
+      <p class="info__lead">Designing newspapers, magazines, packaging and brands that read clearly and print on time.</p>
+
+      <ul class="links">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} data-jump={l.jump} target={l.external ? '_blank' : undefined}>
+                <span class="links__text">
+                  <span class="links__label">{l.label}</span>
+                  <span class="links__note">{l.note}</span>
+                </span>
+                <span class="links__pill">{l.action} ↗</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="info__foot">Open to full-time &amp; freelance · {site.location}</p>
+    </div>
     <div class="show" aria-roledescription="carousel" aria-label="Featured work">
       {
         showcase.map((p, i) => (
@@ -51,29 +74,6 @@ const links = [
       </div>
     </div>
 
-    <div class="info">
-      <p class="info__tag"><span class="info__dot" aria-hidden="true"></span>Graphic designer · Est. 2014</p>
-      <h1>Jefrey Jurado</h1>
-      <p class="info__lead">Designing newspapers, magazines, packaging and brands that read clearly and print on time.</p>
-
-      <ul class="links">
-        {
-          links.map((l) => (
-            <li>
-              <a href={l.href} data-jump={l.jump} target={l.external ? '_blank' : undefined}>
-                <span class="links__text">
-                  <span class="links__label">{l.label}</span>
-                  <span class="links__note">{l.note}</span>
-                </span>
-                <span class="links__pill">{l.action} ↗</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-
-      <p class="info__foot">Open to full-time &amp; freelance · {site.location}</p>
-    </div>
   </div>
 </section>
 
@@ -118,7 +118,7 @@ const links = [
 <style>
   .hero {
     display: grid;
-    grid-template-columns: 1.05fr 1fr;
+    grid-template-columns: 1fr 1.05fr;
     gap: 10px;
     margin-top: 8px;
     padding: 10px;
