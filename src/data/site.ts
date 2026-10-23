@@ -7,7 +7,7 @@ export const site = {
   location: 'Laguna, Philippines',
   // Web3Forms access key for the contact form (public by design; messages go to the email it was created with).
   // While empty, the contact page shows the email address instead of the form.
-  formKey: '',
+  formKey: '77f33cd7-f20f-4f27-91f4-527444bed5ce',
   // Used in structured data so search engines know where he is based.
   region: 'Laguna',
   country: 'PH',
