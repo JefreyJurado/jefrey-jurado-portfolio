@@ -100,7 +100,9 @@ const person = {
         <div class="contact__actions">
           <a href={`mailto:${site.email}`} class="contact__email">
             <span class="contact__label">Email me</span>
-            <span class="contact__address">{site.email}</span>
+            <span class="contact__address"
+              >{site.email.split('@')[0]}@<wbr />{site.email.split('@')[1]}</span
+            >
             <span class="contact__arrow" aria-hidden="true">↗</span>
           </a>
           <div class="contact__links">
@@ -295,7 +297,8 @@ const person = {
     font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--brand);
-    overflow-wrap: anywhere;
+    /* If it still doesn't fit, break only after the @ (see the <wbr> in the markup) */
+    overflow-wrap: break-word;
   }
 
   .contact__arrow {
