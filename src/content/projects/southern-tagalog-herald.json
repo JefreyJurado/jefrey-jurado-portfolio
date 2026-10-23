@@ -1,0 +1,70 @@
+{
+  "title": "The Southern Tagalog Herald",
+  "group": "editorial",
+  "featured": true,
+  "order": 1,
+  "category": "Newspaper Design",
+  "client": "The Southern Tagalog Herald Newspaper",
+  "role": "Graphic Designer & Editor-in-Chief",
+  "year": "2019 – present",
+  "tools": [
+    "InDesign",
+    "Photoshop"
+  ],
+  "summary": "Weekly layout for three regional editions — 156 issues a year, zero missed deadlines.",
+  "description": [],
+  "caseStudy": {
+    "stats": [
+      {
+        "value": "3",
+        "label": "regional editions every week"
+      },
+      {
+        "value": "156",
+        "label": "issues a year"
+      },
+      {
+        "value": "0",
+        "label": "missed print deadlines"
+      }
+    ],
+    "brief": "A regional weekly newspaper publishes separate Laguna, Batangas and Cavite editions, and all three have to reach the press as print-ready files every Friday.",
+    "did": "As Graphic Designer and Editor-in-Chief I run the full weekly cycle, from news gathering and editing to layout, final checks and the CTP files sent to the printer.",
+    "decisions": [
+      "One master InDesign template for all three editions, so each week starts from a proven structure instead of a blank page.",
+      "A clear headline hierarchy, so readers can tell the lead story from the briefs at a glance.",
+      "Stories, photos, captions, ads and legal notices balanced page by page, with a final check of every page before it goes to press."
+    ]
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/southern-tagalog-herald/images/0/image.jpg",
+      "caption": "Laguna Anilag Festival"
+    },
+    {
+      "image": "/src/assets/work/southern-tagalog-herald/images/1/image.jpg",
+      "caption": "Batangas Robosports"
+    },
+    {
+      "image": "/src/assets/work/southern-tagalog-herald/images/2/image.jpg",
+      "caption": "Cavite Bataan Bridge"
+    },
+    {
+      "image": "/src/assets/work/southern-tagalog-herald/images/3/image.jpg",
+      "caption": "Laguna Cocofest"
+    },
+    {
+      "image": "/src/assets/work/southern-tagalog-herald/images/4/image.jpg",
+      "caption": "Batangas Solar Plant"
+    },
+    {
+      "image": "/src/assets/work/southern-tagalog-herald/images/5/image.jpg",
+      "caption": "Cavite CvSU"
+    },
+    {
+      "image": "/src/assets/work/southern-tagalog-herald/images/6/image.jpg",
+      "caption": "Laguna Editorial Page"
+    }
+  ],
+  "videos": []
+}

@@ -12,20 +12,19 @@ npm run build    # production build into dist/
 
 ## Add or update work
 
-1. Put images in `src/assets/work/<project-folder>/` (JPG, PNG or WebP).
-   - Name them `01-...`, `02-...` to set the order. **The first image is the cover.**
-   - Export around 2400px on the long side.
-2. Edit the project's text in `src/data/projects.ts` (title, client, year, description).
-3. A project is hidden until its folder has at least one image.
+Use the admin page:
 
-These folders are ready and waiting for images:
+- **Live site:** https://jefrey-jurado-portfolio.vercel.app/keystatic, sign in with GitHub. Each save is committed to
+  the repo and the site redeploys in about a minute.
+- **On this computer:** `npm run dev`, then open http://localhost:4321/keystatic. Saves go straight to the files here.
 
-| Folder | Project |
-| --- | --- |
-| `asean-times-magazine` | Magazine spreads |
-| `social-media-posters` | AXA Insurance posters & certificates |
+Each project is one JSON file in `src/content/projects/`, with its images in `src/assets/work/<project>/`.
+The form fields are defined in `keystatic.config.ts`.
 
-To add a brand-new project, create a new folder and add a matching entry in `src/data/projects.ts`.
+- The first image is the cover on the Work page. Export around 2400px on the long side (JPG, PNG or WebP).
+- A project stays hidden until it has at least one image.
+- Videos: paste a YouTube or Vimeo link (unlisted is fine) and add a thumbnail as the first image.
+- Fill in "The brief" under Case study to show a case study instead of "About the project".
 
 ## Other things to edit
 
@@ -33,4 +32,5 @@ To add a brand-new project, create a new folder and add a matching entry in `src
 - Résumé PDF: replace `public/jefrey-jurado-resume.pdf`
 - Home page (About: intro, facts, bio): `src/pages/index.astro`
 - Work page (project grid and filters): `src/pages/work/index.astro`
+- Filter groups: `src/data/projects.ts` and the matching options in `keystatic.config.ts`
 - Colours and fonts: `src/styles/global.css` (top of the file)

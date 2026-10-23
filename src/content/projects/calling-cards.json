@@ -1,0 +1,44 @@
+{
+  "title": "Calling Cards",
+  "group": "branding",
+  "featured": false,
+  "order": 15,
+  "client": "Various clients",
+  "category": "Branding",
+  "year": "2021 – 2024",
+  "role": "Graphic Designer",
+  "tools": [
+    "Photoshop",
+    "Illustrator"
+  ],
+  "summary": "Business cards for a food trading brand, a newspaper publisher and a local supplier.",
+  "description": [
+    "A set of calling cards designed for small businesses, each matched to its industry: navy and gold for Noor Food Products Trading, a newsprint motif for The Southern Tagalog Herald, and stone textures for a gravel and sand supplier."
+  ],
+  "caseStudy": {
+    "stats": [],
+    "brief": "",
+    "did": "",
+    "decisions": [],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/calling-cards/images/0/image.jpg",
+      "caption": "Noor Back"
+    },
+    {
+      "image": "/src/assets/work/calling-cards/images/1/image.jpg",
+      "caption": "Noor Owner"
+    },
+    {
+      "image": "/src/assets/work/calling-cards/images/2/image.jpg",
+      "caption": "Gravel And Sand"
+    },
+    {
+      "image": "/src/assets/work/calling-cards/images/3/image.jpg",
+      "caption": "Herald Publisher"
+    }
+  ],
+  "videos": []
+}

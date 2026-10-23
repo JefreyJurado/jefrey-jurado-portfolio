@@ -1,0 +1,78 @@
+{
+  "title": "PAPER.Ph Magazine",
+  "group": "editorial",
+  "featured": true,
+  "order": 4,
+  "client": "Prime Alliance of Publishers, Editors & Reporters of the Philippines",
+  "category": "Magazine Design",
+  "year": "2020",
+  "role": "Magazine Designer",
+  "tools": [
+    "InDesign",
+    "Photoshop"
+  ],
+  "summary": "The launch issue of a national media association's magazine, plus its event print.",
+  "description": [],
+  "caseStudy": {
+    "stats": [
+      {
+        "value": "1st",
+        "label": "issue, launched at the association's first anniversary"
+      },
+      {
+        "value": "3",
+        "label": "kinds of event print: tarpaulins, certificates, ribbons"
+      }
+    ],
+    "brief": "PAPER.Ph, a national association of publishers, editors and reporters, launched its magazine at its first anniversary under the theme “The Media, the New Era, and the New Normal.”",
+    "did": "As Magazine Designer I designed the first issue (news, opinion, feature and message pages, photo spreads and advertiser greetings) and the tarpaulins, certificates and guest ribbons for the event.",
+    "decisions": [
+      "One navy-and-gold look shared by the magazine and the event print, so everything at the anniversary belonged together.",
+      "News, opinion, message pages, photo spreads and greetings each sit within the same consistent design, so the issue reads as one publication."
+    ],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/0/image.jpg",
+      "caption": "Front Cover"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/1/image.jpg",
+      "caption": "Role Of Media"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/2/image.jpg",
+      "caption": "Glass Half Full"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/3/image.jpg",
+      "caption": "News"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/4/image.jpg",
+      "caption": "Financial Literacy"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/5/image.jpg",
+      "caption": "Message"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/6/image.jpg",
+      "caption": "Oath Taking"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/7/image.jpg",
+      "caption": "Editorial"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/8/image.jpg",
+      "caption": "Back Cover"
+    },
+    {
+      "image": "/src/assets/work/paper-ph-magazine/images/9/image.jpg",
+      "caption": "Welcome Tarp"
+    }
+  ],
+  "videos": []
+}

@@ -1,6 +1,9 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import react from '@astrojs/react';
+import keystatic from '@keystatic/astro';
+import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,6 +13,12 @@ export default defineConfig({
   redirects: {
     '/about': '/',
   },
-  // Lists every page for search engines at /sitemap-index.xml (the old /about redirect is left out).
-  integrations: [sitemap({ filter: (page) => !page.endsWith('/about/') })],
+  // Pages are still built ahead of time; the adapter only runs the /keystatic admin page on demand.
+  adapter: vercel(),
+  integrations: [
+    react(),
+    keystatic(),
+    // Lists every page for search engines at /sitemap-index.xml (the old /about redirect and the admin are left out).
+    sitemap({ filter: (page) => !page.endsWith('/about/') && !page.includes('/keystatic') }),
+  ],
 });

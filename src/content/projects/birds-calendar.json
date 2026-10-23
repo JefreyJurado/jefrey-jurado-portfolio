@@ -1,0 +1,65 @@
+{
+  "title": "Philippine Birds Calendar",
+  "group": "print",
+  "featured": false,
+  "order": 10,
+  "client": "Private client",
+  "category": "Calendar Design",
+  "year": "2021",
+  "role": "Graphic Designer",
+  "tools": [
+    "Photoshop",
+    "InDesign"
+  ],
+  "summary": "A 2022 wall calendar featuring a different native Philippine bird each month.",
+  "description": [
+    "A landscape wall calendar where each month features a native Philippine bird, with a short note about the species.",
+    "Each month's accent colour is drawn from that bird's plumage, and a curved photo frame keeps the dates and the photo balanced on every page."
+  ],
+  "caseStudy": {
+    "stats": [],
+    "brief": "",
+    "did": "",
+    "decisions": [],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/birds-calendar/images/0/image.jpg",
+      "caption": "Cover"
+    },
+    {
+      "image": "/src/assets/work/birds-calendar/images/1/image.jpg",
+      "caption": "January"
+    },
+    {
+      "image": "/src/assets/work/birds-calendar/images/2/image.jpg",
+      "caption": "February"
+    },
+    {
+      "image": "/src/assets/work/birds-calendar/images/3/image.jpg",
+      "caption": "March"
+    },
+    {
+      "image": "/src/assets/work/birds-calendar/images/4/image.jpg",
+      "caption": "April"
+    },
+    {
+      "image": "/src/assets/work/birds-calendar/images/5/image.jpg",
+      "caption": "June"
+    },
+    {
+      "image": "/src/assets/work/birds-calendar/images/6/image.jpg",
+      "caption": "July"
+    },
+    {
+      "image": "/src/assets/work/birds-calendar/images/7/image.jpg",
+      "caption": "October"
+    },
+    {
+      "image": "/src/assets/work/birds-calendar/images/8/image.jpg",
+      "caption": "December"
+    }
+  ],
+  "videos": []
+}

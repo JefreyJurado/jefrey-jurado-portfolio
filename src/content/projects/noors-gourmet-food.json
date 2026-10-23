@@ -1,0 +1,102 @@
+{
+  "title": "Noor's Gourmet Food",
+  "group": "packaging",
+  "featured": true,
+  "order": 3,
+  "client": "Noor's Gourmet Food",
+  "category": "Packaging & Branding",
+  "year": "2021 – 2024",
+  "role": "Packaging Designer & Brand Developer",
+  "tools": [
+    "Photoshop",
+    "Illustrator"
+  ],
+  "summary": "A packaging system for a growing line of halal food products — spices, coffee, teas, jams and more.",
+  "description": [],
+  "caseStudy": {
+    "stats": [
+      {
+        "value": "15+",
+        "label": "products designed"
+      },
+      {
+        "value": "1",
+        "label": "label system across every product line"
+      }
+    ],
+    "brief": "Noor's Gourmet Food was growing a range of halal food products, from spice powders and coffee to herbal teas, jams, juices and ready-to-eat dishes, and each new product needed packaging.",
+    "did": "As Packaging Designer and Brand Developer I designed the packaging for more than fifteen of these products.",
+    "decisions": [
+      "Each product line has its own colour story and photography, so it stands apart on the shelf.",
+      "The gold Noor seal, the halal and satisfaction marks and a consistent label structure tie the whole range together as one brand."
+    ],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/0/image.jpg",
+      "caption": "Coffee Moringa"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/1/image.jpg",
+      "caption": "Chili Powder"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/2/image.jpg",
+      "caption": "Rice Coffee"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/3/image.jpg",
+      "caption": "Turmeric Tea"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/4/image.jpg",
+      "caption": "Paprika"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/5/image.jpg",
+      "caption": "Peanut Butter"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/6/image.jpg",
+      "caption": "Frizzled Mushroom"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/7/image.jpg",
+      "caption": "Brown Cane Sugar"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/8/image.jpg",
+      "caption": "Blue Ternate Front"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/9/image.jpg",
+      "caption": "Blue Ternate Back"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/10/image.jpg",
+      "caption": "Roselle Front"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/11/image.jpg",
+      "caption": "Roselle Back"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/12/image.jpg",
+      "caption": "Tofu Garlic"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/13/image.jpg",
+      "caption": "Tofu Garlic Spicy"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/14/image.jpg",
+      "caption": "Bignay Jam Label"
+    },
+    {
+      "image": "/src/assets/work/noors-gourmet-food/images/15/image.jpg",
+      "caption": "Calamansi Label"
+    }
+  ],
+  "videos": []
+}

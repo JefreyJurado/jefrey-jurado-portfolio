@@ -5,9 +5,9 @@ import sharp from 'sharp';
 const W = 1200;
 const H = 630;
 const covers = [
-  'src/assets/work/southern-tagalog-herald/01-laguna-anilag-festival.jpg',
-  'src/assets/work/balwik-magazine/01-october-cover.jpg',
-  'src/assets/work/noors-gourmet-food/01-coffee-moringa.jpg',
+  'src/assets/work/southern-tagalog-herald/images/0/image.jpg',
+  'src/assets/work/balwik-magazine/images/0/image.jpg',
+  'src/assets/work/noors-gourmet-food/images/0/image.jpg',
 ];
 
 const background = Buffer.from(`

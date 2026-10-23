@@ -1,0 +1,73 @@
+{
+  "title": "Sacerdotal Ordination Album",
+  "group": "print",
+  "featured": false,
+  "order": 11,
+  "client": "Rev. Fr. Dennis M. Millano · Diocese of San Pablo",
+  "category": "Photo Album Design",
+  "year": "2018",
+  "role": "Photographer & Album Designer",
+  "tools": [
+    "Photoshop",
+    "InDesign"
+  ],
+  "summary": "A commemorative album telling the story of a priestly ordination, rite by rite.",
+  "description": [
+    "Photographed the ordination at the Cathedral Parish of St. Paul the First Hermit, then designed the commemorative album.",
+    "The album follows the order of the rite, from the procession and litany of saints to the laying on of hands, anointing and first blessing. Gold script titles, scripture quotes and layered photo collages give each moment its own spread."
+  ],
+  "caseStudy": {
+    "stats": [],
+    "brief": "",
+    "did": "",
+    "decisions": [],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/ordination-album/images/0/image.jpg",
+      "caption": "Cover"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/1/image.jpg",
+      "caption": "Cathedral"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/2/image.jpg",
+      "caption": "Procession"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/3/image.jpg",
+      "caption": "Litany Of Saints"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/4/image.jpg",
+      "caption": "Laying On Of Hands"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/5/image.jpg",
+      "caption": "Anointing"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/6/image.jpg",
+      "caption": "Kiss Of Peace"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/7/image.jpg",
+      "caption": "First Blessing"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/8/image.jpg",
+      "caption": "Newly Ordained"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/9/image.jpg",
+      "caption": "Portrait"
+    },
+    {
+      "image": "/src/assets/work/ordination-album/images/10/image.jpg",
+      "caption": "Back Cover"
+    }
+  ],
+  "videos": []
+}

@@ -1,0 +1,37 @@
+{
+  "title": "Orell's & Kasama Labels",
+  "group": "packaging",
+  "featured": false,
+  "order": 14,
+  "client": "RGH Corporation",
+  "category": "Packaging",
+  "year": "2023",
+  "role": "Packaging Designer",
+  "tools": [
+    "Photoshop",
+    "Illustrator"
+  ],
+  "summary": "Wrap-around labels for Premium Banana Thins and Sweet & Spicy Chili Jam.",
+  "description": [
+    "Wrap-around labels for two products distributed by RGH Corporation: Orell's Premium Banana Thins, built around a friendly banana mascot, and KASAMA Cooperatives' Sweet & Spicy Chili Jam.",
+    "Both labels carry full nutrition panels, barcodes and regulatory text laid out to print-ready specifications."
+  ],
+  "caseStudy": {
+    "stats": [],
+    "brief": "",
+    "did": "",
+    "decisions": [],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/product-labels/images/0/image.jpg",
+      "caption": "Label"
+    },
+    {
+      "image": "/src/assets/work/product-labels/images/1/image.jpg",
+      "caption": "Chili Jam Label"
+    }
+  ],
+  "videos": []
+}

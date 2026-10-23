@@ -1,0 +1,83 @@
+{
+  "title": "BALWIK Magazine",
+  "group": "editorial",
+  "featured": true,
+  "order": 2,
+  "client": "BALWIK Publishing House · Sariaya, Quezon",
+  "category": "Magazine Design",
+  "year": "2021",
+  "role": "Layout Artist",
+  "tools": [
+    "InDesign",
+    "Photoshop"
+  ],
+  "summary": "Covers and inside pages for a monthly community magazine, from its first issue on.",
+  "description": [],
+  "caseStudy": {
+    "stats": [
+      {
+        "value": "No. 1",
+        "label": "designed from the very first issue"
+      },
+      {
+        "value": "Monthly",
+        "label": "covers and inside pages"
+      },
+      {
+        "value": "2",
+        "label": "languages: English and Filipino"
+      }
+    ],
+    "brief": "BALWIK, a new community news magazine in Quezon province, needed a look for its monthly issues, starting with Volume 1, Number 1 in September 2021.",
+    "did": "As Layout Artist I designed the covers and inside pages of each issue: cover stories, features, interviews, editorials and opinion columns.",
+    "decisions": [
+      "Every cover is built around one strong portrait and a short cover line, so the magazine is recognisable from issue to issue.",
+      "A consistent grid and colour-coded section heads help readers move between news, features and opinion.",
+      "Large pull-quote titles give long reads a strong way in, in both English and Filipino."
+    ],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/balwik-magazine/images/0/image.jpg",
+      "caption": "October Cover"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/1/image.jpg",
+      "caption": "November Cover"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/2/image.jpg",
+      "caption": "December Cover"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/3/image.jpg",
+      "caption": "September Cover"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/4/image.jpg",
+      "caption": "Cover Story"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/5/image.jpg",
+      "caption": "Editorial"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/6/image.jpg",
+      "caption": "Feature Tita Nena"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/7/image.jpg",
+      "caption": "Interview"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/8/image.jpg",
+      "caption": "Feature Profile"
+    },
+    {
+      "image": "/src/assets/work/balwik-magazine/images/9/image.jpg",
+      "caption": "Opinion"
+    }
+  ],
+  "videos": []
+}

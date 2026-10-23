@@ -1,0 +1,81 @@
+{
+  "title": "KCD Technical Institute",
+  "group": "social",
+  "featured": false,
+  "order": 7,
+  "client": "KCD Technical Institute",
+  "category": "Social Media & Campaigns",
+  "year": "2018",
+  "role": "Graphic Designer & Marketing Staff",
+  "tools": [
+    "Photoshop",
+    "Illustrator"
+  ],
+  "summary": "Enrollment campaigns, workshop posters and event graphics for a technical-vocational school.",
+  "description": [
+    "Designed the school's weekly Facebook graphics and printed tarpaulins: senior high enrollment drives, free summer workshops, scholarship programs, overseas job orientations and campus events.",
+    "Every piece went through a brief → design → revision → dean approval → publish workflow. Each campaign got its own look, while the KCD header and contact block kept the series consistent."
+  ],
+  "caseStudy": {
+    "stats": [],
+    "brief": "",
+    "did": "",
+    "decisions": [],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/0/image.jpg",
+      "caption": "Blood Letting"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/1/image.jpg",
+      "caption": "Work In Japan"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/2/image.jpg",
+      "caption": "Theater Arts"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/3/image.jpg",
+      "caption": "Maths Workshop"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/4/image.jpg",
+      "caption": "Public Speaking"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/5/image.jpg",
+      "caption": "Dance Workshop"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/6/image.jpg",
+      "caption": "Halloween Party"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/7/image.jpg",
+      "caption": "Pride Festival"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/8/image.jpg",
+      "caption": "Thats My Tomboy"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/9/image.jpg",
+      "caption": "Youth Leadership"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/10/image.jpg",
+      "caption": "Senior High Enrollment"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/11/image.jpg",
+      "caption": "TESDA Scholarship"
+    },
+    {
+      "image": "/src/assets/work/kcd-technical-institute/images/12/image.jpg",
+      "caption": "Maulawin Biopark"
+    }
+  ],
+  "videos": []
+}

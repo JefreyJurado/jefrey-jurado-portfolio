@@ -1,0 +1,78 @@
+{
+  "title": "WGomez Rice Sacks",
+  "group": "packaging",
+  "featured": true,
+  "order": 5,
+  "client": "WGomez Vegetables & Grain Trading · Nueva Ecija",
+  "category": "Packaging & Branding",
+  "year": "2020",
+  "role": "Packaging Designer",
+  "tools": [
+    "Photoshop",
+    "Illustrator"
+  ],
+  "summary": "A 25 kg rice sack series and trading logo for a Nueva Ecija rice wholesaler.",
+  "description": [],
+  "caseStudy": {
+    "stats": [
+      {
+        "value": "4",
+        "label": "rice brands"
+      },
+      {
+        "value": "25 kg",
+        "label": "sack format"
+      },
+      {
+        "value": "1",
+        "label": "trading seal"
+      }
+    ],
+    "brief": "WGomez Vegetables & Grain Trading, a rice wholesaler in Nueva Ecija, needed a trading logo and sacks for four rice brands: Ivy’s, Sofia’s, Wave Nher’s and Wency’s.",
+    "did": "As Packaging Designer I designed the WGomez trading seal and the full family of 25 kg rice sacks.",
+    "decisions": [
+      "Each sack uses a single bold colour field, so the varieties are easy to tell apart in a warehouse stack.",
+      "A shared front layout and an “Export Quality” back panel keep the four brands recognisable as one supplier."
+    ],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/wgomez-rice/images/0/image.jpg",
+      "caption": "Wave Nher's Mockup"
+    },
+    {
+      "image": "/src/assets/work/wgomez-rice/images/1/image.jpg",
+      "caption": "Ivy's Mockup"
+    },
+    {
+      "image": "/src/assets/work/wgomez-rice/images/2/image.jpg",
+      "caption": "Sofia's Mockup"
+    },
+    {
+      "image": "/src/assets/work/wgomez-rice/images/3/image.jpg",
+      "caption": "Wency's Mockup"
+    },
+    {
+      "image": "/src/assets/work/wgomez-rice/images/4/image.jpg",
+      "caption": "Ivy's Sack"
+    },
+    {
+      "image": "/src/assets/work/wgomez-rice/images/5/image.jpg",
+      "caption": "Sofia's Sack"
+    },
+    {
+      "image": "/src/assets/work/wgomez-rice/images/6/image.jpg",
+      "caption": "Wave Nher's Sack"
+    },
+    {
+      "image": "/src/assets/work/wgomez-rice/images/7/image.jpg",
+      "caption": "Wency's Sack"
+    },
+    {
+      "image": "/src/assets/work/wgomez-rice/images/8/image.jpg",
+      "caption": "Wgomez Logo"
+    }
+  ],
+  "videos": []
+}

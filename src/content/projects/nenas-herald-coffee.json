@@ -1,0 +1,57 @@
+{
+  "title": "Nena's Herald Coffee",
+  "group": "packaging",
+  "featured": false,
+  "order": 9,
+  "client": "Nena's-Herald Health & Beauty Products",
+  "category": "Packaging",
+  "year": "2022 – 2024",
+  "role": "Packaging Designer",
+  "tools": [
+    "Photoshop",
+    "Illustrator"
+  ],
+  "summary": "Stand-up pouch packaging for a line of six herbal coffee blends.",
+  "description": [
+    "Designed the pouch system for a family of herbal coffee blends: Herbal, Collagen, Inday, Insulin, Purple and Tindog.",
+    "One shared layout, logo placement and leaf motif keep the range consistent, while each blend gets its own colour so customers can tell them apart at a glance. Also designed the matching calling card."
+  ],
+  "caseStudy": {
+    "stats": [],
+    "brief": "",
+    "did": "",
+    "decisions": [],
+    "result": ""
+  },
+  "images": [
+    {
+      "image": "/src/assets/work/nenas-herald-coffee/images/0/image.jpg",
+      "caption": "Herbal Coffee"
+    },
+    {
+      "image": "/src/assets/work/nenas-herald-coffee/images/1/image.jpg",
+      "caption": "Collagen Coffee"
+    },
+    {
+      "image": "/src/assets/work/nenas-herald-coffee/images/2/image.jpg",
+      "caption": "Inday Coffee"
+    },
+    {
+      "image": "/src/assets/work/nenas-herald-coffee/images/3/image.jpg",
+      "caption": "Insulin Coffee"
+    },
+    {
+      "image": "/src/assets/work/nenas-herald-coffee/images/4/image.jpg",
+      "caption": "Purple Coffee"
+    },
+    {
+      "image": "/src/assets/work/nenas-herald-coffee/images/5/image.jpg",
+      "caption": "Tindog Coffee"
+    },
+    {
+      "image": "/src/assets/work/nenas-herald-coffee/images/6/image.jpg",
+      "caption": "Calling Card"
+    }
+  ],
+  "videos": []
+}
