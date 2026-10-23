@@ -1,10 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import { projects, groups } from '../../data/projects';
+import { projects, featured, moreWork, groups } from '../../data/projects';
 import { sizesFor } from '../../lib/layout';
 
-const sizes = sizesFor(projects.length);
+const sections = [
+  { id: 'featured', title: 'Featured', items: featured },
+  { id: 'more', title: 'More work', items: moreWork },
+].filter((s) => s.items.length > 0);
 const filters = Object.entries(groups)
   .map(([key, label]) => ({ key, label, count: projects.filter((p) => p.group === key).length }))
   .filter((f) => f.count > 0);
@@ -41,22 +44,35 @@ const filters = Object.entries(groups)
       </div>
     </div>
 
-    <div class="grid">
-      {
-        projects.map((p, i) => (
-          <ProjectCard
-            slug={p.slug}
-            group={p.group}
-            title={p.title}
-            category={p.category}
-            year={p.year}
-            images={p.images}
-            size={sizes[i]}
-            index={i}
-          />
-        ))
-      }
-    </div>
+    {
+      sections.map((section) => {
+        const sizes = sizesFor(section.items.length);
+        return (
+          <section class="group" aria-labelledby={`group-${section.id}`}>
+            <div class="group__head">
+              <h2 id={`group-${section.id}`}>{section.title}</h2>
+              <span class="muted" data-count>
+                {section.items.length} projects
+              </span>
+            </div>
+            <div class="grid">
+              {section.items.map((p, i) => (
+                <ProjectCard
+                  slug={p.slug}
+                  group={p.group}
+                  title={p.title}
+                  category={p.category}
+                  year={p.year}
+                  images={p.images}
+                  size={sizes[i]}
+                  index={i}
+                />
+              ))}
+            </div>
+          </section>
+        );
+      })
+    }
   </section>
 </Base>
 
@@ -64,13 +80,19 @@ const filters = Object.entries(groups)
   import { sizesFor } from '../../lib/layout';
 
   const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
-  const cards = [...document.querySelectorAll<HTMLElement>('.grid [data-group]')];
+  const groups = [...document.querySelectorAll<HTMLElement>('.group')];
 
   function apply(filter: string) {
-    const visible = cards.filter((card) => filter === 'all' || card.dataset.group === filter);
-    cards.forEach((card) => (card.hidden = !visible.includes(card)));
-    // Re-flow the large/small rhythm for whichever cards are left.
-    sizesFor(visible.length).forEach((size, i) => (visible[i].dataset.size = size));
+    groups.forEach((group) => {
+      const cards = [...group.querySelectorAll<HTMLElement>('[data-group]')];
+      const visible = cards.filter((card) => filter === 'all' || card.dataset.group === filter);
+      cards.forEach((card) => (card.hidden = !visible.includes(card)));
+      // Re-flow the large/small rhythm for whichever cards are left, and hide a section left empty.
+      sizesFor(visible.length).forEach((size, i) => (visible[i].dataset.size = size));
+      group.hidden = visible.length === 0;
+      group.querySelector('[data-count]')!.textContent =
+        `${visible.length} ${visible.length === 1 ? 'project' : 'projects'}`;
+    });
     buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
     // Keep the choice in the URL so a filtered view can be shared, e.g. /work/?type=packaging
     const url = new URL(location.href);
@@ -231,6 +253,29 @@ const filters = Object.entries(groups)
   .filter[aria-pressed='true'] span {
     background: rgba(242, 242, 242, 0.2);
     color: var(--light);
+  }
+
+  .group + .group {
+    margin-top: clamp(64px, 8vw, 112px);
+  }
+
+  .group[hidden] {
+    display: none;
+  }
+
+  .group__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 0 4px;
+  }
+
+  h2 {
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
   }
 
   .grid {

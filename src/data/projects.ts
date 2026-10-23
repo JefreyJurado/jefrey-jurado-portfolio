@@ -334,6 +334,23 @@ const all: Project[] = [
   },
 ];
 
-export const projects = (
+const withImages = (
   await Promise.all(all.map(async (p) => ({ ...p, images: await imagesFor(p.slug) })))
 ).filter((p) => p.images.length > 0);
+
+// The strongest projects, shown first on the Work page under "Featured", in this order.
+const featuredSlugs = [
+  'southern-tagalog-herald',
+  'balwik-magazine',
+  'noors-gourmet-food',
+  'paper-ph-magazine',
+  'wgomez-rice',
+  'logo-design',
+];
+
+export const featured = featuredSlugs
+  .map((slug) => withImages.find((p) => p.slug === slug))
+  .filter((p) => p !== undefined);
+export const moreWork = withImages.filter((p) => !featuredSlugs.includes(p.slug));
+// Featured first, so next/previous on project pages follows the Work page order.
+export const projects = [...featured, ...moreWork];
