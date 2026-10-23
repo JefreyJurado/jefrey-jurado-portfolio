@@ -1,10 +1,13 @@
 /*
   Minimal design system: one typeface, and a five-colour palette
-  (maroon #73030D, wine #732F3B, light grey #F2F2F2, grey #8C8C8C, near-black #0D0D0D).
+  (navy #0B2C5F, steel blue #2E4A7A, light grey #F2F2F2, grey #8C8C8C, near-black #0D0D0D).
 */
 :root {
-  --maroon: #73030d;
-  --wine: #732f3b;
+  /* Brand colours: the deep one for buttons, numbers and links; the softer one ends the gradients */
+  --brand: #0b2c5f;
+  --brand-2: #2e4a7a;
+  /* --brand as r, g, b, for coloured shadows */
+  --brand-rgb: 11, 44, 95;
   --light: #f2f2f2;
   --grey: #8c8c8c;
   --black: #0d0d0d;
@@ -16,7 +19,7 @@
   /* The palette grey, darkened slightly so small text stays readable on the light background */
   --muted: #6e6e6e;
   --line: #d6d6d6;
-  --accent: var(--maroon);
+  --accent: var(--brand);
 
   --font: 'Schibsted Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -126,8 +129,8 @@ p {
 }
 
 .btn--solid:hover {
-  background: var(--wine);
-  border-color: var(--wine);
+  background: var(--brand-2);
+  border-color: var(--brand-2);
 }
 
 @media (prefers-reduced-motion: reduce) {

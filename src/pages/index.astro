@@ -123,7 +123,7 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
 </Base>
 
 <style>
-  /* Opening card: one maroon-to-wine gradient on the light page, with white fact cards */
+  /* Opening card: one brand gradient on the light page, with white fact cards */
   .hero {
     position: relative;
     display: grid;
@@ -134,10 +134,10 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
     border-radius: 28px;
     background:
       radial-gradient(120% 90% at 100% 0%, rgba(242, 242, 242, 0.12), transparent 55%),
-      linear-gradient(135deg, var(--maroon) 0%, var(--wine) 100%);
+      linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
     color: var(--light);
     overflow: hidden;
-    box-shadow: 0 30px 60px -36px rgba(115, 3, 13, 0.6);
+    box-shadow: 0 30px 60px -36px rgba(var(--brand-rgb), 0.6);
   }
 
   .hero__about {
@@ -202,7 +202,7 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
   .hero__btn--light {
     background: var(--light);
     border-color: var(--light);
-    color: var(--maroon);
+    color: var(--brand);
   }
 
   .hero__btn--light:hover {
@@ -243,7 +243,7 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
     font-weight: 600;
     letter-spacing: -0.045em;
     line-height: 1;
-    color: var(--maroon);
+    color: var(--brand);
   }
 
   .facts__label {
@@ -281,12 +281,12 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
   .about__tag {
     display: inline-block;
     padding: 5px 14px;
-    border: 1px solid var(--maroon);
+    border: 1px solid var(--brand);
     border-radius: 999px;
     font-size: 13px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--maroon);
+    color: var(--brand);
   }
 
   .about h2 {
@@ -331,7 +331,7 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
 
   .strengths li:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 30px -22px rgba(115, 3, 13, 0.5);
+    box-shadow: 0 16px 30px -22px rgba(var(--brand-rgb), 0.5);
   }
 
   .strengths__icon {
@@ -341,7 +341,7 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
     height: 44px;
     margin-bottom: 16px;
     border-radius: 12px;
-    background: linear-gradient(135deg, var(--maroon), var(--wine));
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
     color: var(--light);
   }
 
@@ -389,7 +389,7 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
 
   .next:hover {
     transform: translateY(-3px);
-    box-shadow: 0 28px 60px -34px rgba(115, 3, 13, 0.45);
+    box-shadow: 0 28px 60px -34px rgba(var(--brand-rgb), 0.45);
   }
 
   .next__text {
@@ -402,7 +402,7 @@ const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-f
     font-size: clamp(30px, 3.6vw, 52px);
     font-weight: 600;
     letter-spacing: -0.035em;
-    color: var(--maroon);
+    color: var(--brand);
   }
 
   .next__thumbs {

@@ -216,7 +216,7 @@ const person = {
     padding-bottom: 28px;
   }
 
-  /* Contact card in the same maroon gradient as the home page hero */
+  /* Contact card in the same brand gradient as the home page hero */
   .contact {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -226,9 +226,9 @@ const person = {
     border-radius: 28px;
     background:
       radial-gradient(120% 90% at 100% 0%, rgba(242, 242, 242, 0.12), transparent 55%),
-      linear-gradient(135deg, var(--maroon) 0%, var(--wine) 100%);
+      linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
     color: var(--light);
-    box-shadow: 0 30px 60px -36px rgba(115, 3, 13, 0.6);
+    box-shadow: 0 30px 60px -36px rgba(var(--brand-rgb), 0.6);
   }
 
   .contact__tag {
@@ -291,7 +291,7 @@ const person = {
     font-size: clamp(18px, 1.8vw, 24px);
     font-weight: 600;
     letter-spacing: -0.02em;
-    color: var(--maroon);
+    color: var(--brand);
     overflow-wrap: anywhere;
   }
 
@@ -305,7 +305,7 @@ const person = {
     height: 36px;
     margin-top: -18px;
     border-radius: 50%;
-    background: var(--maroon);
+    background: var(--brand);
     color: var(--light);
     font-size: 16px;
   }
@@ -391,7 +391,7 @@ const person = {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: var(--maroon);
+    background: var(--brand);
     font-size: 13px;
   }
 
@@ -417,7 +417,7 @@ const person = {
   .mailtoast__actions .mailtoast__primary {
     background: var(--light);
     border-color: var(--light);
-    color: var(--maroon);
+    color: var(--brand);
   }
 
   .mailtoast__actions .mailtoast__primary:hover {

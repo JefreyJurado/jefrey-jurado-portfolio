@@ -247,9 +247,9 @@ const columns = project.images.length >= 5 ? 3 : 2;
     border-radius: 28px;
     background:
       radial-gradient(120% 90% at 100% 0%, rgba(242, 242, 242, 0.12), transparent 55%),
-      linear-gradient(135deg, var(--maroon) 0%, var(--wine) 100%);
+      linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
     color: var(--light);
-    box-shadow: 0 30px 60px -36px rgba(115, 3, 13, 0.6);
+    box-shadow: 0 30px 60px -36px rgba(var(--brand-rgb), 0.6);
   }
 
   .head__tag {
@@ -378,7 +378,7 @@ const columns = project.images.length >= 5 ? 3 : 2;
     font-weight: 600;
     letter-spacing: -0.04em;
     line-height: 1;
-    color: var(--maroon);
+    color: var(--brand);
   }
 
   .case__stats dt {
@@ -432,7 +432,7 @@ const columns = project.images.length >= 5 ? 3 : 2;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--maroon);
+    background: var(--brand);
   }
 
   @media (max-width: 760px) {
@@ -535,7 +535,7 @@ const columns = project.images.length >= 5 ? 3 : 2;
 
   .tile__caption span {
     font-variant-numeric: tabular-nums;
-    color: var(--maroon);
+    color: var(--brand);
   }
 
   /* Previous / next project cards */
@@ -564,7 +564,7 @@ const columns = project.images.length >= 5 ? 3 : 2;
 
   .pager__card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 26px 56px -34px rgba(115, 3, 13, 0.45);
+    box-shadow: 0 26px 56px -34px rgba(var(--brand-rgb), 0.45);
   }
 
   .pager__thumb {
@@ -599,7 +599,7 @@ const columns = project.images.length >= 5 ? 3 : 2;
   }
 
   .pager__card:hover .pager__title {
-    color: var(--maroon);
+    color: var(--brand);
   }
 
   @media (max-width: 640px) {
@@ -670,8 +670,8 @@ const columns = project.images.length >= 5 ? 3 : 2;
 
   .viewer__nav:hover,
   .viewer__close:hover {
-    background: var(--maroon);
-    border-color: var(--maroon);
+    background: var(--brand);
+    border-color: var(--brand);
   }
 
   .viewer__nav {
