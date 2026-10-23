@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="This page doesn't exist. See Jefrey Jurado's work instead." noindex>
+  <div class="wrap">
+    <section class="missing">
+      <p class="missing__tag">404</p>
+      <h1>This page doesn't exist.</h1>
+      <p class="missing__text">The link may be old or mistyped. The work is still here, though.</p>
+      <div class="missing__actions">
+        <a href="/work/" class="missing__btn missing__btn--light">View my work →</a>
+        <a href="/" class="missing__btn">About me</a>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  /* Same brand gradient card as the other page headers */
+  .missing {
+    margin-top: 12px;
+    padding: clamp(40px, 7vw, 96px) clamp(32px, 4.5vw, 64px);
+    border-radius: 28px;
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(242, 242, 242, 0.12), transparent 55%),
+      linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+    color: var(--light);
+    box-shadow: 0 30px 60px -36px rgba(var(--brand-rgb), 0.6);
+  }
+
+  .missing__tag {
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px solid rgba(242, 242, 242, 0.35);
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: rgba(242, 242, 242, 0.85);
+  }
+
+  h1 {
+    margin: 18px 0 12px;
+    font-size: clamp(36px, 5.5vw, 80px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .missing__text {
+    max-width: 32em;
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: rgba(242, 242, 242, 0.85);
+  }
+
+  .missing__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .missing__btn {
+    padding: 12px 22px;
+    border: 1px solid rgba(242, 242, 242, 0.45);
+    border-radius: 999px;
+    font-size: 15px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .missing__btn:hover {
+    background: rgba(242, 242, 242, 0.14);
+    border-color: var(--light);
+  }
+
+  .missing__btn--light {
+    background: var(--light);
+    border-color: var(--light);
+    color: var(--brand);
+  }
+
+  .missing__btn--light:hover {
+    background: #ffffff;
+  }
+</style>
