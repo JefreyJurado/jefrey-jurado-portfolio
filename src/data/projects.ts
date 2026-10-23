@@ -125,7 +125,7 @@ const all: Project[] = [
     title: 'The Southern Tagalog Herald',
     client: 'The Southern Tagalog Herald Newspaper',
     category: 'Newspaper Design',
-    year: '2019 – 2026',
+    year: '2019 – present',
     role: 'Graphic Designer & Editor-in-Chief',
     tools: ['InDesign', 'Photoshop'],
     summary: 'Weekly layout for three regional editions — 156 issues a year, zero missed deadlines.',
@@ -137,7 +137,7 @@ const all: Project[] = [
       ],
       brief:
         'A regional weekly newspaper publishes separate Laguna, Batangas and Cavite editions, and all three have to reach the press as print-ready files every Friday.',
-      did: 'As Graphic Designer and Editor-in-Chief I ran the full weekly cycle, from news gathering and editing to layout, final checks and the CTP files sent to the printer.',
+      did: 'As Graphic Designer and Editor-in-Chief I run the full weekly cycle, from news gathering and editing to layout, final checks and the CTP files sent to the printer.',
       decisions: [
         'One master InDesign template for all three editions, so each week starts from a proven structure instead of a blank page.',
         'A clear headline hierarchy, so readers can tell the lead story from the briefs at a glance.',
