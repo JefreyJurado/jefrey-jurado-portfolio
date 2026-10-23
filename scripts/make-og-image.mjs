@@ -14,8 +14,8 @@ const background = Buffer.from(`
 <svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#73030d"/>
-      <stop offset="1" stop-color="#732f3b"/>
+      <stop offset="0" stop-color="#0b2c5f"/>
+      <stop offset="1" stop-color="#2e4a7a"/>
     </linearGradient>
     <radialGradient id="glow" cx="1" cy="0" r="0.9">
       <stop offset="0" stop-color="#f2f2f2" stop-opacity="0.14"/>
@@ -31,7 +31,7 @@ const background = Buffer.from(`
   <text x="64" y="378" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#f2f2f2" fill-opacity="0.85">Graphic Designer &amp; Layout Artist</text>
   <text x="64" y="420" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#f2f2f2" fill-opacity="0.7">Newspapers · Magazines · Packaging · Branding</text>
   <rect x="64" y="486" width="356" height="56" rx="28" fill="#f2f2f2"/>
-  <text x="242" y="522" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#73030d">12+ years · 0 missed deadlines</text>
+  <text x="242" y="522" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#0b2c5f">12+ years · 0 missed deadlines</text>
 </svg>`);
 
 // Three covers fanned out on white cards on the right.
