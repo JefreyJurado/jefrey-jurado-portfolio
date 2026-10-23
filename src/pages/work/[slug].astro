@@ -25,7 +25,12 @@ const meta = [
 const columns = project.images.length >= 5 ? 3 : 2;
 ---
 
-<Base title={project.title} description={project.summary}>
+<Base
+  title={project.title}
+  description={project.summary}
+  image={project.images[0].img}
+  imageAlt={`${project.title} — ${project.images[0].caption}`}
+>
   <article class="wrap">
     <a href="/work/" class="back">← All work</a>
 
