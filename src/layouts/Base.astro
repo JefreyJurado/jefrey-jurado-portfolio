@@ -94,7 +94,7 @@ const person = {
       <div class="contact">
         <div class="contact__text">
           <p class="contact__tag">Let's talk</p>
-          <p class="contact__lead">Open to full-time roles and freelance projects.</p>
+          <p class="contact__lead">Open to full&#8209;time roles and freelance projects.</p>
           <p class="contact__sub">Based in {site.location} · willing to relocate</p>
         </div>
         <div class="contact__actions">
@@ -192,6 +192,8 @@ const person = {
   }
 
   nav a {
+    /* Padding makes each link a comfortable 44px-tall tap target on phones */
+    padding: 11px 0;
     color: var(--muted);
     transition: color 0.2s;
   }
@@ -288,7 +290,8 @@ const person = {
   }
 
   .contact__address {
-    font-size: clamp(18px, 1.8vw, 24px);
+    /* Small enough on phones to keep the address on one line */
+    font-size: clamp(16px, 1.8vw, 24px);
     font-weight: 600;
     letter-spacing: -0.02em;
     color: var(--brand);

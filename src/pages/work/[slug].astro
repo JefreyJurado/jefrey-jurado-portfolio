@@ -231,7 +231,8 @@ const columns = project.images.length >= 5 ? 3 : 2;
 <style>
   .back {
     display: inline-block;
-    margin: 20px 0 16px;
+    margin: 8px 0 4px;
+    padding: 12px 0;
     font-size: 15px;
     color: var(--muted);
     transition: color 0.2s;
@@ -438,6 +439,26 @@ const columns = project.images.length >= 5 ? 3 : 2;
   @media (max-width: 760px) {
     .case__row {
       grid-template-columns: 1fr;
+    }
+  }
+
+  /* On phones, each key number sits beside its label in a compact row */
+  @media (max-width: 560px) {
+    .case__stats {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .case__stats div {
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+    }
+    .case__stats dd {
+      flex: none;
+      min-width: 2.2em;
+      font-size: 30px;
     }
   }
 

@@ -14,7 +14,8 @@ export default defineConfig({
     '/about': '/',
   },
   // Pages are still built ahead of time; the adapter only runs the /keystatic admin page on demand.
-  adapter: vercel(),
+  // webAnalytics adds Vercel's cookie-free visitor counter to every page.
+  adapter: vercel({ webAnalytics: { enabled: true } }),
   integrations: [
     react(),
     keystatic(),
