@@ -101,7 +101,19 @@ export interface Project {
   role: string;
   tools: string[];
   summary: string;
-  description: string[];
+  // Plain write-up, used by projects without a case study.
+  description?: string[];
+  // Fuller write-up for featured projects. Only facts Jefrey has confirmed go here;
+  // `result` stays empty until he supplies real outcomes.
+  caseStudy?: CaseStudy;
+}
+
+export interface CaseStudy {
+  stats: { value: string; label: string }[];
+  brief: string;
+  did: string;
+  decisions: string[];
+  result?: string;
 }
 
 // Projects appear on the site in this order. A project stays hidden until
@@ -117,11 +129,21 @@ const all: Project[] = [
     role: 'Graphic Designer & Editor-in-Chief',
     tools: ['InDesign', 'Photoshop'],
     summary: 'Weekly layout for three regional editions — 156 issues a year, zero missed deadlines.',
-    description: [
-      'Led the full weekly production cycle for the Laguna, Batangas and Cavite editions of a regional newspaper, from news gathering to print-ready CTP files sent to the press every Friday.',
-      'Each issue is built from a master InDesign template: placing stories, photos, captions, ads and legal notices, balancing pages, setting headline hierarchy and running page-by-page final checks.',
-      'Shown here: 2026 front pages from all three editions, plus an inside editorial page.',
-    ],
+    caseStudy: {
+      stats: [
+        { value: '3', label: 'regional editions every week' },
+        { value: '156', label: 'issues a year' },
+        { value: '0', label: 'missed print deadlines' },
+      ],
+      brief:
+        'A regional weekly newspaper publishes separate Laguna, Batangas and Cavite editions, and all three have to reach the press as print-ready files every Friday.',
+      did: 'As Graphic Designer and Editor-in-Chief I ran the full weekly cycle, from news gathering and editing to layout, final checks and the CTP files sent to the printer.',
+      decisions: [
+        'One master InDesign template for all three editions, so each week starts from a proven structure instead of a blank page.',
+        'A clear headline hierarchy, so readers can tell the lead story from the briefs at a glance.',
+        'Stories, photos, captions, ads and legal notices balanced page by page, with a final check of every page before it goes to press.',
+      ],
+    },
   },
   {
     slug: 'balwik-magazine',
@@ -133,10 +155,21 @@ const all: Project[] = [
     role: 'Layout Artist',
     tools: ['InDesign', 'Photoshop'],
     summary: 'Covers and inside pages for a monthly community magazine, from its first issue on.',
-    description: [
-      'Designed the monthly issues of BALWIK, a community news magazine in Quezon province, starting with Volume 1, Number 1 in September 2021.',
-      'Each cover is built around one strong portrait and a short cover line. Inside, a consistent grid, colour-coded section heads and large pull-quote titles carry cover stories, features, interviews, editorials and opinion columns in English and Filipino.',
-    ],
+    caseStudy: {
+      stats: [
+        { value: 'No. 1', label: 'designed from the very first issue' },
+        { value: 'Monthly', label: 'covers and inside pages' },
+        { value: '2', label: 'languages: English and Filipino' },
+      ],
+      brief:
+        'BALWIK, a new community news magazine in Quezon province, needed a look for its monthly issues, starting with Volume 1, Number 1 in September 2021.',
+      did: 'As Layout Artist I designed the covers and inside pages of each issue: cover stories, features, interviews, editorials and opinion columns.',
+      decisions: [
+        'Every cover is built around one strong portrait and a short cover line, so the magazine is recognisable from issue to issue.',
+        'A consistent grid and colour-coded section heads help readers move between news, features and opinion.',
+        'Large pull-quote titles give long reads a strong way in, in both English and Filipino.',
+      ],
+    },
   },
   {
     slug: 'noors-gourmet-food',
@@ -148,10 +181,19 @@ const all: Project[] = [
     role: 'Packaging Designer & Brand Developer',
     tools: ['Photoshop', 'Illustrator'],
     summary: 'A packaging system for a growing line of halal food products — spices, coffee, teas, jams and more.',
-    description: [
-      "Designed packaging for more than fifteen products across Noor's food lines, including spice powders, coffee and rice coffee blends, herbal teas, jams, juices and ready-to-eat dishes.",
-      'Each line gets its own colour story and photography so it stands apart on the shelf, while the gold Noor seal, the halal and satisfaction marks, and a consistent label structure keep the whole range recognisable as one brand.',
-    ],
+    caseStudy: {
+      stats: [
+        { value: '15+', label: 'products designed' },
+        { value: '1', label: 'label system across every product line' },
+      ],
+      brief:
+        "Noor's Gourmet Food was growing a range of halal food products, from spice powders and coffee to herbal teas, jams, juices and ready-to-eat dishes, and each new product needed packaging.",
+      did: 'As Packaging Designer and Brand Developer I designed the packaging for more than fifteen of these products.',
+      decisions: [
+        'Each product line has its own colour story and photography, so it stands apart on the shelf.',
+        'The gold Noor seal, the halal and satisfaction marks and a consistent label structure tie the whole range together as one brand.',
+      ],
+    },
   },
   {
     slug: 'paper-ph-magazine',
@@ -163,10 +205,19 @@ const all: Project[] = [
     role: 'Magazine Designer',
     tools: ['InDesign', 'Photoshop'],
     summary: "The launch issue of a national media association's magazine, plus its event print.",
-    description: [
-      "Designed the first issue of PAPER.Ph's magazine, launched at the association's first anniversary under the theme “The Media, the New Era, and the New Normal.”",
-      'The issue covers news, opinion, feature and message pages, photo spreads and advertiser greetings. I also designed the event tarpaulins, certificates and guest ribbons in the same navy-and-gold look.',
-    ],
+    caseStudy: {
+      stats: [
+        { value: '1st', label: "issue, launched at the association's first anniversary" },
+        { value: '3', label: 'kinds of event print: tarpaulins, certificates, ribbons' },
+      ],
+      brief:
+        'PAPER.Ph, a national association of publishers, editors and reporters, launched its magazine at its first anniversary under the theme “The Media, the New Era, and the New Normal.”',
+      did: 'As Magazine Designer I designed the first issue (news, opinion, feature and message pages, photo spreads and advertiser greetings) and the tarpaulins, certificates and guest ribbons for the event.',
+      decisions: [
+        'One navy-and-gold look shared by the magazine and the event print, so everything at the anniversary belonged together.',
+        'News, opinion, message pages, photo spreads and greetings each sit within the same consistent design, so the issue reads as one publication.',
+      ],
+    },
   },
   {
     slug: 'logo-design',
@@ -178,10 +229,19 @@ const all: Project[] = [
     role: 'Logo Designer',
     tools: ['Illustrator', 'Photoshop'],
     summary: 'Logos, mascots and seals for food brands, government contests, schools and small businesses.',
-    description: [
-      "A selection of marks across very different briefs: a bold illustrated badge for Kusina ni Ineng, a superhero-inspired mascot for TESDA's “Lingap ay Maaasahan” theme, a contest entry for the Bureau of Internal Revenue, and seals for two chapels.",
-      'For the contest logos I also wrote the logo explanation that goes with each one: what every shape and colour stands for, and how it connects to the brief.',
-    ],
+    caseStudy: {
+      stats: [
+        { value: '11', label: 'marks shown here' },
+        { value: '2', label: 'contest entries with written explanations' },
+      ],
+      brief:
+        'Logo briefs from very different clients: a food brand, government contests, chapels, an association and small businesses.',
+      did: 'I designed each mark from its brief. For the contest logos I also wrote the logo explanation: what every shape and colour stands for, and how it connects to the theme.',
+      decisions: [
+        "Each mark is matched to its audience, from a bold illustrated badge for Kusina ni Ineng to a superhero-inspired mascot for TESDA's “Lingap ay Maaasahan” theme.",
+        'For contest entries, the written explanation is part of the design: it shows the judges the thinking behind every shape and colour.',
+      ],
+    },
   },
   {
     slug: 'kcd-technical-institute',
@@ -238,10 +298,20 @@ const all: Project[] = [
     role: 'Packaging Designer',
     tools: ['Photoshop', 'Illustrator'],
     summary: 'A 25 kg rice sack series and trading logo for a Nueva Ecija rice wholesaler.',
-    description: [
-      'Designed the WGomez trading seal and a family of 25 kg rice sacks, one per variety and brand: Ivy’s, Sofia’s, Wave Nher’s and Wency’s.',
-      'Each sack uses a single bold colour field so the varieties are easy to tell apart in a warehouse stack, with a shared front layout and an “Export Quality” back panel.',
-    ],
+    caseStudy: {
+      stats: [
+        { value: '4', label: 'rice brands' },
+        { value: '25 kg', label: 'sack format' },
+        { value: '1', label: 'trading seal' },
+      ],
+      brief:
+        "WGomez Vegetables & Grain Trading, a rice wholesaler in Nueva Ecija, needed a trading logo and sacks for four rice brands: Ivy’s, Sofia’s, Wave Nher’s and Wency’s.",
+      did: 'As Packaging Designer I designed the WGomez trading seal and the full family of 25 kg rice sacks.',
+      decisions: [
+        'Each sack uses a single bold colour field, so the varieties are easy to tell apart in a warehouse stack.',
+        'A shared front layout and an “Export Quality” back panel keep the four brands recognisable as one supplier.',
+      ],
+    },
   },
   {
     slug: 'birds-calendar',

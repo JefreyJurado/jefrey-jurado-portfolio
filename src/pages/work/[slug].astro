@@ -15,6 +15,7 @@ export function getStaticPaths() {
 }
 
 const { project, prev, next } = Astro.props;
+const cs = project.caseStudy;
 const meta = [
   { label: 'Client', value: project.client },
   { label: 'Role', value: project.role },
@@ -50,12 +51,49 @@ const columns = project.images.length >= 5 ? 3 : 2;
       </dl>
     </header>
 
-    <section class="about">
-      <h2>About the project</h2>
-      <div class="about__text">
-        {project.description.map((para) => <p>{para}</p>)}
-      </div>
-    </section>
+    {
+      cs ? (
+        <section class="case" aria-label="Case study">
+          <dl class="case__stats">
+            {cs.stats.map((st) => (
+              <div>
+                <dt>{st.label}</dt>
+                <dd>{st.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <div class="case__row">
+            <h2>The brief</h2>
+            <p class="case__lead">{cs.brief}</p>
+          </div>
+          <div class="case__row">
+            <h2>What I did</h2>
+            <p>{cs.did}</p>
+          </div>
+          <div class="case__row">
+            <h2>Design decisions</h2>
+            <ul class="case__list">
+              {cs.decisions.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+          </div>
+          {cs.result && (
+            <div class="case__row">
+              <h2>Result</h2>
+              <p>{cs.result}</p>
+            </div>
+          )}
+        </section>
+      ) : (
+        <section class="about">
+          <h2>About the project</h2>
+          <div class="about__text">
+            {project.description?.map((para) => <p>{para}</p>)}
+          </div>
+        </section>
+      )
+    }
 
     <section aria-label="Project images">
       <div class="gallery__head">
@@ -278,6 +316,101 @@ const columns = project.images.length >= 5 ? 3 : 2;
 
   @media (max-width: 760px) {
     .about {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Case study for featured projects: key numbers, then brief / what I did / decisions / result */
+  .case {
+    margin: 20px 0 clamp(48px, 6vw, 72px);
+    padding: clamp(28px, 4vw, 48px);
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px -36px rgba(13, 13, 13, 0.4);
+  }
+
+  .case__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin: 0 0 clamp(12px, 2vw, 20px);
+  }
+
+  .case__stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 20px 22px;
+    background: var(--light);
+    border-radius: 16px;
+  }
+
+  .case__stats dd {
+    margin: 0;
+    font-size: clamp(32px, 3.4vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--maroon);
+  }
+
+  .case__stats dt {
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .case__row {
+    display: grid;
+    grid-template-columns: 1fr 2.2fr;
+    gap: 12px clamp(24px, 5vw, 72px);
+    padding: clamp(20px, 2.6vw, 28px) 0;
+    border-top: 1px solid var(--line);
+    font-size: 17px;
+    color: var(--muted);
+  }
+
+  .case__row:last-child {
+    padding-bottom: 0;
+  }
+
+  .case__row p,
+  .case__list {
+    max-width: 44em;
+  }
+
+  .case__lead {
+    font-size: 19px;
+    color: var(--ink);
+  }
+
+  .case__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .case__list li {
+    position: relative;
+    padding-left: 22px;
+  }
+
+  .case__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--maroon);
+  }
+
+  @media (max-width: 760px) {
+    .case__row {
       grid-template-columns: 1fr;
     }
   }
