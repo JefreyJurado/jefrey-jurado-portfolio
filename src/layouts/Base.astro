@@ -83,7 +83,7 @@ const person = {
           <a href="/" aria-current={path === '/' ? 'page' : undefined}>About</a>
           <a href="/work/" aria-current={path.startsWith('/work') ? 'page' : undefined}>Work</a>
           <a href={site.resume} target="_blank">Résumé</a>
-          <a href={`mailto:${site.email}`}>Email</a>
+          <a href="/contact/" aria-current={path.startsWith('/contact') ? 'page' : undefined}>Contact</a>
         </nav>
       </div>
     </header>
@@ -108,6 +108,7 @@ const person = {
             <span class="contact__arrow" aria-hidden="true">↗</span>
           </a>
           <div class="contact__links">
+            {site.formKey && <a href="/contact/">Send a message →</a>}
             <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
             <a href={site.resume} target="_blank">Résumé (PDF) ↗</a>
           </div>
@@ -187,6 +188,7 @@ const person = {
   .top__name {
     font-weight: 600;
     letter-spacing: -0.01em;
+    white-space: nowrap;
   }
 
   nav {
@@ -211,8 +213,11 @@ const person = {
   }
 
   @media (max-width: 420px) {
+    .top__inner {
+      gap: 12px;
+    }
     nav {
-      gap: 14px;
+      gap: 12px;
       font-size: 14px;
     }
   }

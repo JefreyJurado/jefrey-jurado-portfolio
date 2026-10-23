@@ -1,0 +1,300 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base title="Contact" description="Get in touch with Jefrey Jurado about a full-time role or a freelance project.">
+  <div class="wrap">
+    <section class="head">
+      <p class="head__tag">Contact</p>
+      <h1>Let's talk.</h1>
+      <p class="head__sub">
+        Tell me about the role or project. I usually reply within a day or two.
+      </p>
+
+      <div class="panel">
+        {
+          site.formKey ? (
+            <form class="form" action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value={site.formKey} />
+              <input type="hidden" name="subject" value="New message from your portfolio" />
+              <input type="hidden" name="from_name" value="Portfolio contact form" />
+              {/* Spam trap: hidden from people, bots tend to tick it */}
+              <input type="checkbox" name="botcheck" class="form__trap" tabindex="-1" autocomplete="off" />
+
+              <div class="form__row">
+                <label>
+                  <span>Your name</span>
+                  <input type="text" name="name" required autocomplete="name" />
+                </label>
+                <label>
+                  <span>Your email</span>
+                  <input type="email" name="email" required autocomplete="email" />
+                </label>
+              </div>
+              <label>
+                <span>Message</span>
+                <textarea name="message" rows="6" required />
+              </label>
+
+              <div class="form__foot">
+                <button type="submit" class="form__send">Send message</button>
+                <p class="form__status" role="status" aria-live="polite" />
+              </div>
+            </form>
+          ) : null
+        }
+
+        <div class="direct">
+          <p class="direct__label">{site.formKey ? 'Or reach me directly' : 'Reach me directly'}</p>
+          <a href={`mailto:${site.email}`} class="direct__email">{site.email}</a>
+          <div class="direct__links">
+            <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a href={site.resume} target="_blank">Résumé (PDF) ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<script>
+  // Sends the form without leaving the page and shows the result underneath the button.
+  const form = document.querySelector<HTMLFormElement>('.form');
+  const status = form?.querySelector<HTMLElement>('.form__status');
+  const button = form?.querySelector<HTMLButtonElement>('.form__send');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status || !button) return;
+    button.disabled = true;
+    status.dataset.state = '';
+    status.textContent = 'Sending…';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message);
+      form.reset();
+      status.dataset.state = 'ok';
+      status.textContent = 'Thank you! Your message was sent.';
+    } catch {
+      status.dataset.state = 'error';
+      status.textContent = "Sorry, that didn't go through. Please email me directly below.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+
+<style>
+  /* Same brand gradient header card as the Work page, with the form on a white panel inside */
+  .head {
+    margin-top: 12px;
+    padding: clamp(32px, 4.5vw, 64px);
+    border-radius: 28px;
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(242, 242, 242, 0.12), transparent 55%),
+      linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+    color: var(--light);
+    box-shadow: 0 30px 60px -36px rgba(var(--brand-rgb), 0.6);
+  }
+
+  .head__tag {
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px solid rgba(242, 242, 242, 0.35);
+    border-radius: 999px;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(242, 242, 242, 0.85);
+  }
+
+  h1 {
+    margin: 18px 0 12px;
+    font-size: clamp(44px, 6vw, 88px);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  .head__sub {
+    max-width: 34em;
+    font-size: clamp(16px, 1.4vw, 19px);
+    color: rgba(242, 242, 242, 0.85);
+  }
+
+  .panel {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: clamp(24px, 4vw, 56px);
+    margin-top: clamp(28px, 4vw, 44px);
+    padding: clamp(24px, 3.5vw, 44px);
+    background: #ffffff;
+    border-radius: 22px;
+    color: var(--ink);
+  }
+
+  .panel:has(> .direct:only-child) {
+    grid-template-columns: 1fr;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--light);
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--brand);
+    background: #ffffff;
+  }
+
+  .form__trap {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .form__foot {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+
+  .form__send {
+    padding: 13px 24px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--brand);
+    color: var(--light);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+  }
+
+  .form__send:hover {
+    background: var(--brand-2);
+  }
+
+  .form__send:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  .form__status {
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .form__status[data-state='ok'] {
+    color: #1f7a3d;
+  }
+
+  .form__status[data-state='error'] {
+    color: #b42318;
+  }
+
+  .direct {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form + .direct {
+    padding-left: clamp(24px, 4vw, 56px);
+    border-left: 1px solid var(--line);
+  }
+
+  .direct__label {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .direct__email {
+    font-size: clamp(18px, 1.8vw, 22px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--brand);
+    overflow-wrap: anywhere;
+  }
+
+  .direct__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .direct__links a {
+    padding: 10px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 15px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .direct__links a:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+  }
+
+  @media (max-width: 860px) {
+    .panel {
+      grid-template-columns: 1fr;
+    }
+    .form + .direct {
+      padding: 24px 0 0;
+      border-left: 0;
+      border-top: 1px solid var(--line);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .form__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
