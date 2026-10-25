@@ -11,10 +11,10 @@
     "Photoshop",
     "Illustrator"
   ],
-  "summary": "Wrap-around labels for Premium Banana Thins and Sweet & Spicy Chili Jam.",
+  "summary": "Wrap-around labels for Premium Banana Thins, Sweet & Spicy Chili Jam and Chili Garlic Paste.",
   "description": [
-    "Wrap-around labels for two products distributed by RGH Corporation: Orell's Premium Banana Thins, built around a friendly banana mascot, and KASAMA Cooperatives' Sweet & Spicy Chili Jam.",
-    "Both labels carry full nutrition panels, barcodes and regulatory text laid out to print-ready specifications."
+    "Wrap-around labels for products distributed by RGH Corporation: Orell's Premium Banana Thins, built around a friendly banana mascot, plus KASAMA Cooperatives' Sweet & Spicy Chili Jam and Honest Farm Chili Garlic Paste.",
+    "Each label carries full nutrition panels, barcodes and regulatory text laid out to print-ready specifications."
   ],
   "caseStudy": {
     "stats": [],
@@ -25,6 +25,11 @@
   },
   "images": [
     {
+      "image": "/src/assets/work/product-labels/images/2/image.jpg",
+      "caption": "Jar Mockup",
+      "alt": "Orell's Premium Banana Thins label wrapped around a jar of banana chips, shown from the left, front and right."
+    },
+    {
       "image": "/src/assets/work/product-labels/images/0/image.jpg",
       "caption": "Label",
       "alt": "Wrap-around label for Orell's Premium Banana Thins in yellow, with a cartoon banana mascot, a nutrition facts panel and a barcode."
@@ -33,6 +38,11 @@
       "image": "/src/assets/work/product-labels/images/1/image.jpg",
       "caption": "Chili Jam Label",
       "alt": "Wrap-around label for Premium Sweet & Spicy Chili Jam in black and dark red, with garlic and chillies, nutrition facts and a barcode."
+    },
+    {
+      "image": "/src/assets/work/product-labels/images/3/image.jpg",
+      "caption": "Chili Garlic Paste Label",
+      "alt": "Wrap-around label for Honest Farm Sweet & Spicy Chili Garlic Paste in green and dark red, with garlic and chillies, nutrition facts and a barcode."
     }
   ],
   "videos": []
