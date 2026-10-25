@@ -26,39 +26,48 @@
   "images": [
     {
       "image": "/src/assets/work/birds-calendar/images/0/image.jpg",
-      "caption": "Cover"
+      "caption": "Cover",
+      "alt": "Cover of a 2022 wall calendar with two bald eagles around a white circle reading \"Calendar 2022\"."
     },
     {
       "image": "/src/assets/work/birds-calendar/images/1/image.jpg",
-      "caption": "January"
+      "caption": "January",
+      "alt": "January 2022 page with a Black-naped Monarch, a small blue bird perched on a branch, and a note about the species."
     },
     {
       "image": "/src/assets/work/birds-calendar/images/2/image.jpg",
-      "caption": "February"
+      "caption": "February",
+      "alt": "February 2022 page with a Blue-capped Kingfisher, a colourful kingfisher found only on Mindanao."
     },
     {
       "image": "/src/assets/work/birds-calendar/images/3/image.jpg",
-      "caption": "March"
+      "caption": "March",
+      "alt": "March 2022 page with a Blue-naped Parrot, a bright green parrot found across the Philippines."
     },
     {
       "image": "/src/assets/work/birds-calendar/images/4/image.jpg",
-      "caption": "April"
+      "caption": "April",
+      "alt": "April 2022 page with an Elegant Tit, a small yellow and black bird found only in the Philippines."
     },
     {
       "image": "/src/assets/work/birds-calendar/images/5/image.jpg",
-      "caption": "June"
+      "caption": "June",
+      "alt": "June 2022 page with a Magnificent Sunbird, a red sunbird perched on a red flower."
     },
     {
       "image": "/src/assets/work/birds-calendar/images/6/image.jpg",
-      "caption": "July"
+      "caption": "July",
+      "alt": "July 2022 page with an Oriental Magpie-Robin, a black and white bird singing on a branch."
     },
     {
       "image": "/src/assets/work/birds-calendar/images/7/image.jpg",
-      "caption": "October"
+      "caption": "October",
+      "alt": "October 2022 page with a Philippine Hawk-Owl, a small brown owl with yellow eyes."
     },
     {
       "image": "/src/assets/work/birds-calendar/images/8/image.jpg",
-      "caption": "December"
+      "caption": "December",
+      "alt": "December 2022 page with a Philippine Hawk-Eagle perched on a branch."
     }
   ],
   "videos": []

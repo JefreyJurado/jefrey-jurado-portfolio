@@ -26,31 +26,38 @@
   "images": [
     {
       "image": "/src/assets/work/nenas-herald-coffee/images/0/image.jpg",
-      "caption": "Herbal Coffee"
+      "caption": "Herbal Coffee",
+      "alt": "Nena's-Herald Herbal Coffee stand-up pouch in blue tones with a leaf logo, a cup of coffee and the herbal ingredients, on a light blue background."
     },
     {
       "image": "/src/assets/work/nenas-herald-coffee/images/1/image.jpg",
-      "caption": "Collagen Coffee"
+      "caption": "Collagen Coffee",
+      "alt": "Nena's-Herald Collagen Coffee stand-up pouch in magenta, on a pink background."
     },
     {
       "image": "/src/assets/work/nenas-herald-coffee/images/2/image.jpg",
-      "caption": "Inday Coffee"
+      "caption": "Inday Coffee",
+      "alt": "Nena's-Herald Inday Coffee stand-up pouch in warm brown, on a cream background."
     },
     {
       "image": "/src/assets/work/nenas-herald-coffee/images/3/image.jpg",
-      "caption": "Insulin Coffee"
+      "caption": "Insulin Coffee",
+      "alt": "Nena's-Herald Insulin Coffee stand-up pouch in dark green, on a light green background."
     },
     {
       "image": "/src/assets/work/nenas-herald-coffee/images/4/image.jpg",
-      "caption": "Purple Coffee"
+      "caption": "Purple Coffee",
+      "alt": "Nena's-Herald Purple Coffee stand-up pouch in purple, on a lilac background."
     },
     {
       "image": "/src/assets/work/nenas-herald-coffee/images/5/image.jpg",
-      "caption": "Tindog Coffee"
+      "caption": "Tindog Coffee",
+      "alt": "Nena's-Herald Tindog Coffee stand-up pouch in black and grey, on a white background."
     },
     {
       "image": "/src/assets/work/nenas-herald-coffee/images/6/image.jpg",
-      "caption": "Calling Card"
+      "caption": "Calling Card",
+      "alt": "Calling card for Nena E. Mallari, CEO of Nena's-Herald Health and Beauty Products Shop, in green and white with the leaf logo. Contact details are blurred."
     }
   ],
   "videos": []

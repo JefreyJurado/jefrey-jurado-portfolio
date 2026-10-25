@@ -40,43 +40,53 @@
   "images": [
     {
       "image": "/src/assets/work/balwik-magazine/images/0/image.jpg",
-      "caption": "October Cover"
+      "caption": "October Cover",
+      "alt": "BALWIK magazine October 2021 cover: a woman in a red dress with the cover line \"Ms. Kate Rances, A Late Bloomer\" and a list of what is inside."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/1/image.jpg",
-      "caption": "November Cover"
+      "caption": "November Cover",
+      "alt": "BALWIK magazine November 2021 cover: a smiling woman in a white blouse beside a large \"40\" and the line \"Staying in business for 40 years and still counting\"."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/2/image.jpg",
-      "caption": "December Cover"
+      "caption": "December Cover",
+      "alt": "BALWIK magazine December 2021 special edition cover: a man giving a thumbs up, with the lines \"Pride of Sariaya!\" and \"Transforming Lives from the Heart\"."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/3/image.jpg",
-      "caption": "September Cover"
+      "caption": "September Cover",
+      "alt": "BALWIK magazine first issue, September 2021: a man wearing a face mask beside a pull quote from the mayor about COVID-19."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/4/image.jpg",
-      "caption": "Cover Story"
+      "caption": "Cover Story",
+      "alt": "BALWIK cover story spread \"Ms. Kate Rances, a Late Bloomer\", with a portrait holding a parrot and pageant photos set into the text."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/5/image.jpg",
-      "caption": "Editorial"
+      "caption": "Editorial",
+      "alt": "BALWIK spread with the \"Business Matters\" column, the editorial \"On Gratefulness\", a \"Usapang COMELEC\" column and a box of emergency phone numbers."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/6/image.jpg",
-      "caption": "Feature Tita Nena"
+      "caption": "Feature Tita Nena",
+      "alt": "BALWIK cover story spread \"Tulay ng Tagumpay ni Tita Nena\", laid out with family and career photos from different decades."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/7/image.jpg",
-      "caption": "Interview"
+      "caption": "Interview",
+      "alt": "BALWIK feature spread: an interview with a provincial information officer, with a portrait in the right-hand column."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/8/image.jpg",
-      "caption": "Feature Profile"
+      "caption": "Feature Profile",
+      "alt": "BALWIK feature profile \"Lala Macalintal-Pabulayan, A Giver, Till It Hurts\", with her portrait and a family photo."
     },
     {
       "image": "/src/assets/work/balwik-magazine/images/9/image.jpg",
-      "caption": "Opinion"
+      "caption": "Opinion",
+      "alt": "BALWIK opinion spread with two columns, \"Young Blood\" and \"Usapang DepEd\", both about the return of face-to-face classes."
     }
   ],
   "videos": []

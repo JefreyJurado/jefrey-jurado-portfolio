@@ -26,55 +26,68 @@
   "images": [
     {
       "image": "/src/assets/work/kcd-technical-institute/images/0/image.jpg",
-      "caption": "Blood Letting"
+      "caption": "Blood Letting",
+      "alt": "KCD Technical Institute poster for a blood-letting and first-aid seminar with the Philippine Red Cross, with a blood-drop mascot and the line \"Be a hero, save lives\"."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/1/image.jpg",
-      "caption": "Work In Japan"
+      "caption": "Work In Japan",
+      "alt": "KCD Technical Institute banner \"Do you want to work in Japan?\", with a plane, a pagoda and the program's steps and qualifications."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/2/image.jpg",
-      "caption": "Theater Arts"
+      "caption": "Theater Arts",
+      "alt": "KCD Technical Institute poster for a free summer theater arts workshop for senior high school students, with theater masks and red curtains."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/3/image.jpg",
-      "caption": "Maths Workshop"
+      "caption": "Maths Workshop",
+      "alt": "KCD Technical Institute poster for a free summer maths workshop, with a portrait of Albert Einstein and a chalkboard of numbers."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/4/image.jpg",
-      "caption": "Public Speaking"
+      "caption": "Public Speaking",
+      "alt": "KCD Technical Institute poster for a free summer public speaking workshop, with a microphone on a stand."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/5/image.jpg",
-      "caption": "Dance Workshop"
+      "caption": "Dance Workshop",
+      "alt": "KCD Technical Institute poster for a free summer dance workshop, with silhouettes of dancers in bright colours."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/6/image.jpg",
-      "caption": "Halloween Party"
+      "caption": "Halloween Party",
+      "alt": "Halloween party poster with a glowing jack-o'-lantern and the schedule for kids' trick or treat and an evening party."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/7/image.jpg",
-      "caption": "Pride Festival"
+      "caption": "Pride Festival",
+      "alt": "Purple poster for an LGBT Pride Parade during the Corambalan Festival 2018, with the line \"Spread love not hate\" and sponsor logos."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/8/image.jpg",
-      "caption": "Thats My Tomboy"
+      "caption": "Thats My Tomboy",
+      "alt": "Poster for \"That's My Tomboy\" during the Corambalan Festival 2018, showing a person in a black cap and t-shirt."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/9/image.jpg",
-      "caption": "Youth Leadership"
+      "caption": "Youth Leadership",
+      "alt": "KCD Technical Institute banner for a Youth Leadership Development Program, themed \"Gearing up millennial student leaders towards effective governance\"."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/10/image.jpg",
-      "caption": "Senior High Enrollment"
+      "caption": "Senior High Enrollment",
+      "alt": "KCD Technical Institute poster for senior high school enrolment for school year 2018–2019, listing its tracks next to a student in uniform."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/11/image.jpg",
-      "caption": "TESDA Scholarship"
+      "caption": "TESDA Scholarship",
+      "alt": "Banner for TESDA scholarships at KCD Technical Institute in welding and dressmaking, with photos of students at work."
     },
     {
       "image": "/src/assets/work/kcd-technical-institute/images/12/image.jpg",
-      "caption": "Maulawin Biopark"
+      "caption": "Maulawin Biopark",
+      "alt": "Banner for the Maulawin Biopark river clean-up and fishery community project in Los Baños, Laguna, with partner logos."
     }
   ],
   "videos": []

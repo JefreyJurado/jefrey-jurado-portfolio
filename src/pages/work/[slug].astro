@@ -30,7 +30,7 @@ const columns = project.images.length >= 5 ? 3 : 2;
   title={project.title}
   description={project.summary}
   image={project.images[0].img}
-  imageAlt={`${project.title} — ${project.images[0].caption}`}
+  imageAlt={project.images[0].alt}
 >
   <article class="wrap">
     <a href="/work/" class="back">← All work</a>
@@ -139,7 +139,7 @@ const columns = project.images.length >= 5 ? 3 : 2;
               >
                 <Image
                   src={item.img}
-                  alt={`${project.title} — ${item.caption}`}
+                  alt={item.alt}
                   widths={[400, 700, 1000]}
                   sizes={`(max-width: 640px) 100vw, (max-width: 1000px) 50vw, ${Math.round(100 / columns)}vw`}
                   loading={i < columns ? 'eager' : 'lazy'}

@@ -35,55 +35,68 @@
   "images": [
     {
       "image": "/src/assets/work/logo-design/images/0/image.jpg",
-      "caption": "Kusina Ni Ineng"
+      "caption": "Kusina Ni Ineng",
+      "alt": "Kusina ni Ineng logo: a round badge filled with grilled meat, rice and vegetables above bold white \"KUSINA\" lettering on a red ribbon."
     },
     {
       "image": "/src/assets/work/logo-design/images/1/image.jpg",
-      "caption": "TESDA Mascot"
+      "caption": "TESDA Mascot",
+      "alt": "TESDA contest mascot: a smiling gear-headed superhero in a blue cape, with the theme \"Sa TESDA, Lingap ay Maaasahan\"."
     },
     {
       "image": "/src/assets/work/logo-design/images/2/image.jpg",
-      "caption": "TESDA Explanation"
+      "caption": "TESDA Explanation",
+      "alt": "Logo explanation board for the TESDA mascot, describing how it combines the TESDA logo with a superhero who serves people wholeheartedly."
     },
     {
       "image": "/src/assets/work/logo-design/images/3/image.jpg",
-      "caption": "BIR Logo"
+      "caption": "BIR Logo",
+      "alt": "BIR contest logo: a blue and yellow shield split by a key, with a torch on top and a handshake in the middle, above \"Bureau of Internal Revenue\"."
     },
     {
       "image": "/src/assets/work/logo-design/images/4/image.jpg",
-      "caption": "BIR Explanation"
+      "caption": "BIR Explanation",
+      "alt": "Contest entry sheet \"Contest for the Design of New BIR Logo\", showing the shield logo with the designer's name."
     },
     {
       "image": "/src/assets/work/logo-design/images/5/image.jpg",
-      "caption": "Relcomm Society"
+      "caption": "Relcomm Society",
+      "alt": "Religious Communication Society logo: an illustrated portrait inside a red circle, with the name curved around it in green."
     },
     {
       "image": "/src/assets/work/logo-design/images/6/image.jpg",
-      "caption": "McEarly Auto Trading"
+      "caption": "McEarly Auto Trading",
+      "alt": "McEarly Auto Trading logo: a navy circle with a sports car outline above bold \"MCEARLY\" lettering."
     },
     {
       "image": "/src/assets/work/logo-design/images/7/image.jpg",
-      "caption": "Mr Suave Auto Trading"
+      "caption": "Mr Suave Auto Trading",
+      "alt": "Mr. Suave Auto Trading logo: a vintage car wearing a hat and moustache above the script word \"Suave\"."
     },
     {
       "image": "/src/assets/work/logo-design/images/8/image.jpg",
-      "caption": "Paper PH"
+      "caption": "Paper PH",
+      "alt": "PAPER.Ph logo: a blue mosaic triangle with a gold quill pen above the name and \"Est 2019\"."
     },
     {
       "image": "/src/assets/work/logo-design/images/9/image.jpg",
-      "caption": "St. Michael Chapel Seal"
+      "caption": "St. Michael Chapel Seal",
+      "alt": "St. Michael Chapel seal: an illustration of St. Michael the Archangel defeating the devil, ringed by the chapel's name."
     },
     {
       "image": "/src/assets/work/logo-design/images/10/image.jpg",
-      "caption": "St. Ignatius Chapel Seal"
+      "caption": "St. Ignatius Chapel Seal",
+      "alt": "St. Ignatius Chapel seal: a black and white line portrait of St. Ignatius ringed by the chapel's name."
     },
     {
       "image": "/src/assets/work/logo-design/images/11/image.jpg",
-      "caption": "PCX Xclusive"
+      "caption": "PCX Xclusive",
+      "alt": "PCX Cebu Xclusive club logo: a shield with white wings, the front of a red scooter and \"EST 2020\", on black."
     },
     {
       "image": "/src/assets/work/logo-design/images/12/image.jpg",
-      "caption": "Sari Sari Store"
+      "caption": "Sari Sari Store",
+      "alt": "Sari Sari Store by Sabina logo on a yellow circle: a sunflower-textured letter S and a woman carrying shopping bags."
     }
   ],
   "videos": []

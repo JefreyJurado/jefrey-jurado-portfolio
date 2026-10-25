@@ -35,67 +35,83 @@
   "images": [
     {
       "image": "/src/assets/work/noors-gourmet-food/images/0/image.jpg",
-      "caption": "Coffee Moringa"
+      "caption": "Coffee Moringa",
+      "alt": "Noor's Gourmet Food label for Premium Coffee with Moringa: dark background, gold logo, green script lettering, coffee beans and a moringa leaf."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/1/image.jpg",
-      "caption": "Chili Powder"
+      "caption": "Chili Powder",
+      "alt": "Noor's Gourmet Food label for Premium Chili Powder: white and red design with red chillies and a pile of chili powder."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/2/image.jpg",
-      "caption": "Rice Coffee"
+      "caption": "Rice Coffee",
+      "alt": "Noor's Gourmet Food label for Premium Rice Coffee with Moringa: dark background with moringa leaves and a hand holding roasted rice."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/3/image.jpg",
-      "caption": "Turmeric Tea"
+      "caption": "Turmeric Tea",
+      "alt": "Noor's Gourmet Food label for Premium Turmeric Ginger Tea in bright orange, with a cup of tea, turmeric root and turmeric powder."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/4/image.jpg",
-      "caption": "Paprika"
+      "caption": "Paprika",
+      "alt": "Noor's Gourmet Food label for Premium Paprika Powder: white and deep red design with red bell peppers and paprika."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/5/image.jpg",
-      "caption": "Peanut Butter"
+      "caption": "Peanut Butter",
+      "alt": "Noor label for Premium Peanut Butter with Low Glycemic Index: a round badge over whole peanuts and a slice of toast with peanut butter."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/6/image.jpg",
-      "caption": "Frizzled Mushroom"
+      "caption": "Frizzled Mushroom",
+      "alt": "Noor's Gourmet Food label for Premium Frizzled Mushroom, with a bowl of crispy fried mushrooms under a round brown badge."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/7/image.jpg",
-      "caption": "Brown Cane Sugar"
+      "caption": "Brown Cane Sugar",
+      "alt": "Noor label for Brown Cane Sugar: green bamboo background, distributor details and a wooden bowl of sugar."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/8/image.jpg",
-      "caption": "Blue Ternate Front"
+      "caption": "Blue Ternate Front",
+      "alt": "Front of the Noor Blue Ternate Tea label: dark blue background with a butterfly pea flower and the line \"Make your morning more than just good.\""
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/9/image.jpg",
-      "caption": "Blue Ternate Back"
+      "caption": "Blue Ternate Back",
+      "alt": "Back of the Blue Ternate Tea label, listing the health benefits of blue ternate and mint above a photo of a cup of tea."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/10/image.jpg",
-      "caption": "Roselle Front"
+      "caption": "Roselle Front",
+      "alt": "Front of the Noor Roselle Tea label: deep red background with roselle flowers and the line \"Evening Calm\"."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/11/image.jpg",
-      "caption": "Roselle Back"
+      "caption": "Roselle Back",
+      "alt": "Back of the Roselle Tea label, listing the health benefits of roselle and mint above tea being poured into a cup."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/12/image.jpg",
-      "caption": "Tofu Garlic"
+      "caption": "Tofu Garlic",
+      "alt": "Noor's Gourmet Food label for Tofu Garlic with Malunggay: green design with large brown script lettering and a photo of fried tofu."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/13/image.jpg",
-      "caption": "Tofu Garlic Spicy"
+      "caption": "Tofu Garlic Spicy",
+      "alt": "Spicy version of the Tofu Garlic with Malunggay label, in red with a \"Spicy\" badge."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/14/image.jpg",
-      "caption": "Bignay Jam Label"
+      "caption": "Bignay Jam Label",
+      "alt": "Wrap-around Noor label for Bignay Jam with Low Glycemic Index, with bignay berries, a nutrition facts panel and the ingredients."
     },
     {
       "image": "/src/assets/work/noors-gourmet-food/images/15/image.jpg",
-      "caption": "Calamansi Label"
+      "caption": "Calamansi Label",
+      "alt": "Wrap-around Noor label for Concentrated Calamansi Juice in bright green, with calamansi fruit, nutrition facts and a barcode."
     }
   ],
   "videos": []

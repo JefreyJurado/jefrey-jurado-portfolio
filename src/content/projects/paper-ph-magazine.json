@@ -35,43 +35,53 @@
   "images": [
     {
       "image": "/src/assets/work/paper-ph-magazine/images/0/image.jpg",
-      "caption": "Front Cover"
+      "caption": "Front Cover",
+      "alt": "Front cover of PAPER.Ph magazine's first issue, December 2020: two men speaking into microphones, with the lines \"The year that is 2020\" and \"The Role of Media in this Time of Pandemic\"."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/1/image.jpg",
-      "caption": "Role Of Media"
+      "caption": "Role Of Media",
+      "alt": "PAPER.Ph article page \"The Role of Media in this Time of Pandemic\", with newspapers in the header and a small author photo."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/2/image.jpg",
-      "caption": "Glass Half Full"
+      "caption": "Glass Half Full",
+      "alt": "PAPER.Ph \"Facts and Figures\" column page titled \"Glass Half Full\", with a glass of water in the header."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/3/image.jpg",
-      "caption": "News"
+      "caption": "News",
+      "alt": "PAPER.Ph news page with two stories: \"NEDA cites statistics, technology importance in bridging gaps\" and \"Gov. Mamba looks north for development in Cagayan\"."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/4/image.jpg",
-      "caption": "Financial Literacy"
+      "caption": "Financial Literacy",
+      "alt": "PAPER.Ph \"Financial Literacy\" article page with a round author portrait, plus an alarm clock, coins and seedlings along the bottom."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/5/image.jpg",
-      "caption": "Message"
+      "caption": "Message",
+      "alt": "PAPER.Ph full-page message from Gov. Ramil Hernandez of Laguna on a blue and yellow background."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/6/image.jpg",
-      "caption": "Oath Taking"
+      "caption": "Oath Taking",
+      "alt": "PAPER.Ph \"Oath Taking\" photo spread: a honeycomb grid of portraits on yellow over a photo of people taking an oath."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/7/image.jpg",
-      "caption": "Editorial"
+      "caption": "Editorial",
+      "alt": "PAPER.Ph editorial page \"The Media, the New Era, and the New Normal\", with the board of directors and the editorial box."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/8/image.jpg",
-      "caption": "Back Cover"
+      "caption": "Back Cover",
+      "alt": "PAPER.Ph back cover in dark blue with the organisation's mission and vision above a group photo of members."
     },
     {
       "image": "/src/assets/work/paper-ph-magazine/images/9/image.jpg",
-      "caption": "Welcome Tarp"
+      "caption": "Welcome Tarp",
+      "alt": "Welcome tarpaulin for PAPER.Ph's first anniversary and magazine launch, themed \"The Media, the New Era, and the New Normal\"."
     }
   ],
   "videos": []

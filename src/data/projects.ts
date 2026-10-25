@@ -13,6 +13,8 @@ const files = import.meta.glob<{ default: ImageMetadata }>(
 export interface WorkImage {
   img: ImageMetadata;
   caption: string;
+  // Describes the image for screen readers and search engines.
+  alt: string;
   // Soft background colour sampled from the image itself, used behind it on the site.
   tint: string;
 }
@@ -89,7 +91,7 @@ interface ProjectEntry {
   summary: string;
   description: string[];
   caseStudy: CaseStudy;
-  images: { image: string | null; caption: string }[];
+  images: { image: string | null; caption: string; alt?: string }[];
   videos: { url: string | null; caption: string }[];
 }
 
@@ -130,7 +132,13 @@ async function toProject(file: string, entry: ProjectEntry): Promise<Project & {
   const images = await Promise.all(
     entry.images
       .filter((item) => item.image && files[item.image])
-      .map(async (item) => ({ img: files[item.image!].default, caption: item.caption, tint: await tintOf(item.image!) })),
+      .map(async (item) => ({
+        img: files[item.image!].default,
+        caption: item.caption,
+        // Falls back to the title and caption when no description has been written.
+        alt: item.alt?.trim() || `${entry.title} — ${item.caption}`,
+        tint: await tintOf(item.image!),
+      })),
   );
   const videos = entry.videos.flatMap((v) => {
     const embed = v.url ? embedUrl(v.url) : undefined;

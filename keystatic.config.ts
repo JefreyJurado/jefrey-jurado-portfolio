@@ -88,6 +88,12 @@ export default config({
               validation: { isRequired: true },
             }),
             caption: fields.text({ label: 'Caption' }),
+            alt: fields.text({
+              label: 'Image description',
+              description:
+                'Optional. One sentence saying what the image shows, read out to blind visitors and used by Google. Not shown on the page.',
+              multiline: true,
+            }),
           }),
           {
             label: 'Images',

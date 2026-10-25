@@ -25,19 +25,23 @@
   "images": [
     {
       "image": "/src/assets/work/calling-cards/images/0/image.jpg",
-      "caption": "Noor Back"
+      "caption": "Noor Back",
+      "alt": "Back of the Noor Food Products Trading calling card: a gold Noor logo on navy."
     },
     {
       "image": "/src/assets/work/calling-cards/images/1/image.jpg",
-      "caption": "Noor Owner"
+      "caption": "Noor Owner",
+      "alt": "Front of the Noor calling card for owner Ruby Allen F. Leonor, with a gold wing motif on navy. Contact details are blurred."
     },
     {
       "image": "/src/assets/work/calling-cards/images/2/image.jpg",
-      "caption": "Gravel And Sand"
+      "caption": "Gravel And Sand",
+      "alt": "Calling card for Elmer T. Masambique, Gravel and Sand, with a stone texture and a list of gravel and sand products. Contact details are blurred."
     },
     {
       "image": "/src/assets/work/calling-cards/images/3/image.jpg",
-      "caption": "Herald Publisher"
+      "caption": "Herald Publisher",
+      "alt": "Calling card for Nena E. Mallari, publisher and owner of The Southern Tagalog Herald Publications, with a rolled-up newspaper. Contact details are blurred."
     }
   ],
   "videos": []

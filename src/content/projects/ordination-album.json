@@ -26,47 +26,58 @@
   "images": [
     {
       "image": "/src/assets/work/ordination-album/images/0/image.jpg",
-      "caption": "Cover"
+      "caption": "Cover",
+      "alt": "Album cover for the sacerdotal ordination of Rev. Fr. Dennis M. Millano, Diocese of San Pablo, showing him in white and gold vestments beside a crucifix and an image of Mary."
     },
     {
       "image": "/src/assets/work/ordination-album/images/1/image.jpg",
-      "caption": "Cathedral"
+      "caption": "Cathedral",
+      "alt": "Album spread of the Cathedral Parish of St. Paul the First Hermit: the red and white church facade and priests walking in procession."
     },
     {
       "image": "/src/assets/work/ordination-album/images/2/image.jpg",
-      "caption": "Procession"
+      "caption": "Procession",
+      "alt": "Album spread \"Procession to the Altar\", a collage of the bishop, concelebrating priests and the candidates entering the cathedral."
     },
     {
       "image": "/src/assets/work/ordination-album/images/3/image.jpg",
-      "caption": "Litany Of Saints"
+      "caption": "Litany Of Saints",
+      "alt": "Album spread \"Litany of Saints\", with a large photo of a candidate lying face down on the cathedral floor."
     },
     {
       "image": "/src/assets/work/ordination-album/images/4/image.jpg",
-      "caption": "Laying On Of Hands"
+      "caption": "Laying On Of Hands",
+      "alt": "Album spread \"Laying on of Hands\", showing the bishop and priests laying hands on the kneeling candidates."
     },
     {
       "image": "/src/assets/work/ordination-album/images/5/image.jpg",
-      "caption": "Anointing"
+      "caption": "Anointing",
+      "alt": "Album spread \"Anointing of Hands by the Bishop\", with photos of the bishop anointing the new priests' hands."
     },
     {
       "image": "/src/assets/work/ordination-album/images/6/image.jpg",
-      "caption": "Kiss Of Peace"
+      "caption": "Kiss Of Peace",
+      "alt": "Album spread \"Kiss of Peace\", showing the newly ordained priests embracing the clergy."
     },
     {
       "image": "/src/assets/work/ordination-album/images/7/image.jpg",
-      "caption": "First Blessing"
+      "caption": "First Blessing",
+      "alt": "Album spread \"First Final Blessing\", a wide photo of the new priests giving their first blessing at the altar."
     },
     {
       "image": "/src/assets/work/ordination-album/images/8/image.jpg",
-      "caption": "Newly Ordained"
+      "caption": "Newly Ordained",
+      "alt": "Album spread \"The Newly Ordained Priests\", with a group photo of six priests in gold-trimmed vestments."
     },
     {
       "image": "/src/assets/work/ordination-album/images/9/image.jpg",
-      "caption": "Portrait"
+      "caption": "Portrait",
+      "alt": "Album portrait page: a new priest in vestments beside the Latin text \"Tu es sacerdos aeternum secundum ordinem melchisedech\"."
     },
     {
       "image": "/src/assets/work/ordination-album/images/10/image.jpg",
-      "caption": "Back Cover"
+      "caption": "Back Cover",
+      "alt": "Album back cover in dark tones: the new priest at prayer beside a quote from St. John Paul the Great on the priesthood."
     }
   ],
   "videos": []

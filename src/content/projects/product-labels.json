@@ -26,11 +26,13 @@
   "images": [
     {
       "image": "/src/assets/work/product-labels/images/0/image.jpg",
-      "caption": "Label"
+      "caption": "Label",
+      "alt": "Wrap-around label for Orell's Premium Banana Thins in yellow, with a cartoon banana mascot, a nutrition facts panel and a barcode."
     },
     {
       "image": "/src/assets/work/product-labels/images/1/image.jpg",
-      "caption": "Chili Jam Label"
+      "caption": "Chili Jam Label",
+      "alt": "Wrap-around label for Premium Sweet & Spicy Chili Jam in black and dark red, with garlic and chillies, nutrition facts and a barcode."
     }
   ],
   "videos": []

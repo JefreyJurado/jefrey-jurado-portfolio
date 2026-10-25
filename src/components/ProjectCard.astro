@@ -30,7 +30,7 @@ const extras = more.slice(0, 2);
   <div class="card__well">
     <Image
       src={cover.img}
-      alt={`${title} — ${category}`}
+      alt={cover.alt}
       widths={[500, 900, 1400]}
       sizes="(max-width: 760px) 100vw, 60vw"
       loading={index < 3 ? 'eager' : 'lazy'}
@@ -39,7 +39,7 @@ const extras = more.slice(0, 2);
       extras.map((x) => (
         <Image
           src={x.img}
-          alt={`${title} — ${x.caption}`}
+          alt={x.alt}
           class="card__extra"
           widths={[400, 700]}
           sizes="30vw"
