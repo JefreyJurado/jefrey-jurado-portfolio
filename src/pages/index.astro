@@ -8,20 +8,8 @@ const facts = [
   { value: '12+', label: 'years in print & digital design' },
   { value: '156', label: 'newspaper issues laid out a year' },
   { value: '0', label: 'missed print deadlines' },
-  { value: '3', label: 'regional newspaper editions every week' },
+  { value: String(projects.length), label: 'portfolio projects to explore' },
 ];
-
-// Work shown in the opening card, so visitors see designs on the first screen.
-// The first piece is the large tile; `image` picks which of the project's images to show.
-const showcase = [
-  { slug: 'southern-tagalog-herald', image: 0, label: 'Newspaper' },
-  { slug: 'balwik-magazine', image: 0, label: 'Magazine' },
-  { slug: 'noors-gourmet-food', image: 1, label: 'Packaging' },
-].flatMap((s) => {
-  const p = projects.find((p) => p.slug === s.slug);
-  const item = p?.images[s.image] ?? p?.images[0];
-  return p && item ? [{ ...s, project: p, item }] : [];
-});
 
 // Highlight tiles in the About section. Icons are simple 24px line drawings.
 const strengths = [
@@ -43,7 +31,7 @@ const strengths = [
 ];
 
 // Small previews on the "See my work" card at the bottom of the page.
-const previews = ['paper-ph-magazine', 'logo-design', 'wgomez-rice']
+const previews = ['southern-tagalog-herald', 'balwik-magazine', 'noors-gourmet-food']
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p) => p !== undefined);
 ---
@@ -65,38 +53,22 @@ const previews = ['paper-ph-magazine', 'logo-design', 'wgomez-rice']
           <a href={site.resume} class="hero__btn" target="_blank">Download résumé</a>
           <a href={`mailto:${site.email}`} class="hero__btn">Email me</a>
         </div>
+      </div>
+
+      <div class="hero__side">
+        <ul class="facts">
+          {
+            facts.map((f) => (
+              <li>
+                <span class="facts__value">{f.value}</span>
+                <span class="facts__label">{f.label}</span>
+              </li>
+            ))
+          }
+        </ul>
         <p class="hero__open">Open to full-time &amp; freelance work · willing to relocate</p>
       </div>
-
-      <div class="showcase">
-        {
-          showcase.map((s, i) => (
-            <a href={`/work/${s.project.slug}/`} class="showcase__item">
-              <Image
-                src={s.item.img}
-                alt={`${s.project.title} — ${s.item.caption}`}
-                widths={i === 0 ? [400, 640, 960] : [300, 480, 720]}
-                sizes={i === 0 ? '(max-width: 900px) 55vw, 24vw' : '(max-width: 900px) 40vw, 18vw'}
-                loading="eager"
-                fetchpriority={i === 0 ? 'high' : 'auto'}
-              />
-              <span class="showcase__label">{s.label}</span>
-            </a>
-          ))
-        }
-      </div>
     </section>
-
-    <ul class="facts">
-      {
-        facts.map((f) => (
-          <li>
-            <span class="facts__value">{f.value}</span>
-            <span class="facts__label">{f.label}</span>
-          </li>
-        ))
-      }
-    </ul>
 
     <section class="about" aria-labelledby="about-title">
       <div class="about__head">
@@ -155,9 +127,9 @@ const previews = ['paper-ph-magazine', 'logo-design', 'wgomez-rice']
   .hero {
     position: relative;
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.35fr 1fr;
     gap: clamp(28px, 4vw, 56px);
-    margin: 12px 0 16px;
+    margin: 12px 0 clamp(56px, 8vw, 104px);
     padding: clamp(32px, 4.5vw, 64px);
     border-radius: 28px;
     background:
@@ -239,61 +211,18 @@ const previews = ['paper-ph-magazine', 'logo-design', 'wgomez-rice']
     transform: translateY(-1px);
   }
 
-  /* Three real pieces of work: one tall tile on the left, two stacked on the right */
-  .showcase {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 12px;
-    min-height: clamp(380px, 38vw, 560px);
+  .hero__side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
   }
 
-  .showcase__item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    background: var(--light);
-    box-shadow: 0 22px 40px -22px rgba(13, 13, 13, 0.6);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-
-  .showcase__item:first-child {
-    grid-row: 1 / -1;
-  }
-
-  .showcase__item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 30px 50px -24px rgba(13, 13, 13, 0.7);
-  }
-
-  .showcase__item img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-  }
-
-  .showcase__label {
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
-    padding: 5px 11px;
-    border-radius: 999px;
-    background: rgba(13, 13, 13, 0.72);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--light);
-  }
-
-  /* Key numbers in a row of white cards under the opening card */
   .facts {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin: 0 0 clamp(56px, 8vw, 104px);
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
@@ -303,10 +232,10 @@ const previews = ['paper-ph-magazine', 'logo-design', 'wgomez-rice']
     flex-direction: column;
     gap: 8px;
     padding: clamp(18px, 2vw, 26px);
-    background: #ffffff;
+    background: var(--light);
     border-radius: 18px;
     color: var(--ink);
-    box-shadow: 0 20px 50px -36px rgba(13, 13, 13, 0.4);
+    box-shadow: 0 18px 36px -24px rgba(13, 13, 13, 0.55);
   }
 
   .facts__value {
@@ -324,21 +253,17 @@ const previews = ['paper-ph-magazine', 'logo-design', 'wgomez-rice']
   }
 
   .hero__open {
-    margin-top: 18px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(242, 242, 242, 0.12);
     font-size: 14px;
-    color: rgba(242, 242, 242, 0.75);
+    text-align: center;
+    color: rgba(242, 242, 242, 0.9);
   }
 
   @media (max-width: 900px) {
     .hero {
       grid-template-columns: 1fr;
-    }
-    .showcase {
-      min-height: clamp(320px, 90vw, 520px);
-    }
-    .facts {
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
     }
   }
 
