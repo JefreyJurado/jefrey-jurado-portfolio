@@ -24,6 +24,16 @@
   },
   "images": [
     {
+      "image": "/src/assets/work/calling-cards/images/4/image.jpg",
+      "caption": "Halal Food Mockup",
+      "alt": "Mockup of a stack of navy Noor Halal Food and Trading calling cards for Ruby Allen F. Leonor, beside a white back card reading \"Guaranteed Pure and Fresh\". Contact details are blurred."
+    },
+    {
+      "image": "/src/assets/work/calling-cards/images/5/image.jpg",
+      "caption": "Purple Card Mockup",
+      "alt": "Mockup of a purple Noor's Halal Gourmet Food & Trading calling card for Ruby Allen F. Leonor, lying on beige fabric. Contact details are blurred."
+    },
+    {
       "image": "/src/assets/work/calling-cards/images/0/image.jpg",
       "caption": "Noor Back",
       "alt": "Back of the Noor Food Products Trading calling card: a gold Noor logo on navy."
